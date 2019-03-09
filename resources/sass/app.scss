@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+  	Builds our style structure
+   		https://sass-guidelin.es/#the-7-1-pattern
+   ========================================================================== */
+/**
+ * Table of Contents:
+ *
+ *  1. Abstracts
+ *  2. Components
+ *  3. Layouts
+ *  4. Animations
+ */
+
+ /**
+ * Chapter 1: Abstracts
+ */
+@import 'abstracts/variables';
+
+/**
+ * Chapter 2: Components
+ */
+@import 'components/labels';
+@import 'components/navigation';
+@import 'components/notification';
+@import 'components/options';
+@import 'components/validations';
+
+/**
+ * Chapter 3: Layouts
+ */
+@import 'layouts/page';
+
+/**
+ * Chapter 4: Animations
+ */
+@import 'animations/scale-in-center';
+@import 'animations/slide-in-left';
+@import 'animations/slide-in-right';
+@import 'animations/slide-out-back';
+@import 'animations/slide-in-top';
