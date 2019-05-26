@@ -1,2 +1,88 @@
-div.page {
+@font-face {
+	font-family: 'lemurmure-regular';
+	src: url('/fonts/lemurmure-regular.woff');
+}
+html {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+}
+body {
+	overflow: hidden;
+	background-color: #00030b;
+}
+::-webkit-scrollbar {
+	width: 0px;
+	/* make scrollbar transparent */
+	background: transparent;
+}
+:root {
+	cursor: auto;
+	--cursorX: 50vw;
+	--cursorY: 50vh;
+}
+:root:before {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 100%;
+	z-index: -2;
+	position: fixed;
+	pointer-events: none;
+	background: radial-gradient(
+		circle 20vmax at var(--cursorX) var(--cursorY),
+		rgba(0, 0, 0, 0) 0%,
+		rgba(0, 0, 0, 0.5) 40%,
+		rgba(0, 0, 0, 0.95) 100%
+	)
+}
+.background {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	background-color: blue;
+	z-index: -3;
+	mix-blend-mode: multiply;
+}
+.background-surf {
+	position: fixed;
+	z-index: -3;
+	width: 100vw;
+	height: 100vh;
+	background-image: url('/img/background.jpg');
+	background-size: cover;
+	background-position: center;
+}
+.container-large {
+	display: grid;
+	height: 100vh;
+	width: 100vw;
+	grid-template-rows: [row0-start] 50px [row0-end row1-start] auto [row1-end row2-start] 50px [row2-end row3-start] 50px [row3-end];
+	grid-template-columns: [col1-start] 150px [col1-end col2-start] auto [col2-end];
+	grid-template-areas: "menu content" "footer footer";
+	.left-container {
+		grid-area: menu;
+		grid-column-start: col1-start;
+		grid-column-end: col1-end;
+		grid-row-start: row1-start;
+		grid-row-end: row1-end;
+		border-right: solid 1px rgba(208, 208, 208, 0.31);
+	}
+	.right-container {
+		grid-area: content;
+		grid-column-start: col2-start;
+		grid-column-end: col2-end;
+		grid-row-start: row0-start;
+		grid-row-end: row2-end;
+		padding-top: 50px;
+	}
+	.footer-container {
+		grid-area: footer;
+		height: auto;
+		grid-column-start: 1-col;
+		grid-column-end: 3-col;
+		grid-row-start: row2-end;
+		grid-row-end: row3-end;
+		border-top: solid 2.5px #fff;
+	}
 }

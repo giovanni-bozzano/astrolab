@@ -1,40 +1,3 @@
-<style lang="scss">
-	@import 'resources/sass/abstracts/_variables.scss';
-	div#points-map {
-		height: 100%;
-		width: 100%;
-		.canvas-container {
-  			top: 50%;
-  			left: 50%;
-  			-ms-transform: translate(-50%, -50%);
-  			transform: translate(-50%, -50%);
-  		}
-		div.point-info-window {
-			div.point-name {
-				display: block;
-				text-align: center;
-				color: $dark-color;
-				font-family: 'Josefin Sans', sans-serif;
-			}
-			div.point-address {
-				display: block;
-				text-align: center;
-				margin-top: 5px;
-				color: $grey;
-				font-family: 'Lato', sans-serif;
-				span.address {
-					font-size: 14px;
-					display: block;
-				}
-				a {
-					color: $secondary-color;
-					font-weight: bold;
-				}
-			}
-		}
-	}
-</style>
-
 <template>
 	<div id="points-map">
 		<canvas id="points-map-canvas"><p>canvas unsupported</p></canvas> 
@@ -42,8 +5,6 @@
 </template>
 
 <script>
-	import { EventBus } from '../../event-bus.js';
-
 	export default {
 		data: function() {
 			return {
@@ -58,13 +19,6 @@
 			*/
 			points: function() {
 				return this.$store.getters.getPoints;
-			},
-
-			/*
-				Grabs the categories filter.
-			*/
-			categoriesFilter: function() {
-				return this.$store.getters.getCategoriesFilter;
 			},
 
 			/*
@@ -90,14 +44,6 @@
 			points: function() {
 				this.clearMarkers();
 				this.buildMarkers();
-				this.processFilters();
-			},
-
-			/*
-				When the categories change, process the filters.
-			*/
-			categoriesFilter: function() {
-				this.processFilters();
 			},
 
 			selectedCategory: function() {
@@ -110,7 +56,10 @@
 		},
 
 		mounted: function() {
-			this.$canvas = new fabric.Canvas('points-map-canvas', { selection: false });
+			this.$canvas = new fabric.Canvas('points-map-canvas', {
+				selection: false,
+				height: 500
+			});
 			this.$canvas.hoverCursor = 'pointer';
 			this.resizeCanvas();
 			window.onresize = (e) => {
@@ -184,19 +133,6 @@
 		},
 
 		methods: {
-			/*
-				Process filters on the canvas selected by the user.
-			*/
-			processFilters: function() {
-				/*for(var i = 0; i < this.$markers.length; i++) {
-					if (this.categoriesFilter.length == 0) {
-						this.$markers[i].setMap(this.$canvas);
-					} else {
-						this.$markers[i].setMap(null);
-					}
-				}*/
-			},
-
 			/*
 				Clears the markers from the canvas.
 			*/

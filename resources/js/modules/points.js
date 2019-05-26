@@ -18,8 +18,7 @@ export const points = {
 		pointLoadStatus: 0,
 		pointAdded: {},
 		pointAddStatus: 0,
-		pointAddText: '',
-		pointsView: 'map'
+		pointAddText: ''
 	},
 
 	/*
@@ -79,13 +78,6 @@ export const points = {
 			}).catch(function() {
 				commit('setPointAddedStatus', 3);
 			});
-		},
-
-		/*
-			Change the view of the points whether it's list or map.
-		*/
-		changePointsView({ commit, state, dispatch }, view) {
-			commit('setPointsView', view);
 		},
 
 		/*
@@ -173,13 +165,6 @@ export const points = {
 		*/
 		setPointAddedText(state, text) {
 			state.pointAddText = text;
-		},
-
-		/*
-			Sets the points view.
-		*/
-		setPointsView(state, view) {
-			state.pointsView = view
 		}
 	},
 
@@ -234,13 +219,6 @@ export const points = {
 		*/
 		getPointAddText(state) {
 			return state.pointAddText;
-		},
-
-		/*
-			Returns the points view.
-		*/
-		getPointsView(state) {
-			return state.pointsView;
 		}
 	}
 }

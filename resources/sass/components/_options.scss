@@ -1,40 +1,47 @@
-div.option {
-	font-size: 16px;
-	color: #666666;
-	font-family: "Lato", sans-serif;
-	border-radius: 4px;
-	background-color: #F9F9FA;
-	width: 150px;
-	height: 57px;
-	float: left;
-	margin-right: 10px;
-	margin-bottom: 10px;
-	padding: 5px;
-	cursor: pointer;
-	position: relative;
+div.options {
+	margin-bottom: 1rem;
+	div.option {
+		font-size: 13px;
+		color: #666666;
+		font-family: 'IBM Plex Mono', monospace;
+		border-radius: 4px;
+		background-color: #F9F9FA;
+		width: 200px;
+		height: 57px;
+		float: left;
+		margin-right: 10px;
+		margin-bottom: 10px;
+		padding: 5px;
+		cursor: pointer;
+		position: relative;
 
-	&.active {
-		color: white;
-		background-color: $secondary-color;
-	}
-
-	div.option-container {
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
-
-		img.option-icon {
-			display: inline-block;
-			margin-right: 10px;
-			margin-left: 5px;
-			width: 20px;
-			max-height: 30px;
+		&.active {
+			color: white;
+			background-color: $secondary-color;
 		}
 
-		span.option-name {
-			display: inline-block;
-			width: calc(100% - 40px);
-			vertical-align: middle;
+		div.option-container {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			display: inline-flex;
+
+			img.option-icon {
+				display: inline-block;
+				margin-right: 10px;
+				margin-left: 5px;
+				width: 20px;
+				max-height: 30px;
+			}
+
+			span.option-name {
+				display: inline-block;
+				width: calc(100% - 40px);
+				vertical-align: middle;
+			}
 		}
 	}
+}
+div.clear {
+	clear: both;
 }

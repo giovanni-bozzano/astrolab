@@ -1,15 +1,3 @@
-<style lang="scss">
-	@import 'resources/sass/abstracts/_variables.scss';
-	div.loader {
-		margin: auto;
-		vertical-align: middle;
-	}
-	svg path,
-	svg rect {
-		fill: $secondary-color;
-	}
-</style>
-
 <template>
 	<div class="loader loader--style3" v-bind:style="'width: '+width+'px; height: '+height+'px; display: '+display+''" title="2">
 		<svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

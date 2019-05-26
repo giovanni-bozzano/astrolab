@@ -1,7 +1,3 @@
-<style lang="scss">
-	@import 'resources/sass/abstracts/_variables.scss';
-	@import 'resources/sass/components/_navigation.scss';
-</style>
 <template>
 	<section>
 	    <div class="logo-container">
@@ -12,17 +8,17 @@
 	        </figure>
 	    </div>
 	    <nav id="nav" class="menu-sections-container">
-			<div class="menu-section">
+			<div class="menu-section" v-bind:class="{ 'active': ['project'].includes($route.name) }">
 				<router-link :to="{ name: 'project' }">
 					<li class="menu-inner">Progetto</li>
 				</router-link>
 			</div>
-			<div class="menu-section">
+			<div class="menu-section" v-bind:class="{ 'active': ['about'].includes($route.name) }">
 				<router-link :to="{ name: 'about' }">
 					<li class="menu-inner">Chi Siamo</li>
 				</router-link>
 			</div>
-			<div class="menu-section" v-if="user != '' && userLoadStatus == 2">
+			<div class="menu-section" v-if="user != '' && userLoadStatus == 2" v-bind:class="{ 'active': ['suggestions'].includes($route.name) }">
 				<router-link :to="{ name: 'newpoint' }">
 					<li class="menu-inner">Consigli</li>
 				</router-link>

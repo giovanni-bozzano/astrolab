@@ -8,10 +8,14 @@
  * Table of Contents:
  *
  *  1. Abstracts
- *  2. Components
+ *  2. Base
  *  3. Layouts
- *  4. Animations
+ *  4. Pages
+ *  5. Components
+ *  6. Animations
  */
+
+@import 'node_modules/foundation-sites/assets/foundation.scss';
 
  /**
  * Chapter 1: Abstracts
@@ -19,13 +23,13 @@
 @import 'abstracts/variables';
 
 /**
- * Chapter 2: Components
+ * Chapter 2: Base
  */
-@import 'components/labels';
-@import 'components/navigation';
-@import 'components/notification';
-@import 'components/options';
-@import 'components/validations';
+@import 'base/h';
+@import 'base/input';
+@import 'base/label';
+@import 'base/p';
+@import 'base/textarea';
 
 /**
  * Chapter 3: Layouts
@@ -33,7 +37,28 @@
 @import 'layouts/page';
 
 /**
- * Chapter 4: Animations
+ * Chapter 4: Pages
+ */
+@import 'pages/about';
+@import 'pages/home';
+@import 'pages/new-point';
+@import 'pages/project';
+
+/**
+ * Chapter 5: Components
+ */
+@import 'components/grid';
+@import 'components/loader';
+@import 'components/navigation';
+@import 'components/notification';
+@import 'components/options';
+@import 'components/points-categories';
+@import 'components/points-map';
+@import 'components/shadow-box';
+@import 'components/validations';
+
+/**
+ * Chapter 5: Animations
  */
 @import 'animations/scale-in-center';
 @import 'animations/slide-in-left';

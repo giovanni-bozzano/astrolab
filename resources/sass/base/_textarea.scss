@@ -1,0 +1,7 @@
+textarea {
+	border: 1px solid #BABABA;
+	border-radius: 3px;
+	&.invalid {
+		border: 1px solid #D0021B;
+	}
+}

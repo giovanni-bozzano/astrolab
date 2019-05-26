@@ -1,149 +1,64 @@
-<style lang="scss" scoped>
-	@import 'resources/sass/abstracts/_variables.scss';
-	div#new-point {
-		position: fixed;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		background-color: white;
-		z-index: 99999;
-		overflow: auto;
-		img#back {
-			float: right;
-			margin-top: 20px;
-			margin-right: 20px;
-		}
-		.centered {
-			margin: auto;
-		}
-		h2.page-title {
-			color: #342C0C;
-			font-size: 36px;
-			font-weight: 900;
-			font-family: "Lato", sans-serif;
-			margin-top: 60px;
-		}
-		label.form-label {
-			font-family: "Lato", sans-serif;
-			text-transform: uppercase;
-			font-weight: bold;
-			color: black;
-			margin-top: 10px;
-			margin-bottom: 10px;
-		}
-		input[type="text"].form-input {
-			border: 1px solid #BABABA;
-			border-radius: 3px;
-			&.invalid {
-				border: 1px solid #D0021B;
-			}
-		}
-		textarea {
-			border: 1px solid #BABABA;
-			border-radius: 3px;
-			&.invalid {
-				border: 1px solid #D0021B;
-			}
-		}
-		div.validation {
-			color: #D0021B;
-			font-family: "Lato", sans-serif;
-			font-size: 14px;
-			margin-top: -15px;
-			margin-bottom: 15px;
-		}
-		a.add-point-button{
-			display: block;
-			text-align: center;
-			height: 50px;
-			color: white;
-			border-radius: 3px;
-			font-size: 18px;
-			font-family: "Lato", sans-serif;
-			background-color: $secondary-color;
-			line-height: 50px;
-			margin-top: 25px;
-			margin-bottom: 50px;
-		}
-	}
-	div#points-map-container {
-		position: relative;
-		width: 100%;
-		height: 400px;
-		top: 0px;
-		div#points-map {
-			position: relative;
-		}
-	}
-</style>
-
 <template>
-	<transition name="scale-in-center">
-		<div id="new-point">
-			<router-link :to="{ name: 'home' }">
-				<img src="/img/close-modal.svg" id="back"/>
-			</router-link>
-
-			<div class="grid-container">
-				<div class="grid-x grid-padding-x">
-					<div class="large-8 medium-9 small-12 cell centered">
-						<h2 class="page-title">Add Point</h2>
-					</div>
+	<div id="new-point-page" class="right-container">
+		<div class="shadow-box-top"></div>
+		<div class="shadow-box-bottom"></div>
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x">
+				<div class="large-8 medium-9 small-12 cell">
+					<h1>Aggiungi Punto</h1>
+					<router-link :to="{ name: 'home' }">
+						<img src="/img/close-modal.svg" id="back"/>
+					</router-link>
 				</div>
-				<div class="grid-x grid-padding-x">
-					<div class="large-8 medium-9 small-12 cell centered">
-						<label class="form-label">Name</label>
-						<input type="text" id="name" placeholder="Name" class="form-input" autocomplete="off" v-model="name" v-bind:class="{'invalid' : !validations.name.is_valid }"/>
-						<div class="validation" v-show="!validations.name.is_valid">{{ validations.name.text }}</div>
-					</div>
+			</div>
+			<div class="grid-x grid-padding-x">
+				<div class="large-8 medium-9 small-12 cell">
+					<label>Nome</label>
+					<input type="text" id="name" placeholder="Nome" class="form-input" autocomplete="off" v-model="name" v-bind:class="{'invalid' : !validations.name.is_valid }"/>
+					<div class="validation" v-show="!validations.name.is_valid">{{ validations.name.text }}</div>
 				</div>
-				<div class="grid-x grid-padding-x">
-					<div class="large-8 medium-9 small-12 cell centered">
-						<label class="form-label">Address</label>
-						<input type="text" id="address" placeholder="Address" class="form-input" autocomplete="off" v-model="address"/>
-					</div>
+			</div>
+			<div class="grid-x grid-padding-x">
+				<div class="large-8 medium-9 small-12 cell">
+					<label>Indirizzo</label>
+					<input type="text" id="address" placeholder="Indirizzo" class="form-input" autocomplete="off" v-model="address"/>
 				</div>
-				<div class="grid-x grid-padding-x">
-					<div class="large-8 medium-9 small-12 cell centered">
-						<label class="form-label">Description</label>
-						<textarea rows="4" id="description" placeholder="Description" class="form-input"  v-model="description" v-bind:class="{'invalid' : !validations.description.is_valid }"/>
-						<div class="validation" v-show="!validations.description.is_valid">{{ validations.description.text }}</div>
-					</div>
+			</div>
+			<div class="grid-x grid-padding-x">
+				<div class="large-8 medium-9 small-12 cell">
+					<label>Descrizione</label>
+					<textarea rows="4" id="description" placeholder="Descrizione" class="form-input"  v-model="description" v-bind:class="{'invalid' : !validations.description.is_valid }"/>
+					<div class="validation" v-show="!validations.description.is_valid">{{ validations.description.text }}</div>
 				</div>
-				<div class="grid-x grid-padding-x">
-					<div class="large-8 medium-9 small-12 cell centered">
-						<label class="form-label">Available Categories</label>
-					</div>
-				</div>
-				<div class="grid-x grid-padding-x">
-					<div class="large-8 medium-9 small-12 cell centered">
+			</div>
+			<div class="grid-x grid-padding-x">
+				<div class="large-8 medium-9 small-12 cell">
+					<label>Categoria</label>
+					<div class="options">
 						<div class="category option" v-on:click="toggleSelectedCategory(category.id)" v-for="category in categories" v-bind:class="{'active': category.id == selectedCategory }">
 							<div class="option-container">
-								<img v-bind:src="'/img/icons/' + category.icon + '.svg'" class="option-icon"/> <span class="option-name">{{ category.name }}</span>
+								<img class="option-icon" v-bind:src="'/img/icons/' + category.icon + '.svg'"/> <span class="option-name">{{ category.name }}</span>
 							</div>
 						</div>
+						<div class="clear"></div>
 					</div>
+					<div class="validation" v-show="!validations.category.is_valid">{{ validations.category.text }}</div>
 				</div>
-				<div class="grid-x grid-padding-x">
-					<div class="large-8 medium-9 small-12 cell centered">
-						<label class="form-label">Position</label>
-					</div>
+			</div>
+			<div class="grid-x grid-padding-x">
+				<div class="large-8 medium-9 small-12 cell">
+					<label>Posizione</label>
+					<points-map ref="map"></points-map>
+					<div class="validation" v-show="!validations.position.is_valid">{{ validations.position.text }}</div>
 				</div>
-				<div class="grid-x grid-padding-x">
-					<div class="large-8 medium-9 small-12 cell centered">
-						<points-map ref="map"></points-map>
-						<div class="validation" v-show="!validations.position.is_valid">{{ validations.position.text }}</div>
-					</div>
-				</div>
-				<div class="grid-x grid-padding-x">
-					<div class="large-8 medium-9 small-12 cell centered">
-						<a class="add-point-button" v-on:click="submitNewPoint()">Add Point</a>
-					</div>
+			</div>
+			<div class="grid-x grid-padding-x">
+				<div class="large-8 medium-9 small-12 cell">
+					<a class="add-point-button" v-on:click="submitNewPoint()">Add Point</a>
 				</div>
 			</div>
 		</div>
-	</transition>
+	</div>
 </template>
 
 <script>
@@ -171,6 +86,10 @@
 						is_valid: true,
 						text: ''
 					},
+					category: {
+						is_valid: true,
+						text: ''
+					},
 					position: {
 						is_valid: true,
 						text: ''
@@ -188,6 +107,7 @@
 		},
 		mounted: function() {
 			this.$refs.map.setEditable(true);
+			document.getElementById('points-map-canvas').style.border = '1px solid #FFFFFF';
 		},
 		watch: {
 			pointAddStatus: function() {
@@ -197,9 +117,9 @@
 					*/
 					this.clearForm();
 					/*
-						Go back to the points screen.
+						Go back to the home page.
 					*/
-					this.$router.push({ name: 'points' });
+					this.$router.push({ name: 'home' });
 				}
 			}
 		},
@@ -247,6 +167,15 @@
 				} else {
 					this.validations.description.is_valid = true;
 					this.validations.description.text = '';
+				}
+
+				if (this.selectedCategory == null) {
+					validNewPointForm = false;
+					this.validations.category.is_valid = false;
+					this.validations.category.text = 'Please select a category for the new point!';
+				} else {
+					this.validations.category.is_valid = true;
+					this.validations.category.text = '';
 				}
 
 				if (this.$refs.map.$canvas.newMarker == null) {

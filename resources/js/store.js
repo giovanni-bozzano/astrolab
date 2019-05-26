@@ -27,7 +27,6 @@ import { points } from './modules/points.js';
 import { users } from './modules/users.js';
 import { categories } from './modules/categories.js';
 import { display } from './modules/display.js';
-import { filters } from './modules/filters.js';
 
 /*
 	Exports our data store.
@@ -37,7 +36,6 @@ export default new Vuex.Store({
 		points,
 		users,
 		categories,
-		display,
-		filters
+		display
 	}
 });

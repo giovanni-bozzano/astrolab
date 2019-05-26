@@ -10,6 +10,8 @@
 		<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,500&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Spectral:300&display=swap" rel="stylesheet">
 
+		<link href="{{ mix('/css/app.css' ) }}" rel="stylesheet" type="text/css"/>
+
 		<link rel="icon" type="image/png" href="/favicon.png">
 
 		<title>Astrolab</title>

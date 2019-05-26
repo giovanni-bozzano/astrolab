@@ -1,44 +1,42 @@
-.menu-sections-container {
-    width: 100%;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 40px;
+nav.menu-sections-container {
+	width: 100%;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 40px;
 }
-.menu-inner {
+li.menu-inner {
 	font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.8em;
-    color: #fff;
-    letter-spacing: 0.06em;
-    width: 90px;
-    line-height: 40px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 10px;
-    display: flex;
+	font-size: 0.8em;
+	color: white;
+	letter-spacing: 0.06em;
+	width: 90px;
+	line-height: 40px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 10px;
+	display: flex;
 }
-.active {
-    background-color: #fff;
-    color: #000;
-    cursor: pointer;
+div.active li.menu-inner {
+	color: black;
 }
-.a-active {
-    background-color: #fff;
+div.active {
+	background-color: white;
 }
-.menu-section:hover .menu-inner,
-.menu-section:hover {
-    background-color: #fff;
-    color: #000;
-    cursor: pointer;
+div.menu-section:hover li.menu-inner,
+div.menu-section:hover {
+	background-color: white;
+	color: black;
+	cursor: pointer;
 }
-.logo-container {
-    text-align: center;
-    height: auto;
+div.logo-container {
+	text-align: center;
+	height: auto;
 }
-.logo-wrap {
-    width: 90px;
-    margin-left: auto;
-    margin-right: auto;
+figure.logo-wrap {
+	width: 90px;
+	margin-left: auto;
+	margin-right: auto;
 }
 /* Small only */
 @media screen and (max-width: 39.9375em) {

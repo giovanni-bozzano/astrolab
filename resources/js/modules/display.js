@@ -10,10 +10,7 @@ export const display = {
 	*/
 	state: {
 		selectedCategory: null,
-		selectedPoint: null,
-		zoomLevel: '',
-		latitude: 0.0,
-		longitude: 0.0
+		selectedPoint: null
 	},
 
 	/*
@@ -32,27 +29,6 @@ export const display = {
 		*/
 		toggleSelectedPoint({ commit }, data) {
 			commit('setSelectedPoint', data);
-		},
-
-		/*
-			Applies the zoom level.
-		*/
-		applyZoomLevel({ commit }, data) {
-			commit('setZoomLevel', data);
-		},
-
-		/*
-			Applies the latitude.
-		*/
-		applyLatitude({ commit }, data) {
-			commit('setLatitude', data);
-		},
-
-		/*
-			Applies the longitude.
-		*/
-		applyLongitude({ commit }, data) {
-			commit('setLongitude', data);
 		}
 	},
 
@@ -72,27 +48,6 @@ export const display = {
 		*/
 		setSelectedPoint(state, selectedPoint) {
 			state.selectedPoint = selectedPoint;
-		},
-
-		/*
-			Sets the zoom level.
-		*/
-		setZoomLevel(state, level) {
-			state.zoomLevel = level;
-		},
-
-		/*
-			Sets the latitude.
-		*/
-		setLatitude(state, latitude) {
-			state.latitude = latitude;
-		},
-
-		/*
-			Sets the longitude.
-		*/
-		setLongitude(state, longitude) {
-			state.longitude = longitude;
 		}
 	},
 
@@ -112,27 +67,6 @@ export const display = {
 		*/
 		getSelectedPoint(state) {
 			return state.selectedPoint;
-		},
-
-		/*
-			Gets the zoom level.
-		*/
-		getZoomLevel(state) {
-			return state.zoomLevel;
-		},
-
-		/*
-			Gets the latitude.
-		*/
-		getLatitude(state) {
-			return state.latitude;
-		},
-
-		/*
-			Gets the longitude.
-		*/
-		getLongitude(state) {
-			return state.longitude;
 		}
 	}
 }
