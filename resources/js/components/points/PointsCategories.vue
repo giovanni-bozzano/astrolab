@@ -10,6 +10,186 @@
 				</div>
 			</div>
 		</div>
+				<div v-for="category in categories">
+			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
+				<img class="category-icon" src="/img/point-marker.png"></img><li class="category-name"> {{ category.name }}</li>
+			</div>
+			<div class="category-points" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
+				<div class="point" v-on:mouseenter="toggleSelectedPoint(category.id, point.id)" v-on:mouseleave="toggleSelectedPoint(null, null)" v-for="point in expandedPoints(category.id)">
+					<li class="point-name">{{ point.name }}</li>
+				</div>
+			</div>
+		</div>
+				<div v-for="category in categories">
+			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
+				<img class="category-icon" src="/img/point-marker.png"></img><li class="category-name"> {{ category.name }}</li>
+			</div>
+			<div class="category-points" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
+				<div class="point" v-on:mouseenter="toggleSelectedPoint(category.id, point.id)" v-on:mouseleave="toggleSelectedPoint(null, null)" v-for="point in expandedPoints(category.id)">
+					<li class="point-name">{{ point.name }}</li>
+				</div>
+			</div>
+		</div>
+				<div v-for="category in categories">
+			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
+				<img class="category-icon" src="/img/point-marker.png"></img><li class="category-name"> {{ category.name }}</li>
+			</div>
+			<div class="category-points" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
+				<div class="point" v-on:mouseenter="toggleSelectedPoint(category.id, point.id)" v-on:mouseleave="toggleSelectedPoint(null, null)" v-for="point in expandedPoints(category.id)">
+					<li class="point-name">{{ point.name }}</li>
+				</div>
+			</div>
+		</div>
+				<div v-for="category in categories">
+			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
+				<img class="category-icon" src="/img/point-marker.png"></img><li class="category-name"> {{ category.name }}</li>
+			</div>
+			<div class="category-points" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
+				<div class="point" v-on:mouseenter="toggleSelectedPoint(category.id, point.id)" v-on:mouseleave="toggleSelectedPoint(null, null)" v-for="point in expandedPoints(category.id)">
+					<li class="point-name">{{ point.name }}</li>
+				</div>
+			</div>
+		</div>
+				<div v-for="category in categories">
+			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
+				<img class="category-icon" src="/img/point-marker.png"></img><li class="category-name"> {{ category.name }}</li>
+			</div>
+			<div class="category-points" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
+				<div class="point" v-on:mouseenter="toggleSelectedPoint(category.id, point.id)" v-on:mouseleave="toggleSelectedPoint(null, null)" v-for="point in expandedPoints(category.id)">
+					<li class="point-name">{{ point.name }}</li>
+				</div>
+			</div>
+		</div>
+				<div v-for="category in categories">
+			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
+				<img class="category-icon" src="/img/point-marker.png"></img><li class="category-name"> {{ category.name }}</li>
+			</div>
+			<div class="category-points" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
+				<div class="point" v-on:mouseenter="toggleSelectedPoint(category.id, point.id)" v-on:mouseleave="toggleSelectedPoint(null, null)" v-for="point in expandedPoints(category.id)">
+					<li class="point-name">{{ point.name }}</li>
+				</div>
+			</div>
+		</div>
+				<div v-for="category in categories">
+			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
+				<img class="category-icon" src="/img/point-marker.png"></img><li class="category-name"> {{ category.name }}</li>
+			</div>
+			<div class="category-points" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
+				<div class="point" v-on:mouseenter="toggleSelectedPoint(category.id, point.id)" v-on:mouseleave="toggleSelectedPoint(null, null)" v-for="point in expandedPoints(category.id)">
+					<li class="point-name">{{ point.name }}</li>
+				</div>
+			</div>
+		</div>
+				<div v-for="category in categories">
+			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
+				<img class="category-icon" src="/img/point-marker.png"></img><li class="category-name"> {{ category.name }}</li>
+			</div>
+			<div class="category-points" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
+				<div class="point" v-on:mouseenter="toggleSelectedPoint(category.id, point.id)" v-on:mouseleave="toggleSelectedPoint(null, null)" v-for="point in expandedPoints(category.id)">
+					<li class="point-name">{{ point.name }}</li>
+				</div>
+			</div>
+		</div>
+				<div v-for="category in categories">
+			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
+				<img class="category-icon" src="/img/point-marker.png"></img><li class="category-name"> {{ category.name }}</li>
+			</div>
+			<div class="category-points" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
+				<div class="point" v-on:mouseenter="toggleSelectedPoint(category.id, point.id)" v-on:mouseleave="toggleSelectedPoint(null, null)" v-for="point in expandedPoints(category.id)">
+					<li class="point-name">{{ point.name }}</li>
+				</div>
+			</div>
+		</div>
+				<div v-for="category in categories">
+			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
+				<img class="category-icon" src="/img/point-marker.png"></img><li class="category-name"> {{ category.name }}</li>
+			</div>
+			<div class="category-points" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
+				<div class="point" v-on:mouseenter="toggleSelectedPoint(category.id, point.id)" v-on:mouseleave="toggleSelectedPoint(null, null)" v-for="point in expandedPoints(category.id)">
+					<li class="point-name">{{ point.name }}</li>
+				</div>
+			</div>
+		</div>
+				<div v-for="category in categories">
+			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
+				<img class="category-icon" src="/img/point-marker.png"></img><li class="category-name"> {{ category.name }}</li>
+			</div>
+			<div class="category-points" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
+				<div class="point" v-on:mouseenter="toggleSelectedPoint(category.id, point.id)" v-on:mouseleave="toggleSelectedPoint(null, null)" v-for="point in expandedPoints(category.id)">
+					<li class="point-name">{{ point.name }}</li>
+				</div>
+			</div>
+		</div>
+				<div v-for="category in categories">
+			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
+				<img class="category-icon" src="/img/point-marker.png"></img><li class="category-name"> {{ category.name }}</li>
+			</div>
+			<div class="category-points" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
+				<div class="point" v-on:mouseenter="toggleSelectedPoint(category.id, point.id)" v-on:mouseleave="toggleSelectedPoint(null, null)" v-for="point in expandedPoints(category.id)">
+					<li class="point-name">{{ point.name }}</li>
+				</div>
+			</div>
+		</div>
+				<div v-for="category in categories">
+			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
+				<img class="category-icon" src="/img/point-marker.png"></img><li class="category-name"> {{ category.name }}</li>
+			</div>
+			<div class="category-points" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
+				<div class="point" v-on:mouseenter="toggleSelectedPoint(category.id, point.id)" v-on:mouseleave="toggleSelectedPoint(null, null)" v-for="point in expandedPoints(category.id)">
+					<li class="point-name">{{ point.name }}</li>
+				</div>
+			</div>
+		</div>
+				<div v-for="category in categories">
+			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
+				<img class="category-icon" src="/img/point-marker.png"></img><li class="category-name"> {{ category.name }}</li>
+			</div>
+			<div class="category-points" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
+				<div class="point" v-on:mouseenter="toggleSelectedPoint(category.id, point.id)" v-on:mouseleave="toggleSelectedPoint(null, null)" v-for="point in expandedPoints(category.id)">
+					<li class="point-name">{{ point.name }}</li>
+				</div>
+			</div>
+		</div>
+				<div v-for="category in categories">
+			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
+				<img class="category-icon" src="/img/point-marker.png"></img><li class="category-name"> {{ category.name }}</li>
+			</div>
+			<div class="category-points" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
+				<div class="point" v-on:mouseenter="toggleSelectedPoint(category.id, point.id)" v-on:mouseleave="toggleSelectedPoint(null, null)" v-for="point in expandedPoints(category.id)">
+					<li class="point-name">{{ point.name }}</li>
+				</div>
+			</div>
+		</div>
+				<div v-for="category in categories">
+			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
+				<img class="category-icon" src="/img/point-marker.png"></img><li class="category-name"> {{ category.name }}</li>
+			</div>
+			<div class="category-points" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
+				<div class="point" v-on:mouseenter="toggleSelectedPoint(category.id, point.id)" v-on:mouseleave="toggleSelectedPoint(null, null)" v-for="point in expandedPoints(category.id)">
+					<li class="point-name">{{ point.name }}</li>
+				</div>
+			</div>
+		</div>
+				<div v-for="category in categories">
+			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
+				<img class="category-icon" src="/img/point-marker.png"></img><li class="category-name"> {{ category.name }}</li>
+			</div>
+			<div class="category-points" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
+				<div class="point" v-on:mouseenter="toggleSelectedPoint(category.id, point.id)" v-on:mouseleave="toggleSelectedPoint(null, null)" v-for="point in expandedPoints(category.id)">
+					<li class="point-name">{{ point.name }}</li>
+				</div>
+			</div>
+		</div>
+				<div v-for="category in categories">
+			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
+				<img class="category-icon" src="/img/point-marker.png"></img><li class="category-name"> {{ category.name }}</li>
+			</div>
+			<div class="category-points" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
+				<div class="point" v-on:mouseenter="toggleSelectedPoint(category.id, point.id)" v-on:mouseleave="toggleSelectedPoint(null, null)" v-for="point in expandedPoints(category.id)">
+					<li class="point-name">{{ point.name }}</li>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 

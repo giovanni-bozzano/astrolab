@@ -1,11 +1,9 @@
 <template>
-	<div id="home-page" class="right-container">
-		<div class="shadow-box-top"></div>
-		<div class="shadow-box-bottom"></div>
-		<div class="categories">
+	<div id="home-page">
+		<div class="categories top-padding bottom-padding">
 			<points-categories></points-categories>
 		</div>
-		<div class="map">
+		<div class="map top-padding bottom-padding">
 			<points-map></points-map>
 		</div>
 	</div>

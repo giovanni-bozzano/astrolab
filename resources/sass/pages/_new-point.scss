@@ -1,12 +1,12 @@
 div#new-point-page {
-	overflow: auto;
+    padding-top: 3rem;
+    padding-bottom: 8rem;
 	h1 {
 		float: left;
 	}
 	img#back {
 		float: right;
-		margin-top: 20px;
-		margin-right: 20px;
+		margin-top: 1rem;
 	}
 	a.add-point-button{
 		display: block;
@@ -14,21 +14,11 @@ div#new-point-page {
 		height: 50px;
 		color: white;
 		border-radius: 3px;
-		font-size: 18px;
+		font-size: 0.8em;
 		font-family: 'IBM Plex Mono', monospace;
 		background-color: $secondary-color;
-		line-height: 50px;
-		margin-top: 25px;
-		margin-bottom: 50px;
-	}
-	div#points-map-container {
-		position: relative;
-		width: 100%;
-		height: 400px;
-		top: 0px;
-		div#points-map {
-			position: relative;
-		}
+		line-height: 3rem;
+		margin-top: 1.5rem;
 	}
 }
 /* Small only */

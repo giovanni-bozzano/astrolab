@@ -2,15 +2,28 @@
 	<div id="app-layout">
 		<success-notification></success-notification>
 		<error-notification></error-notification>
-		<main class="container-large">
-				<div id="background" v-if="['home'].includes($route.name)">
-				<div class="background-surf"></div>
-				<div class="background"></div>
+		<div id="background" class="show-for-large" v-if="['home'].includes($route.name)">
+			<div class="background-surf"></div>
+			<div class="background"></div>
+		</div>
+		<div class="shadow-box-top"></div>
+		<div class="shadow-box-bottom"></div>
+		<div class="off-canvas-wrapper">
+			<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+				<navigation class="off-canvas position-left reveal-for-large" data-off-canvas data-position="left"></navigation>
+				<div class="off-canvas-content" data-off-canvas-content>
+					<div class="title-bar hide-for-large">
+						<div class="title-bar-left">
+							<button class="menu-icon" type="button" data-open="navigation"></button>
+						</div>
+					</div>
+					<div class="app-page">
+						<router-view></router-view>
+					</div>
+				</div>
 			</div>
-			<navigation class="left-container"></navigation>
-			<router-view></router-view>
-			<app-footer class="footer-container"></app-footer>
-		</main>
+		</div>
+		<app-footer class="footer-container"></app-footer>
 		<login-modal></login-modal>
 	</div>
 </template>
@@ -75,6 +88,10 @@
 					});
 				}
 			}
+		},
+
+		mounted: function() {
+			$(document).foundation();
 		}
 	}
 </script>

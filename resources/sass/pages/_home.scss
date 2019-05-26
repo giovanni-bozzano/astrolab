@@ -1,15 +1,11 @@
 div#home-page {
-	overflow: hidden;
-	padding-left: 3rem;
-	padding-top: 0;
+	height: 100%;
 	display: grid;
 	grid-template-rows: [row0-start] auto [row0-end];
 	grid-template-columns: [col0-start] 300px [col0-end col1-start] auto [col1-end];
 	grid-template-areas: "menu content";
 	div.categories {
 		overflow: auto;
-		padding-bottom: 8rem;
-		padding-top: 50px;
 		grid-area: menu;
 		grid-column-start: col0-start;
 		grid-column-end: col0-end;
@@ -18,7 +14,6 @@ div#home-page {
 	}
 	div.map {
 		overflow: hidden;
-		padding-top: 50px;
 		grid-area: content;
 		grid-column-start: col1-start;
 		grid-column-end: col1-end;

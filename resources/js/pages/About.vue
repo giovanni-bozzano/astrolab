@@ -1,15 +1,13 @@
 <template>
-	<div id="about-page" class="right-container">
-		<div class="shadow-box-top"></div>
-		<div class="shadow-box-bottom"></div>
+	<div id="about-page" class="top-padding bottom-padding">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
-				<div class="large-12 medium-12 small-12 cell">
+				<div class="cell large-12 medium-12 small-12">
 					<h1>Il nostro team</h1>
 				</div>
 			</div>
 			<div class="grid-x grid-padding-x">
-				<div class="large-12 medium-12 small-12 cell">
+				<div class="cell large-12 medium-12 small-12">
 					<div class="options">
 						<div class="team-member">
 							<img class="team-image" src="/img/about/valentina_avanzini.jpg"/>

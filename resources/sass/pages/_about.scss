@@ -1,21 +1,19 @@
 div#about-page {
-	overflow: auto;
 	div.team-member {
-		font-size: 13px;
+		font-size: 0.8em;
 		color: white;
 		font-family: 'IBM Plex Mono', monospace;
-		width: 240px;
-		height: 200px;
+		width: 13.5rem;
+		height: 12.5rem;
 		float: left;
-		margin-right: 10px;
-		margin-bottom: 10px;
-		padding: 5px;
+		margin-right: 0.5rem;
+		margin-bottom: 0.5rem;
 		position: relative;
 		display: inline-table;
 		img.team-image {
-			width: 120px;
-			height: 120px;
-			margin-bottom: 10px;
+			width: 7.5rem;
+			height: 7.5rem;
+			margin-bottom: 1rem;
 			border-radius: 5%;
 		}
 	}
@@ -27,15 +25,6 @@ div#about-page {
 		color: #fff;
 		font-size: 1.4em;
 		letter-spacing: 0.06em;
-		margin-top: 3rem;
+		margin-top: 2.5rem;
 	}
-}
-/* Small only */
-@media screen and (max-width: 39.9375em) {
-}
-/* Medium only */
-@media screen and (min-width: 40em) and (max-width: 63.9375em) {
-}
-/* Large only */
-@media screen and (min-width: 64em) and (max-width: 74.9375em) {
 }

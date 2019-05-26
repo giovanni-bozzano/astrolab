@@ -213,6 +213,9 @@
 			},
 
 			resizeCanvas: function() {
+				if (this.$canvas.editable) {
+					return;
+				}
 				var width = document.getElementById('points-map').offsetWidth;
 				var height = document.getElementById('points-map').offsetHeight;
 				if (width >= height) {

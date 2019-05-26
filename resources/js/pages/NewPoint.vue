@@ -1,10 +1,8 @@
 <template>
-	<div id="new-point-page" class="right-container">
-		<div class="shadow-box-top"></div>
-		<div class="shadow-box-bottom"></div>
+	<div id="new-point-page" class="top-padding bottom-padding">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
-				<div class="large-8 medium-9 small-12 cell">
+				<div class="cell large-8 medium-9 small-12">
 					<h1>Aggiungi Punto</h1>
 					<router-link :to="{ name: 'home' }">
 						<img src="/img/close-modal.svg" id="back"/>
@@ -12,27 +10,27 @@
 				</div>
 			</div>
 			<div class="grid-x grid-padding-x">
-				<div class="large-8 medium-9 small-12 cell">
+				<div class="cell large-8 medium-9 small-12">
 					<label>Nome</label>
 					<input type="text" id="name" placeholder="Nome" class="form-input" autocomplete="off" v-model="name" v-bind:class="{'invalid' : !validations.name.is_valid }"/>
 					<div class="validation" v-show="!validations.name.is_valid">{{ validations.name.text }}</div>
 				</div>
 			</div>
 			<div class="grid-x grid-padding-x">
-				<div class="large-8 medium-9 small-12 cell">
+				<div class="cell large-8 medium-9 small-12">
 					<label>Indirizzo</label>
 					<input type="text" id="address" placeholder="Indirizzo" class="form-input" autocomplete="off" v-model="address"/>
 				</div>
 			</div>
 			<div class="grid-x grid-padding-x">
-				<div class="large-8 medium-9 small-12 cell">
+				<div class="cell large-8 medium-9 small-12">
 					<label>Descrizione</label>
 					<textarea rows="4" id="description" placeholder="Descrizione" class="form-input"  v-model="description" v-bind:class="{'invalid' : !validations.description.is_valid }"/>
 					<div class="validation" v-show="!validations.description.is_valid">{{ validations.description.text }}</div>
 				</div>
 			</div>
 			<div class="grid-x grid-padding-x">
-				<div class="large-8 medium-9 small-12 cell">
+				<div class="cell large-8 medium-9 small-12">
 					<label>Categoria</label>
 					<div class="options">
 						<div class="category option" v-on:click="toggleSelectedCategory(category.id)" v-for="category in categories" v-bind:class="{'active': category.id == selectedCategory }">
@@ -46,14 +44,14 @@
 				</div>
 			</div>
 			<div class="grid-x grid-padding-x">
-				<div class="large-8 medium-9 small-12 cell">
+				<div class="cell large-8 medium-9 small-12">
 					<label>Posizione</label>
 					<points-map ref="map"></points-map>
 					<div class="validation" v-show="!validations.position.is_valid">{{ validations.position.text }}</div>
 				</div>
 			</div>
 			<div class="grid-x grid-padding-x">
-				<div class="large-8 medium-9 small-12 cell">
+				<div class="cell large-8 medium-9 small-12">
 					<a class="add-point-button" v-on:click="submitNewPoint()">Add Point</a>
 				</div>
 			</div>

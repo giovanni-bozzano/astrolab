@@ -1,5 +1,5 @@
 <template>
-	<section>
+	<div id="navigation">
 	    <div class="logo-container">
 	        <figure class="logo-wrap">
 	            <router-link :to="{ name: 'home'}">
@@ -37,7 +37,7 @@
 				</a>
 			</div>
 	    </nav>
-	</section>
+	</div>
 </template>
 <script>
 	/*
