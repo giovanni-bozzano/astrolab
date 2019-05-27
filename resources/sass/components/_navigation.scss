@@ -1,49 +1,62 @@
-nav.menu-sections-container {
-	width: 100%;
-	height: auto;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 40px;
+div#navigation {
+	div.title-bar-center {
+		flex: 1 1 0px;
+		text-align: center;
+	}
+	div.navigation-content {
+		padding-top: 3rem;
+	}
+	nav.menu-sections-container {
+		width: 100%;
+		height: auto;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 40px;
+	}
+	li.menu-inner {
+		font-family: 'IBM Plex Mono', monospace;
+		font-size: 0.8em;
+		color: white;
+		letter-spacing: 0.06em;
+		width: 90px;
+		line-height: 40px;
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+	}
+	div.active li.menu-inner {
+		color: black;
+	}
+	div.active {
+		background-color: white;
+	}
+	div.menu-section:hover li.menu-inner,
+	div.menu-section:hover {
+		background-color: white;
+		color: black;
+		cursor: pointer;
+	}
+	div.logo-container {
+		text-align: center;
+		height: auto;
+	}
+	figure.logo-wrap {
+		width: 90px;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
-li.menu-inner {
-	font-family: 'IBM Plex Mono', monospace;
-	font-size: 0.8em;
-	color: white;
-	letter-spacing: 0.06em;
-	width: 90px;
-	line-height: 40px;
-	margin-left: auto;
-	margin-right: auto;
-	padding-left: 10px;
-	display: flex;
+@media print, screen and (min-width: 64em) {
+	div#navigation {
+		li.menu-inner {
+			padding-left: 10px;
+		}
+	}
 }
-div.active li.menu-inner {
-	color: black;
-}
-div.active {
-	background-color: white;
-}
-div.menu-section:hover li.menu-inner,
-div.menu-section:hover {
-	background-color: white;
-	color: black;
-	cursor: pointer;
-}
-div.logo-container {
-	text-align: center;
-	height: auto;
-}
-figure.logo-wrap {
-	width: 90px;
-	margin-left: auto;
-	margin-right: auto;
-}
-/* Small only */
-@media screen and (max-width: 39.9375em) {
-}
-/* Medium only */
-@media screen and (min-width: 40em) and (max-width: 63.9375em) {
-}
-/* Large only */
-@media screen and (min-width: 64em) and (max-width: 74.9375em) {
+@media print, screen and (max-width: 63.99875em) {
+	div#navigation {
+		li.menu-inner {
+			text-align: center;
+		}
+	}
 }

@@ -1,42 +1,49 @@
 <template>
 	<div id="navigation">
-	    <div class="logo-container">
-	        <figure class="logo-wrap">
-	            <router-link :to="{ name: 'home'}">
-	            	<img class="logo" src="img/logo-white.svg" width="65px" height="auto">
-	            </router-link>
-	        </figure>
+		<div class="title-bar hide-for-large">
+			<div class="title-bar-center">
+				<button type="button" data-close="navigation" class="menu-icon" aria-expanded="true" aria-controls="navigation"></button>
+			</div>
+		</div>
+		<div class="navigation-content">
+		    <div class="logo-container" data-close="navigation">
+		        <figure class="logo-wrap">
+		            <router-link :to="{ name: 'home'}">
+		            	<img class="logo" src="img/logo-white.svg" width="65px" height="auto">
+		            </router-link>
+		        </figure>
+		    </div>
+			<nav id="nav" class="menu-sections-container">
+				<div class="menu-section" data-close="navigation" v-bind:class="{ 'active': ['project'].includes($route.name) }">
+					<router-link :to="{ name: 'project' }">
+						<li class="menu-inner">Progetto</li>
+					</router-link>
+				</div>
+				<div class="menu-section" data-close="navigation" v-bind:class="{ 'active': ['about'].includes($route.name) }">
+					<router-link :to="{ name: 'about' }">
+						<li class="menu-inner">Chi Siamo</li>
+					</router-link>
+				</div>
+				<div class="menu-section" data-close="navigation" v-if="user != '' && userLoadStatus == 2" v-bind:class="{ 'active': ['suggestions'].includes($route.name) }">
+					<router-link :to="{ name: 'newpoint' }">
+						<li class="menu-inner">Consigli</li>
+					</router-link>
+				</div>
+				<div class="menu-section" data-close="navigation" v-if="user != '' && userLoadStatus == 2 && user.permission >= 1">
+					<router-link :to="{ name: 'newpoint'}">
+						<li class="menu-inner">Admin</li>
+					</router-link>
+				</div>
+				<div class="menu-section" data-close="navigation">
+					<a v-if="user != '' && userLoadStatus == 2" v-show="userLoadStatus == 2" v-on:click="logout()">
+						<li class="menu-inner">Logout</li>
+					</a>
+					<a v-if="user == ''" v-on:click="login()">
+						<li class="menu-inner">Login</li>
+					</a>
+				</div>
+			</nav>
 	    </div>
-	    <nav id="nav" class="menu-sections-container">
-			<div class="menu-section" v-bind:class="{ 'active': ['project'].includes($route.name) }">
-				<router-link :to="{ name: 'project' }">
-					<li class="menu-inner">Progetto</li>
-				</router-link>
-			</div>
-			<div class="menu-section" v-bind:class="{ 'active': ['about'].includes($route.name) }">
-				<router-link :to="{ name: 'about' }">
-					<li class="menu-inner">Chi Siamo</li>
-				</router-link>
-			</div>
-			<div class="menu-section" v-if="user != '' && userLoadStatus == 2" v-bind:class="{ 'active': ['suggestions'].includes($route.name) }">
-				<router-link :to="{ name: 'newpoint' }">
-					<li class="menu-inner">Consigli</li>
-				</router-link>
-			</div>
-			<div class="menu-section" v-if="user != '' && userLoadStatus == 2 && user.permission >= 1">
-				<router-link :to="{ name: 'newpoint'}">
-					<li class="menu-inner">Admin</li>
-				</router-link>
-			</div>
-			<div class="menu-section">
-				<a v-if="user != '' && userLoadStatus == 2" v-show="userLoadStatus == 2" v-on:click="logout()">
-					<li class="menu-inner">Logout</li>
-				</a>
-				<a v-if="user == ''" v-on:click="login()">
-					<li class="menu-inner">Login</li>
-				</a>
-			</div>
-	    </nav>
 	</div>
 </template>
 <script>
