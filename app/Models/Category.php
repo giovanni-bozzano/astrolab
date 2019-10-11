@@ -8,8 +8,13 @@ class Category extends Model
 {
     protected $table = 'categories';
 
-    public function points()
+    public function pois()
     {
-		return $this->hasMany('App\Models\Point');
+		return $this->hasMany('App\Models\POI');
+	}
+
+	public function suggestedPois()
+	{
+		return $this->hasMany('App\Models\SuggestedPOI');
 	}
 }

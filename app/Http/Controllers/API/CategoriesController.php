@@ -8,21 +8,18 @@ use App\Models\Category;
 use Request;
 
 /**
- * The points controller handles all API requests that manage category data.
+ * The categories controller handles all API requests that manage category data.
  */
 class CategoriesController extends Controller
 {
 	/*
-	|-------------------------------------------------------------------------------
-	| Get All Categories
-	|-------------------------------------------------------------------------------
 	| URL:            /api/v1/categories
 	| Method:         GET
 	| Description:    Gets all of the categories in the application.
 	*/
 	public function getCategories()
 	{
-		$categories = Category::withCount('points')->get();
+		$categories = Category::withCount('pois')->get();
 		return response()->json($categories);
 	}
 }

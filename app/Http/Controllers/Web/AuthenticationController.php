@@ -67,6 +67,6 @@ class AuthenticationController extends Controller
 		/*
 			Redirect to the app
 		*/
-		return redirect('/#/home');
+		return redirect('/');
 	}
 }

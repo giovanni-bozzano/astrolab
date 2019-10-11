@@ -26,6 +26,18 @@ class User extends Authenticatable
 	 * @var array
 	 */
 	protected $hidden = [
-		'provider', 'provider_id', 'remember_token'
+		'role_id', 'provider', 'provider_id', 'remember_token'
 	];
+
+	protected $appends = ['is_administrator'];
+
+	public function getIsAdministratorAttribute()
+	{
+		return $this->role_id == 2;
+	}
+
+	public function suggestedPois()
+	{
+		return $this->hasMany('App\Models\SuggestedPOI');
+	}
 }

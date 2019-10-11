@@ -27,17 +27,29 @@ class AppController extends Controller
 		return view('app');
 	}
 
-	public function getLogin()
+	/**
+	 * Gets the view that displays the admin panel.
+	 */
+	public function getAppAdmin()
 	{
-		return view('login');
+		/*
+			If the request has a ref variable, redirect to the
+			homepage. This is so the SPA doesn't break.
+		*/
+		if (Request::has('ref')) {
+			return redirect('/admin');
+		}
+		/*
+			Return the view
+		*/
+		return view('app-admin');
 	}
 
 	/**
-	 * Logs out the user and redirects them home.
+	 * Logs out the user.
 	 */
 	public function getLogout()
 	{
 		Auth::logout();
-		return redirect('/');
 	}
 }

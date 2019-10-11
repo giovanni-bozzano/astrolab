@@ -7,58 +7,64 @@
 /**
  * Table of Contents:
  *
- *  1. Abstracts
- *  2. Base
- *  3. Layouts
- *  4. Pages
- *  5. Components
- *  6. Animations
+ *  1. Vendors
+ *  2. Abstracts
+ *  3. Base
+ *  4. Layouts
+ *  5. Pages
+ *  6. Components
+ *  7. Animations
  */
 
 @import 'node_modules/foundation-sites/assets/foundation.scss';
 
  /**
- * Chapter 1: Abstracts
+ * Chapter 1: Vendor
+ */
+@import 'vendors/responsive-card-table';
+
+ /**
+ * Chapter 2: Abstracts
  */
 @import 'abstracts/variables';
 
 /**
- * Chapter 2: Base
+ * Chapter 3: Base
  */
 @import 'base/h';
 @import 'base/input';
 @import 'base/label';
-@import 'base/p';
 @import 'base/textarea';
 
 /**
- * Chapter 3: Layouts
+ * Chapter 4: Layouts
  */
 @import 'layouts/page';
 
 /**
- * Chapter 4: Pages
+ * Chapter 5: Pages
  */
 @import 'pages/about';
 @import 'pages/home';
-@import 'pages/new-point';
+@import 'pages/new-poi';
 @import 'pages/project';
 
 /**
- * Chapter 5: Components
+ * Chapter 6: Components
  */
+@import 'components/button';
 @import 'components/grid';
 @import 'components/loader';
 @import 'components/navigation';
 @import 'components/notification';
 @import 'components/options';
-@import 'components/points-categories';
-@import 'components/points-map';
+@import 'components/pois-categories';
+@import 'components/pois-map';
 @import 'components/shadow-box';
 @import 'components/validations';
 
 /**
- * Chapter 5: Animations
+ * Chapter 7: Animations
  */
 @import 'animations/scale-in-center';
 @import 'animations/slide-in-left';

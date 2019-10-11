@@ -1,0 +1,128 @@
+$responsive-card-table-bottom-gap: 1.5rem;
+$responsive-card-table-border: 1px solid $white;
+$responsive-card-table-stack-point: 640px;
+$responsive-card-table-label-bg: rgba(202, 202, 202, 0.3);
+
+table {
+	thead {
+		background-color: transparent;
+		color: $white;
+	}
+
+	tbody {
+		background-color: transparent;
+
+		tr {
+			background-color: transparent !important;
+		}
+	}
+
+	th {
+		background-color: $responsive-card-table-label-bg;
+	}
+
+	tr,	th,	td {
+		border: $responsive-card-table-border;
+	}
+}
+
+.pagination > li, .pagination > li.disabled {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	hyphens: manual;
+	padding: 0.1875rem 0.625rem;
+	margin: 0;
+	color: #a7a9ac;
+	background-color: #231f20;
+	border: 3px solid #a7a9ac;
+	letter-spacing: 3px;
+	transition: background-color 0.25s ease-out, color 0.25s ease-out;
+}
+
+.pagination > li {
+	padding: 0;
+}
+
+.pagination > li:hover, .pagination > li:focus, .pagination > li.current {
+	background-color: #fff;
+	color: #161721;
+}
+
+.pagination > li.disabled:hover, .pagination > li.disabled:focus {
+	background-color: #231f20;
+	color: #a7a9ac;
+}
+
+.pagination > li > a {
+	padding: 0.1875rem 0.625rem;
+	color: #a7a9ac;
+	background-color: transparent;
+	background: transparent;
+}
+
+.pagination > li > a:hover {
+	color: #161721;
+	background-color: transparent;
+	background: transparent;
+}
+
+.responsive-card-table {
+	border-collapse: collapse;
+
+	.fit {
+		box-sizing: border-box;
+		width: 1%;
+	}
+
+	@media screen and (max-width: $responsive-card-table-stack-point) {
+		thead tr {
+			position: absolute;
+			top: -9999em;
+			left: -9999em;
+		}
+
+		tr {
+			border: $responsive-card-table-border;
+			display: block;
+		}
+
+		tr + tr {
+			margin-top: $responsive-card-table-bottom-gap;
+		}
+
+		td {
+			border: none;
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			border-bottom: $responsive-card-table-border;
+			padding-left: 50%;
+			position: relative;
+
+			&:before {
+				content: attr(data-label);
+				display: inline-block;
+				font-weight: bold;
+				line-height: 1.5;
+				margin-left: -100%;
+				width: 100%;
+				position: relative;
+				z-index: 1;
+			}
+
+			&:after {
+				content: '';
+				position: absolute;
+				background: $responsive-card-table-label-bg;
+				width: 45%;
+				height: 95%;
+				left: 1px;
+				top: 1px;
+				z-index: 0;
+			}
+		}
+
+		.fit {
+			width: 100%;
+		}
+	}
+}

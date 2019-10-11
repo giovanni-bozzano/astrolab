@@ -22,6 +22,10 @@ class UsersController extends Controller
 	*/
 	public function getUser()
 	{
-		return Auth::guard('api')->user();
+		$user = Auth::guard('api')->user();
+		if (!$user) {
+			return null;
+		}
+		return User::with('suggestedPois')->find($user)->first();
 	}
 }

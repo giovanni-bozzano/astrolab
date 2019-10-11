@@ -1,0 +1,14 @@
+.button {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	hyphens: manual;
+	padding: 10px;
+	margin: 0;
+	color: #a7a9ac;
+	background-color: #231f20;
+	border: 3px solid #a7a9ac;
+	letter-spacing: 3px;
+}
+.button:focus, .button:hover {
+	background-color: #fff;
+	color: #161721;
+}
