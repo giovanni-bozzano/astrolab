@@ -1,5 +1,5 @@
 <template>
-	<div id="suggest-poi-page" class="top-padding bottom-padding">
+	<div id="publish-poi-page" class="top-padding bottom-padding">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-12 medium-12 small-12">
@@ -16,6 +16,7 @@
 								<th>Data di aggiunta</th>
 								<th>Utente</th>
 								<th></th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -24,6 +25,7 @@
 								<td data-label="Data di aggiunta">{{ suggestedPoi.created_at }}</td>
 								<td data-label="Utente">{{ suggestedPoi.user.name }}</td>
 								<td class="fit"><router-link :to="{ name: 'publish-poi-new', params: { id: suggestedPoi.id }}" class="button">Pubblica</router-link></td>
+								<td class="fit"><a v-on:click="deleteSuggestedPoi(suggestedPoi.id)" class="button">Elimina</a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -39,6 +41,8 @@
 </template>
 
 <script>
+	import { EventBus } from '../../event-bus.js';
+
 	export default {
 		computed: {
 			suggestedPois: function() {
@@ -46,23 +50,33 @@
 			},
 			suggestedPoisLoadStatus: function() {
 				return this.$store.getters.getSuggestedPoisLoadStatus;
+			},
+			poiDeleteStatus: function() {
+				return this.$store.getters.getPoiDeleteStatus;
 			}
 		},
 		watch: {
 			suggestedPoisLoadStatus: function() {
 				if (this.suggestedPoisLoadStatus == 2) {
-					$(document).ready(function () {
+					$(document).ready(function() {
 						$('#table').DataTable({
 							'language': {
 								'url': 'https://cdn.datatables.net/plug-ins/1.10.20/i18n/Italian.json'
 							},
-							'order': [[ 1, "desc" ]],
-							"columnDefs": [ {
-								"targets": 3,
-								"orderable": false
+							'order': [[ 1, 'desc' ]],
+							'columnDefs': [ {
+								'targets': [ 3, 4 ],
+								'orderable': false
 							} ]
 						});
 					});
+				}
+			},
+			poiDeleteStatus: function() {
+				if (this.poiDeleteStatus == 2) {
+					EventBus.$emit('show-success');
+				} else if (this.poiDeleteStatus == 3) {
+					EventBus.$emit('show-error');
 				}
 			}
 		},
@@ -74,9 +88,19 @@
 					},
 					'order': [[ 1, "desc" ]],
 					"columnDefs": [ {
-						"targets": 3,
+						"targets": [ 3, 4 ],
 						"orderable": false
 					} ]
+				});
+			}
+			EventBus.$on('destroy-datatable', function() {
+				$('#table').DataTable().destroy();
+			}.bind(this));
+		},
+		methods: {
+			deleteSuggestedPoi(id) {
+				this.$store.dispatch('deleteSuggestedPoi', {
+					id: id
 				});
 			}
 		}

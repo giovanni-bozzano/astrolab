@@ -2,24 +2,31 @@
 	<div id="app-layout">
 		<success-notification></success-notification>
 		<error-notification></error-notification>
+		<!--
+		<div id="background" class="show-for-large">
+			<div class="background-surf"></div>
+			<div class="background"></div>
+		</div>
+		-->
 		<div class="shadow-box-top"></div>
 		<div class="shadow-box-bottom"></div>
+		<div class="title-bar hide-for-medium">
+			<div class="title-bar-left">
+				<button class="menu-icon" type="button" data-open="navigation"></button>
+			</div>
+		</div>
 		<div class="off-canvas-wrapper">
 			<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
-				<navigation class="off-canvas position-left reveal-for-large" data-off-canvas data-position="left"></navigation>
+				<navigation class="off-canvas position-left reveal-for-medium bottom-padding" data-off-canvas data-position="left"></navigation>
 				<div class="off-canvas-content" data-off-canvas-content>
-					<div class="title-bar hide-for-large">
-						<div class="title-bar-left">
-							<button class="menu-icon" type="button" data-open="navigation"></button>
-						</div>
-					</div>
 					<div class="app-page">
 						<router-view></router-view>
 					</div>
 				</div>
 			</div>
 		</div>
-		<app-footer class="footer-container"></app-footer>
+		<app-footer class="footer-container show-for-large"></app-footer>
+		<cookie-consent></cookie-consent>
 		<loader></loader>
 	</div>
 </template>
@@ -37,6 +44,7 @@
 	import ErrorNotification from '../../global/components/ErrorNotification.vue';
 	import Navigation from '../components/Navigation.vue';
 	import Footer from '../../global/components/Footer.vue';
+	import CookieConsent from '../../global/components/CookieConsent.vue';
 	import Loader from '../../global/components/Loader.vue';
 
 	export default {
@@ -45,54 +53,32 @@
 			'error-notification': ErrorNotification,
 			'navigation': Navigation,
 			'app-footer': Footer,
+			'cookie-consent': CookieConsent,
 			'loader': Loader
 		},
 
 		created: function() {
+			/*
+			document.addEventListener('mousemove', this.update);
+			document.addEventListener('touchmove', this.update);
+			*/
 			this.$store.dispatch('loadPois');
 			this.$store.dispatch('loadUser');
 			this.$store.dispatch('loadCategories');
 			this.$store.dispatch('loadSuggestedPois');
 		},
 
-		computed: {
-			/*
-				Get the POI add text.
-			*/
-			poiAddText() {
-				return this.$store.getters.getPoiAddText;
-			},
-			/*
-				Get the POI add status.
-			*/
-			poiAddStatus() {
-				return this.$store.getters.getPoiAddStatus;
-			}
-		},
-
-		/*
-			Define what to watch in the module.
-		*/
-		watch: {
-			/*
-				When the POI added status changes, emit the success
-				if the POI was added successfully!
-			*/
-			poiAddStatus: function() {
-				if (this.poiAddStatus == 2) {
-					EventBus.$emit('show-success', {
-						notification: this.poiAddText
-					});
-				} else if (this.poiAddStatus == 3) {
-					EventBus.$emit('show-error', {
-						notification: this.poiAddText
-					});
-				}
-			}
-		},
-
 		mounted: function() {
 			$(document).foundation();
+		},
+
+		methods: {
+			/*
+			update: function(e) {
+				document.documentElement.style.setProperty('--cursorX', e.clientX + 'px');
+				document.documentElement.style.setProperty('--cursorY', e.clientY + 'px');
+			}
+			*/
 		}
 	}
 </script>

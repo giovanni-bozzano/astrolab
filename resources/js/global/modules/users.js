@@ -89,10 +89,19 @@ export const users = {
 		},
 
 		/*
-			Returns whether the user's suggested POIs.
+			Returns the user's suggested POIs.
 		*/
 		getUserSuggestedPois(state) {
 			return state.user.suggested_pois;
+		},
+
+		/*
+			Returns the user's suggested POI.
+		*/
+		getUserSuggestedPoi: (state) => (id) => {
+			return state.user.suggested_pois.find(function(element) {
+				return element.id == id;
+			});
 		}
 	}
 }

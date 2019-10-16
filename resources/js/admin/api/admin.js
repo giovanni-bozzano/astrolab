@@ -37,5 +37,12 @@ export default {
 				'Content-Type': 'multipart/form-data'
 			}
 		});
+	},
+
+	/*
+		POST /api/v1/admin/pois/delete-suggested/{id}
+	*/
+	deleteSuggestedPoi: function(id) {
+		return axios.post(CONFIG.URL + 'api/v1/admin/pois/delete-suggested/' + id);
 	}
 }

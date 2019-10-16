@@ -1,10 +1,18 @@
 <template>
-	<div id="home-page">
-		<div class="categories top-padding bottom-padding">
-			<pois-categories></pois-categories>
-		</div>
-		<div class="map top-padding bottom-padding">
-			<pois-map></pois-map>
+	<div id="map-page" class="top-padding bottom-padding">
+		<div class="grid-container">
+			<div class="grid-x grid-padding-x">
+				<div class="cell large-3 medium-3 small-12 categories-cell">
+					<div class="categories">
+						<pois-categories></pois-categories>
+					</div>
+				</div>
+				<div class="cell large-9 medium-9 small-12 map-cell" id="map-cell">
+					<div class="map">
+						<pois-map ref="map"></pois-map>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -18,16 +26,8 @@
 			'pois-categories': POIsCategories,
 			'pois-map': POIsMap
 		},
-
-		created: function() {
-			document.addEventListener('mousemove', this.update);
-			document.addEventListener('touchmove', this.update);
-		},
-		methods: {
-			update: function(e) {
-				document.documentElement.style.setProperty('--cursorX', e.clientX + 'px');
-				document.documentElement.style.setProperty('--cursorY', e.clientY + 'px');
-			}
+		mounted: function() {
+			this.$refs.map.resizeCanvas();
 		}
 	}
 </script>

@@ -2,10 +2,12 @@
 	<div id="suggest-poi-page" class="top-padding bottom-padding">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
-				<div class="cell large-8 medium-9 small-12">
+				<div class="cell large-6 medium-7 small-10">
 					<h1>Pubblica un nuovo luogo</h1>
+				</div>
+				<div class="cell large-2 medium-2 small-2 back-container">
 					<router-link :to="{ name: 'publish-poi' }">
-						<img src="/img/close-modal.svg" id="back"/>
+						<img src="/img/close-modal.svg" class="back"/>
 					</router-link>
 				</div>
 			</div>
@@ -47,8 +49,7 @@
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-8 medium-9 small-12">
 					<label>Hashtag</label>
-					<input type="text" id="hashtag" placeholder="Inserisci un hashtag..." class="form-input" autocomplete="off" v-model="hashtag" v-bind:class="{'invalid' : !validations.hashtag.is_valid }"/>
-					<div class="validation" v-show="!validations.hashtag.is_valid">{{ validations.hashtag.text }}</div>
+					<input type="text" id="hashtag" placeholder="Inserisci un hashtag..." class="form-input" autocomplete="off" v-model="hashtag"/>
 				</div>
 			</div>
 			<div class="grid-x grid-padding-x">
@@ -70,6 +71,7 @@
 </template>
 
 <script>
+	import { EventBus } from '../../event-bus.js';
 	import POIsMap from '../../global/components/POIsMap.vue';
 
 	export default {
@@ -102,10 +104,6 @@
 						is_valid: true,
 						text: ''
 					},
-					hashtag: {
-						is_valid: true,
-						text: ''
-					},
 					position: {
 						is_valid: true,
 						text: ''
@@ -131,8 +129,10 @@
 			poiAddStatus: function() {
 				if (this.poiAddStatus == 2) {
 					this.clearForm();
-					this.$store.dispatch('loadSuggestedPois');
+					EventBus.$emit('show-success');
 					this.$router.push({ name: 'publish-poi' });
+				} else if (this.poiAddStatus == 3) {
+					EventBus.$emit('show-error');
 				}
 			},
 			suggestedPoisLoadStatus: function() {
@@ -229,15 +229,6 @@
 					this.validations.category.text = '';
 				}
 
-				if (this.hashtag.trim() == '') {
-					validForm = false;
-					this.validations.hashtag.is_valid = false;
-					this.validations.hashtag.text = 'Inserisci un hashtag per il nuovo luogo!';
-				} else {
-					this.validations.hashtag.is_valid = true;
-					this.validations.hashtag.text = '';
-				}
-
 				if (this.$refs.map.$canvas.newMarker == null) {
 					validForm = false;
 					this.validations.position.is_valid = false;
@@ -250,6 +241,7 @@
 				return validForm;
 			},
 			clearForm: function() {
+				this.id = null;
 				this.name = '';
 				this.address = '';
 				this.description = '';
@@ -272,10 +264,6 @@
 						text: ''
 					},
 					category: {
-						is_valid: true,
-						text: ''
-					},
-					hashtag: {
 						is_valid: true,
 						text: ''
 					},

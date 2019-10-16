@@ -1,0 +1,55 @@
+div#map-page {
+	height: calc(100vh);
+	div.categories {
+		overflow: auto;
+	}
+	div.map {
+		height: 100%;
+		div.canvas-container {
+			border: solid;
+			margin-right: auto;
+			margin-left: auto;
+		}
+	}
+	.grid-container {
+		height: -webkit-fill-available;
+	}
+	.grid-x {
+		height: inherit;
+	}
+	.categories-cell {
+		overflow: auto;
+		// Full view - top size - bottom padding
+		max-height: calc(100vh - 3rem - 8rem);
+	}
+	.map-cell {
+		// Full view - top size - bottom padding
+		max-height: calc(100vh - 3rem - 8rem);
+	}
+}
+@media #{$large-up} {
+	div#map-page {
+		// Full view - bottom size
+		height: calc(100vh - 3rem);
+		.categories-cell {
+			// Full view - top size - bottom padding - bottom size
+			max-height: calc(100vh - 3rem - 8rem - 3rem);
+		}
+		.map-cell {
+			// Full view - top size - bottom padding - bottom size
+			max-height: calc(100vh - 3rem - 8rem - 3rem);
+		}
+	}
+}
+
+@media #{$small-only} {
+	div#map-page {
+		// Full view - top size
+		height: calc(100vh - 3rem);
+		.map-cell {
+			padding-top: 2rem;
+			// Full view - top size - bottom padding - padding between rows - minimum upper row height
+			max-height: calc(100vh - 3rem - 8rem - 2rem - 10rem);
+		}
+	}
+}

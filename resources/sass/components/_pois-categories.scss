@@ -16,7 +16,8 @@ div#pois-categories {
 		padding-left: 20px;
 	}
 	li.poi-name {
-		padding-left: 80px;
+		padding-left: 1rem;
+		padding-right: 1rem;
 		font-weight: lighter;
 	}
 	div.category:hover li.category-name,
@@ -39,5 +40,10 @@ div#pois-categories {
 	}
 	div.category-pois.collapsed {
 		max-height: 0;
+	}
+}
+@media #{$small-only} {
+	div#pois-categories {
+		min-height: 10rem;
 	}
 }

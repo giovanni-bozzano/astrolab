@@ -4,6 +4,7 @@
 |-------------------------------------------------------------------------------
 | The Vuex data store for the administrator.
 */
+import { EventBus } from '../../event-bus.js';
 import AdminAPI from '../api/admin.js';
 
 export const admin = {
@@ -25,6 +26,7 @@ export const admin = {
 		loadSuggestedPois({ commit }) {
 			commit('setSuggestedPoisLoadStatus', 1);
 			AdminAPI.getSuggestedPois().then(function(response) {
+				EventBus.$emit('destroy-datatable');
 				commit('setSuggestedPois', response.data);
 				commit('setSuggestedPoisLoadStatus', 2);
 			}).catch(function() {
@@ -39,9 +41,8 @@ export const admin = {
 		publishNewPoi({ commit, state, dispatch }, data) {
 			commit('setPoiAddStatus', 1);
 			AdminAPI.publishNewPoi(data.id, data.name, data.address, data.description, data.category_id, data.hashtag, data.latitude, data.longitude).then(function(response) {
-				commit('setPoiAddText', response.data.name + ' è stato pubblicato!');
+				commit('setNotificationText', response.data);
 				commit('setPoiAddStatus', 2);
-				commit('setPoiAdded', response.data);
 
 				/*
 					Load the POIs.
@@ -49,11 +50,32 @@ export const admin = {
 				dispatch('loadPois');
 			}).catch(function() {
 				if (error.response.status == 401) {
-					commit('setPoiAddText', 'Non hai il permesso per questa azione.');
+					commit('setNotificationText', error.response.data);
 				}
 				commit('setPoiAddStatus', 3);
 			});
-		}
+		},
+
+		/*
+			Deletes a suggested POI.
+		*/
+		deleteSuggestedPoi({ commit, state, dispatch }, data) {
+			commit('setPoiDeleteStatus', 1);
+			AdminAPI.deleteSuggestedPoi(data.id).then(function(response) {
+				commit('setNotificationText', response.data);
+				commit('setPoiDeleteStatus', 2);
+
+				/*
+					Load the suggested POIs.
+				*/
+				dispatch('loadSuggestedPois');
+			}).catch(function(error) {
+				if (error.response.status == 403) {
+					commit('setNotificationText', error.response.data);
+				}
+				commit('setPoiDeleteStatus', 3);
+			});
+		},
 	},
 
 	/*

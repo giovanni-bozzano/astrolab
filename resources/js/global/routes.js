@@ -32,14 +32,12 @@ export default new VueRouter({
 				{
 					path: 'map',
 					name: 'map',
-					component: Vue.component('Map', require('./pages/Map.vue').default),
-					children: [
-						{
-							path: ':id',
-							name: 'poi',
-							component: Vue.component('POI', require('./pages/POI.vue').default)
-						}
-					]
+					component: Vue.component('Map', require('./pages/Map.vue').default)
+				},
+				{
+					path: 'map/:id',
+					name: 'map-poi',
+					component: Vue.component('MapPOI', require('./pages/MapPOI.vue').default)
 				},
 				{
 					path: 'pois/suggest',
@@ -47,7 +45,7 @@ export default new VueRouter({
 					component: Vue.component('SuggestPOI', require('./pages/SuggestPOI.vue').default)
 				},
 				{
-					path: 'pois/suggest/new',
+					path: 'pois/suggest/new/:id?',
 					name: 'suggest-poi-new',
 					component: Vue.component('SuggestPOINew', require('./pages/SuggestPOINew.vue').default)
 				},

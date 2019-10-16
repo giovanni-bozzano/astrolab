@@ -1,10 +1,6 @@
 <template>
 	<div id="navigation">
-		<div class="title-bar hide-for-large">
-			<div class="title-bar-center">
-				<button type="button" data-close="navigation" class="menu-icon" aria-expanded="true" aria-controls="navigation"></button>
-			</div>
-		</div>
+		<div class="title-bar hide-for-medium"></div>
 		<div class="navigation-content">
 		    <div class="logo-container" data-close="navigation">
 		        <figure class="logo-wrap">

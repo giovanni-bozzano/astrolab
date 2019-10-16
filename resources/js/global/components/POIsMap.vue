@@ -76,7 +76,7 @@
 			this.$canvas.on('mouse:down', function(event) {
 				if (!this.editable) {
 					if (event.target != null && event.target.poi != null) {
-						router.push({ name: 'poi', params: { id: event.target.poi.id } });
+						router.push({ name: 'map-poi', params: { id: event.target.poi.id } });
 					}
 					return;
 				}
@@ -253,6 +253,16 @@
 				} else {
 					this.$canvas.setWidth(width);
 					this.$canvas.setHeight(width);
+				}
+				if (document.getElementById('map-cell')) {
+					document.getElementById('map-cell').style.height = width + 'px';
+				}
+				if (document.getElementById('pois-categories')) {
+					if (window.matchMedia('(max-width: 640px)').matches) {
+						document.getElementById('pois-categories').style.maxHeight = 'calc(100vh - 3rem - 8rem - 2rem - ' + width + 'px)';
+					} else {
+						document.getElementById('pois-categories').style.maxHeight = '';
+					}
 				}
 			},
 

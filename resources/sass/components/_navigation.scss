@@ -22,6 +22,7 @@ div#navigation {
 		margin-left: auto;
 		margin-right: auto;
 		display: block;
+		padding-left: 10px;
 	}
 	div.active li.menu-inner {
 		color: black;
@@ -45,17 +46,11 @@ div#navigation {
 		margin-right: auto;
 	}
 }
-@media print, screen and (min-width: 64em) {
-	div#navigation {
-		li.menu-inner {
-			padding-left: 10px;
-		}
-	}
-}
-@media print, screen and (max-width: 63.99875em) {
+@media #{$small-only} {
 	div#navigation {
 		li.menu-inner {
 			text-align: center;
+			padding-left: 0;
 		}
 	}
 }

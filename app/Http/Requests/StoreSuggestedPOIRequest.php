@@ -24,6 +24,7 @@ class StoreSuggestedPOIRequest extends FormRequest
 	public function rules()
 	{
 		return [
+			'id' => 'sometimes',
 			'name' => 'required',
 			'address' => 'required',
 			'description' => 'required',

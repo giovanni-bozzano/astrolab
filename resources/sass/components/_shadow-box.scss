@@ -10,7 +10,7 @@
 	margin-top: 0px;
 }
 .shadow-box-bottom {
-	position: absolute;
+	position: fixed;
 	background: linear-gradient(to bottom, transparent, #000 90%);
 	background-blend-mode: multiply;
 	z-index: 2;
@@ -18,10 +18,15 @@
 	height: 8rem;
 	pointer-events: none;
 	bottom: 0;
-	margin-bottom: 3rem;
+	margin-bottom: 0;
 }
-@media print, screen and (max-width: 63.99875em) {
+@media #{$large-up} {
+	.shadow-box-bottom {
+		margin-bottom: 3rem;
+	}
+}
+@media #{$small-only} {
 	.shadow-box-top {
-		top: 5rem;
+		top: 3rem;
 	}
 }

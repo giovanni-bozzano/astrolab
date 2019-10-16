@@ -21,13 +21,15 @@
 								<th>Nome</th>
 								<th>Data di aggiunta</th>
 								<th></th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr v-for="suggestedPoi in userSuggestedPois">
 								<td data-label="Nome">{{ suggestedPoi.name }}</td>
 								<td data-label="Data di aggiunta">{{ suggestedPoi.created_at }}</td>
-								<td class="fit"><a class="button">Modifica</a></td>
+								<td class="fit"><router-link :to="{ name: 'suggest-poi-new', params: { id: suggestedPoi.id }}" class="button">Modifica</router-link></td>
+								<td class="fit"><a v-on:click="deleteUserSuggestedPoi(suggestedPoi.id)" class="button">Elimina</a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -60,9 +62,26 @@
 			},
 			userSuggestedPois: function() {
 				return this.$store.getters.getUserSuggestedPois;
+			},
+			poiDeleteStatus: function() {
+				return this.$store.getters.getPoiDeleteStatus;
+			}
+		},
+		watch: {
+			poiDeleteStatus: function() {
+				if (this.poiDeleteStatus == 2) {
+					EventBus.$emit('show-success');
+				} else if (this.poiDeleteStatus == 3) {
+					EventBus.$emit('show-error');
+				}
 			}
 		},
 		methods: {
+			deleteUserSuggestedPoi(id) {
+				this.$store.dispatch('deleteUserSuggestedPoi', {
+					id: id
+				});
+			},
 			/*
 				Prompts the login form.
 			*/

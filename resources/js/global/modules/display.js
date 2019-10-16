@@ -9,6 +9,7 @@ export const display = {
 		Defines the state being monitored for the module
 	*/
 	state: {
+		notificationText: '',
 		selectedCategory: null,
 		selectedPoi: null
 	},
@@ -37,6 +38,13 @@ export const display = {
 	*/
 	mutations: {
 		/*
+			Sets the notification text.
+		*/
+		setNotificationText(state, notificationText) {
+			state.notificationText = notificationText;
+		},
+
+		/*
 			Sets the selected category.
 		*/
 		setSelectedCategory(state, selectedCategory) {
@@ -55,6 +63,13 @@ export const display = {
 		Defines the getters on the Vuex module.
 	*/
 	getters: {
+		/*
+			Returns the notification text.
+		*/
+		getNotificationText(state) {
+			return state.notificationText;
+		},
+
 		/*
 			Returns the selected category.
 		*/

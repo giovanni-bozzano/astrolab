@@ -2,10 +2,12 @@
 	<div id="suggest-poi-page" class="top-padding bottom-padding">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
-				<div class="cell large-8 medium-9 small-12">
+				<div class="cell large-6 medium-7 small-10">
 					<h1>Suggerisci un nuovo luogo</h1>
+				</div>
+				<div class="cell large-2 medium-2 small-2 back-container">
 					<router-link :to="{ name: 'suggest-poi' }">
-						<img src="/img/close-modal.svg" id="back"/>
+						<img src="/img/close-modal.svg" class="back"/>
 					</router-link>
 				</div>
 			</div>
@@ -63,15 +65,16 @@
 </template>
 
 <script>
+	import { EventBus } from '../../event-bus.js';
 	import POIsMap from '../components/POIsMap.vue';
 
 	export default {
 		components: {
 			'pois-map': POIsMap
 		},
-
 		data: function() {
 			return {
+				id: null,
 				name: '',
 				address: '',
 				description: '',
@@ -104,20 +107,18 @@
 			isUserLoggedIn: function() {
 				return this.$store.getters.isUserLoggedIn;
 			},
+			userLoadStatus: function() {
+				return this.$store.getters.getUserLoadStatus;
+			},
 			categories: function() {
 				return this.$store.getters.getCategories;
 			},
 			poiAddStatus: function() {
 				return this.$store.getters.getPoiAddStatus;
+			},
+			suggestedPoi: function() {
+				return this.$store.getters.getUserSuggestedPoi(this.$route.params.id);
 			}
-		},
-		mounted: function() {
-			this.$refs.map.setEditable(true);
-			this.$refs.map.resizeCanvas();
-			this.$refs.map.clearMarkers();
-			this.$refs.map.buildMarkers();
-			document.getElementById('pois-map-canvas').style.border = '1px solid #FFFFFF';
-			document.getElementById('pois-map').style.marginBottom = '1rem';
 		},
 		watch: {
 			isUserLoggedIn: function() {
@@ -128,10 +129,42 @@
 			poiAddStatus: function() {
 				if (this.poiAddStatus == 2) {
 					this.clearForm();
-					this.$store.dispatch('loadUser');
+					EventBus.$emit('show-success');
 					this.$router.push({ name: 'suggest-poi' });
+				} else if (this.poiAddStatus == 3) {
+					EventBus.$emit('show-error');
+				}
+			},
+			userLoadStatus: function() {
+				if (this.userLoadStatus == 2 && this.suggestedPoi != null) {
+					this.id = this.suggestedPoi.id;
+					this.name = this.suggestedPoi.name;
+					this.address = this.suggestedPoi.address;
+					this.description = this.suggestedPoi.description;
+					this.category_id = this.suggestedPoi.category_id;
+					this.latitude = this.suggestedPoi.latitude;
+					this.longitude = this.suggestedPoi.longitude;
+					this.$refs.map.addNewMarker(this.suggestedPoi.latitude, this.suggestedPoi.longitude);
 				}
 			}
+		},
+		mounted: function() {
+			if (this.userLoadStatus == 2 && this.suggestedPoi != null) {
+				this.id = this.suggestedPoi.id;
+				this.name = this.suggestedPoi.name;
+				this.address = this.suggestedPoi.address;
+				this.description = this.suggestedPoi.description;
+				this.category_id = this.suggestedPoi.category_id;
+				this.latitude = this.suggestedPoi.latitude;
+				this.longitude = this.suggestedPoi.longitude;
+				this.$refs.map.addNewMarker(this.suggestedPoi.latitude, this.suggestedPoi.longitude);
+			}
+			this.$refs.map.setEditable(true);
+			this.$refs.map.resizeCanvas();
+			this.$refs.map.clearMarkers();
+			this.$refs.map.buildMarkers();
+			document.getElementById('pois-map-canvas').style.border = '1px solid #FFFFFF';
+			document.getElementById('pois-map').style.marginBottom = '1rem';
 		},
 		methods: {
 			/*
@@ -146,6 +179,7 @@
 				}
 				if (this.validateForm()) {
 					this.$store.dispatch('suggestNewPoi', {
+						id: this.id,
 						name: this.name,
 						address: this.address,
 						description: this.description,
@@ -206,6 +240,7 @@
 				return validForm;
 			},
 			clearForm: function() {
+				this.id = null;
 				this.name = '';
 				this.address = '';
 				this.description = '';

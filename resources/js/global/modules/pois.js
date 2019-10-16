@@ -14,11 +14,8 @@ export const pois = {
 	state: {
 		pois: [],
 		poisLoadStatus: 0,
-		poi: {},
-		poiLoadStatus: 0,
-		poiAdded: {},
 		poiAddStatus: 0,
-		poiAddText: ''
+		poiDeleteStatus: 0
 	},
 
 	/*
@@ -40,38 +37,44 @@ export const pois = {
 		},
 
 		/*
-			Loads a POI.
-		*/
-		loadPoi({ commit }, data) {
-			commit('setPoiLoadStatus', 1);
-			POIsAPI.getPoi(data.id).then(function(response) {
-				commit('setPoi', response.data);
-				commit('setPoiLoadStatus', 2);
-			}).catch( function(){
-				commit('setPoi', {});
-				commit('setPoiLoadStatus', 3);
-			});
-		},
-
-		/*
 			Suggests a new POI.
 		*/
 		suggestNewPoi({ commit, state, dispatch }, data) {
 			commit('setPoiAddStatus', 1);
-			POIsAPI.suggestNewPoi(data.name, data.address, data.description, data.category_id, data.latitude, data.longitude).then(function(response) {
-				commit('setPoiAddText', response.data.name + ' è stato suggerito!');
+			POIsAPI.suggestNewPoi(data.id, data.name, data.address, data.description, data.category_id, data.latitude, data.longitude).then(function(response) {
+				commit('setNotificationText', response.data);
 				commit('setPoiAddStatus', 2);
-				commit('setPoiAdded', response.data);
 
 				/*
-					Load the POIs.
+					Load the suggested POIs.
 				*/
-				dispatch('loadPois');
+				dispatch('loadUser');
 			}).catch(function(error) {
 				if (error.response.status == 403) {
-					commit('setPoiAddText', 'Hai raggiunto il numero massimo di suggerimenti.');
+					commit('setNotificationText', error.response.data);
 				}
 				commit('setPoiAddStatus', 3);
+			});
+		},
+
+		/*
+			Deletes a suggested POI.
+		*/
+		deleteUserSuggestedPoi({ commit, state, dispatch }, data) {
+			commit('setPoiDeleteStatus', 1);
+			POIsAPI.deleteUserSuggestedPoi(data.id).then(function(response) {
+				commit('setNotificationText', response.data);
+				commit('setPoiDeleteStatus', 2);
+
+				/*
+					Load the suggested POIs.
+				*/
+				dispatch('loadUser');
+			}).catch(function(error) {
+				if (error.response.status == 403) {
+					commit('setNotificationText', error.response.data);
+				}
+				commit('setPoiDeleteStatus', 3);
 			});
 		},
 
@@ -142,13 +145,6 @@ export const pois = {
 		},
 
 		/*
-			Set the added POI.
-		*/
-		setPoiAdded(state, poi) {
-			state.poiAdded = poi;
-		},
-
-		/*
 			Set the POI add status.
 		*/
 		setPoiAddStatus(state, status) {
@@ -156,10 +152,10 @@ export const pois = {
 		},
 
 		/*
-			Set the POI add text
+			Set the POI delete status.
 		*/
-		setPoiAddText(state, text) {
-			state.poiAddText = text;
+		setPoiDeleteStatus(state, status) {
+			state.poiDeleteStatus = status;
 		}
 	},
 
@@ -184,8 +180,10 @@ export const pois = {
 		/*
 			Returns the POI.
 		*/
-		getPoi(state) {
-			return state.poi;
+		getPoi: (state) => (id) => {
+			return state.pois.find(function(element) {
+				return element.id == id;
+			});
 		},
 
 		/*
@@ -196,13 +194,6 @@ export const pois = {
 		},
 
 		/*
-			Gets the added POI.
-		*/
-		getPoiAdded(state) {
-			return state.poiAdded;
-		},
-
-		/*
 			Gets the POI add status.
 		*/
 		getPoiAddStatus(state) {
@@ -210,10 +201,10 @@ export const pois = {
 		},
 
 		/*
-			Gets the POI add text
+			Gets the POI delete status.
 		*/
-		getPoiAddText(state) {
-			return state.poiAddText;
+		getPoiDeleteStatus(state) {
+			return state.poiDeleteStatus;
 		}
 	}
 }

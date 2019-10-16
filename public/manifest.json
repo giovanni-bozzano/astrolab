@@ -1,0 +1,22 @@
+{
+	"short_name": "AstroLab",
+	"name": "AstroLab",
+	"icons": [
+		{
+			"src": "icon.png",
+			"type": "image/png",
+			"sizes": "1024x1024"
+		},
+		{
+			"src": "icon-maskable.png",
+			"type": "image/png",
+			"sizes": "1024x1024",
+			"purpose": "maskable"
+		}
+	],
+	"start_url": "/",
+	"background_color": "#000000",
+	"display": "fullscreen",
+	"scope": "/",
+	"theme_color": "#000000"
+}

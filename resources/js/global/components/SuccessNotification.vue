@@ -2,13 +2,16 @@
 	<transition name="slide-in-top">
 		<div class="success-notification-container" v-show="show">
 			<div class="success-notification">
-				<img src="/img/success.svg"/> {{ successMessage }}
+				<img src="/img/success.svg"/> {{ text }}
 			</div>
 		</div>
 	</transition>
 </template>
 
 <script>
+	/*
+		Imports the Event Bus to pass events on tag updates
+	*/
 	import { EventBus } from '../../event-bus.js';
 	
 	export default {
@@ -17,22 +20,22 @@
 		*/
 		data: function() {
 			return {
-				successMessage: '',
 				show: false
+			}
+		},
+		computed: {
+			text: function() {
+				return this.$store.getters.getNotificationText;
 			}
 		},
 		/*
 			Sets up the component when mounted.
 		*/
 		mounted: function() {
-			/*
-				On show success, show the notification.
-			*/
-			EventBus.$on('show-success', function(data) {
-				this.successMessage = data.notification;
+			EventBus.$on('show-success', function() {
 				this.show = true;
 				/*
-					After 3 seconds hide the notification.
+					Hide the notification after 3 seconds.
 				*/
 				setTimeout(function() {
 					this.show = false;

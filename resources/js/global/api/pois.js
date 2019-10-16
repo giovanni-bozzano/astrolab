@@ -12,16 +12,16 @@ export default {
 	},
 
 	/*
-		GET /api/v1/pois/{poiId}
+		GET /api/v1/pois/{id}/instagram/{endCursor}
 	*/
-	getPoi: function(poiId) {
-		return axios.get(CONFIG.URL + 'api/v1/pois/' + poiId);
+	getPoiInstagramPosts: function(id, endCursor) {
+		return axios.get(CONFIG.URL + 'api/v1/pois/' + id + '/instagram/' + endCursor);
 	},
 
 	/*
-		POST /api/v1/pois
+		POST /api/v1/pois/suggest
 	*/
-	suggestNewPoi: function(name, address, description, category_id, latitude, longitude) {
+	suggestNewPoi: function(id, name, address, description, category_id, latitude, longitude) {
 		/*
 			Initialize the form data
 		*/
@@ -30,6 +30,7 @@ export default {
 		/*
 			Add the form data we need to submit
 		*/
+		formData.append('id', id);
 		formData.append('name', name);
 		formData.append('address', address);
 		formData.append('description', description);
@@ -42,5 +43,12 @@ export default {
 				'Content-Type': 'multipart/form-data'
 			}
 		});
+	},
+
+	/*
+		POST /api/v1/pois/delete-suggested/{id}
+	*/
+	deleteUserSuggestedPoi: function(id) {
+		return axios.post(CONFIG.URL + 'api/v1/pois/delete-suggested/' + id);
 	}
 }

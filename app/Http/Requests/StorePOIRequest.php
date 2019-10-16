@@ -24,6 +24,7 @@ class StorePOIRequest extends FormRequest
 	public function rules()
 	{
 		return [
+			'id' => 'sometimes',
 			'name' => 'required',
 			'address' => 'required',
 			'description' => 'required',
@@ -46,7 +47,6 @@ class StorePOIRequest extends FormRequest
 			'address.required' => 'An address is required to add this POI.',
 			'description.required' => 'A description is required to add this POI.',
 			'category_id.required' => 'A category is required to add this POI.',
-			'hashtag.required' => 'An hashtag is required to add this POI.',
 			'latitude.required' => 'A latitude is required to add this POI.',
 			'longitude.required' => 'A longitude is required to add this POI.'
 		];

@@ -23,12 +23,12 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::get('/pois', 'API\POIsController@getPois');
 
 	/*
-	| URL:            /api/v1/pois/{id}
-	| Controller:     API\POIsController@getPoi
+	| URL:            /api/v1/pois/{id}/instagram/{endCursor}
+	| Controller:     API\POIsController@getPoiInstagramPosts
 	| Method:         GET
-	| Description:    Gets an individual POI.
+	| Description:    Gets an individual POI's Instagram posts.
 	*/
-	Route::get('/pois/{id}', 'API\POIsController@getPoi');
+	Route::get('/pois/{id}/instagram/{endCursor?}', 'API\POIsController@getPoiInstagramPosts');
 
 	/*
 	| URL:            /api/v1/categories
@@ -48,8 +48,15 @@ Route::group(['prefix' => 'v1'], function() {
 		| Method:         POST
 		| Description:    Adds a new suggested POI to the application.
 		*/
-		Route::post('/pois/suggest', 'API\POIsController@suggestNewPoi')
-			->middleware('maximum_suggested_pois');
+		Route::post('/pois/suggest', 'API\POIsController@suggestNewPoi');
+
+		/*
+		| URL:            /api/v1/pois/delete-suggested/{id}
+		| Controller:     API\POIsController@deleteUserSuggestedPoi
+		| Method:         POST
+		| Description:    Deletes a suggested POI in the application.
+		*/
+		Route::post('/pois/delete-suggested/{id}', 'API\POIsController@deleteUserSuggestedPoi');
 
 		Route::group(['prefix' => 'admin', 'middleware' => 'administrator_permission:api'], function() {
 			/*
@@ -67,6 +74,14 @@ Route::group(['prefix' => 'v1'], function() {
 			| Description:    Adds a new POI to the application.
 			*/
 			Route::post('/pois/publish', 'API\POIsController@publishNewPoi');
+
+			/*
+			| URL:            /api/v1/admin/pois/delete-suggested/{id}
+			| Controller:     API\POIsController@deleteSuggestedPoi
+			| Method:         POST
+			| Description:    Deletes a suggested POI in the application.
+			*/
+			Route::post('/pois/delete-suggested/{id}', 'API\POIsController@deleteSuggestedPoi');
 		});
 	});
 });
