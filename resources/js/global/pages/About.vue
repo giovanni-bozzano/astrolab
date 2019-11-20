@@ -7,48 +7,50 @@
 				</div>
 			</div>
 			<div class="grid-x grid-padding-x">
-				<div class="cell large-12 medium-12 small-12">
-					<div class="options">
-						<div class="team-member">
-							<img class="team-image" src="/img/about/valentina_avanzini.jpg"/>
-							<h2>Valentina Avanzini</h2>
-							<h3>Coordinatrice</h3>
-						</div>
-						<div class="team-member">
-							<img class="team-image" src="/img/about/giulia_di_rienzo.jpg"/>
-							<h2>Giulia Di Rienzo</h2>
-							<h3>Public relation manager</h3>
-						</div>
-						<div class="team-member">
-							<img class="team-image" src="/img/about/francesca_musiari.jpg"/>
-							<h2>Francesca Musiari</h2>
-							<h3>Social media manager</h3>
-						</div>
-						<div class="team-member">
-							<img class="team-image" src="/img/about/giulia_grazia_napolitano.jpg"/>
-							<h2>Giulia Grazia Napolitano</h2>
-							<h3>Social media manager</h3>
-						</div>
-						<div class="team-member">
-							<img class="team-image" src="/img/about/anna_canali.jpg"/>
-							<h2>Anna Canali</h2>
-							<h3>Amministrazione</h3>
-						</div>
-						<div class="team-member">
-							<img class="team-image" src="/img/about/marta_borrini.jpg"/>
-							<h2>Marta Borrini</h2>
-							<h3>Amministrazione</h3>
-						</div>
-						<div class="team-member">
-							<img class="team-image" src="/img/about/rocco_punghellini.jpg"/>
-							<h2>Rocco Punghellini</h2>
-							<h3>Visual Designer</h3>
-						</div>
-						<div class="clear"></div>
+				<div class="cell large-3 medium-4 small-6">
+					<div class="team-member">
+						<img class="team-image" src="/img/about/valentina_avanzini.jpg"/>
+						<h2>Valentina Avanzini</h2>
+						<h3>Coordinatrice</h3>
 					</div>
-					<footer>Grazie ai ragazzi dell'associazione Vita Activa, che hanno reso possibile questo progetto.</footer>
+				</div>
+				<div class="cell large-3 medium-4 small-6">
+					<div class="team-member">
+						<img class="team-image" src="/img/about/giulia_di_rienzo.jpg"/>
+						<h2>Giulia Di Rienzo</h2>
+						<h3>Public Relations Manager</h3>
+					</div>
+				</div>
+				<div class="cell large-3 medium-4 small-6">
+					<div class="team-member">
+						<img class="team-image" src="/img/about/francesca_musiari.jpg"/>
+						<h2>Francesca Musiari</h2>
+						<h3>Social Media Manager</h3>
+					</div>
+				</div>
+				<div class="cell large-3 medium-4 small-6">
+					<div class="team-member">
+						<img class="team-image" src="/img/about/anna_canali.jpg"/>
+						<h2>Anna Canali</h2>
+						<h3>Amministrazione</h3>
+					</div>
+				</div>
+				<div class="cell large-3 medium-4 small-6">
+					<div class="team-member">
+						<img class="team-image" src="/img/about/marta_borrini.jpg"/>
+						<h2>Marta Borrini</h2>
+						<h3>Amministrazione</h3>
+					</div>
+				</div>
+				<div class="cell large-3 medium-4 small-6">
+					<div class="team-member">
+						<img class="team-image" src="/img/about/rocco_punghellini.jpg"/>
+						<h2>Rocco Punghellini</h2>
+						<h3>Visual Designer</h3>
+					</div>
 				</div>
 			</div>
+			<footer><p>Grazie ai ragazzi dell'associazione Vita Activa, che hanno reso possibile questo progetto.</p></footer>
 		</div>
 	</div>
 </template>

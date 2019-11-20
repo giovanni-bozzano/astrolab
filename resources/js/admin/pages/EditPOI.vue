@@ -1,12 +1,12 @@
 <template>
-	<div id="suggest-poi-new-page" class="top-padding bottom-padding">
+	<div id="edit-poi-page" class="top-padding bottom-padding">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-6 medium-7 small-10">
-					<h1>Suggerisci un nuovo luogo</h1>
+					<h1>Modifica luogo</h1>
 				</div>
 				<div class="cell large-2 medium-2 small-2 back-container">
-					<router-link :to="{ name: 'suggest-poi' }">
+					<router-link :to="{ name: 'current-pois' }">
 						<img src="/img/close-modal.svg" class="back"/>
 					</router-link>
 				</div>
@@ -48,6 +48,13 @@
 			</div>
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-8 medium-9 small-12">
+					<label>Hashtag</label>
+					<input type="text" id="hashtag" placeholder="Inserisci un hashtag..." class="form-input" autocomplete="off" v-model="hashtag" v-bind:class="{'invalid' : !validations.hashtag.is_valid }"/>
+					<div class="validation" v-show="!validations.hashtag.is_valid">{{ validations.hashtag.text }}</div>
+				</div>
+			</div>
+			<div class="grid-x grid-padding-x">
+				<div class="cell large-8 medium-9 small-12">
 					<label>Posizione</label>
 					<div>
 						<pois-map ref="map"></pois-map>
@@ -57,7 +64,7 @@
 			</div>
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-8 medium-9 small-12">
-					<a class="button" v-on:click="suggestNewPoi()">Conferma</a>
+					<a class="button" v-on:click="editPoi()">Conferma</a>
 				</div>
 			</div>
 		</div>
@@ -66,12 +73,13 @@
 
 <script>
 	import { EventBus } from '../../event-bus.js';
-	import POIsMap from '../components/POIsMap.vue';
+	import POIsMap from '../../global/components/POIsMap.vue';
 
 	export default {
 		components: {
 			'pois-map': POIsMap
 		},
+
 		data: function() {
 			return {
 				id: null,
@@ -79,6 +87,7 @@
 				address: '',
 				description: '',
 				category_id: null,
+				hashtag: '',
 				validations: {
 					name: {
 						is_valid: true,
@@ -96,6 +105,10 @@
 						is_valid: true,
 						text: ''
 					},
+					hashtag: {
+						is_valid: true,
+						text: ''
+					},
 					position: {
 						is_valid: true,
 						text: ''
@@ -104,60 +117,58 @@
 			}
 		},
 		computed: {
-			isUserLoggedIn: function() {
-				return this.$store.getters.isUserLoggedIn;
-			},
-			userLoadStatus: function() {
-				return this.$store.getters.getUserLoadStatus;
-			},
 			categories: function() {
 				return this.$store.getters.getCategories;
 			},
-			poiAddStatus: function() {
-				return this.$store.getters.getPoiAddStatus;
+			poiEditStatus: function() {
+				return this.$store.getters.getPoiEditStatus;
 			},
-			suggestedPoi: function() {
-				return this.$store.getters.getUserSuggestedPoi(this.$route.params.id);
+			poisLoadStatus: function() {
+				return this.$store.getters.getPoisLoadStatus;
+			},
+			poi: function() {
+				return this.$store.getters.getPoi(this.$route.params.id);
 			}
 		},
 		watch: {
-			isUserLoggedIn: function() {
-				if (!this.isUserLoggedIn) {
-					this.$router.push({ name: 'suggest-poi' });
-				}
-			},
-			poiAddStatus: function() {
-				if (this.poiAddStatus == 2) {
+			poiEditStatus: function() {
+				if (this.poiEditStatus == 2) {
 					this.clearForm();
 					EventBus.$emit('show-success');
-					this.$router.push({ name: 'suggest-poi' });
-				} else if (this.poiAddStatus == 3) {
+					this.$router.push({ name: 'current-pois' });
+				} else if (this.poiEditStatus == 3) {
 					EventBus.$emit('show-error');
 				}
 			},
-			userLoadStatus: function() {
-				if (this.userLoadStatus == 2 && this.suggestedPoi != null) {
-					this.id = this.suggestedPoi.id;
-					this.name = this.suggestedPoi.name;
-					this.address = this.suggestedPoi.address;
-					this.description = this.suggestedPoi.description;
-					this.category_id = this.suggestedPoi.category_id;
-					this.latitude = this.suggestedPoi.latitude;
-					this.longitude = this.suggestedPoi.longitude;
-					this.$refs.map.addNewMarker(this.suggestedPoi.latitude, this.suggestedPoi.longitude);
+			poisLoadStatus: function() {
+				if (this.poisLoadStatus == 2 && this.poi != null) {
+					this.id = this.poi.id;
+					this.name = this.poi.name;
+					this.address = this.poi.address;
+					this.description = this.poi.description;
+					this.category_id = this.poi.category_id;
+					if (this.poi.hashtag != null) {
+						this.hashtag = this.poi.hashtag;
+					}
+					this.latitude = this.poi.latitude;
+					this.longitude = this.poi.longitude;
+					this.$refs.map.addNewMarker(this.poi.latitude, this.poi.longitude);
 				}
 			}
 		},
 		mounted: function() {
-			if (this.userLoadStatus == 2 && this.suggestedPoi != null) {
-				this.id = this.suggestedPoi.id;
-				this.name = this.suggestedPoi.name;
-				this.address = this.suggestedPoi.address;
-				this.description = this.suggestedPoi.description;
-				this.category_id = this.suggestedPoi.category_id;
-				this.latitude = this.suggestedPoi.latitude;
-				this.longitude = this.suggestedPoi.longitude;
-				this.$refs.map.addNewMarker(this.suggestedPoi.latitude, this.suggestedPoi.longitude);
+			if (this.poisLoadStatus == 2 && this.poi != null) {
+				this.id = this.poi.id;
+				this.name = this.poi.name;
+				this.address = this.poi.address;
+				this.description = this.poi.description;
+				this.category_id = this.poi.category_id;
+				if (this.poi.hashtag != null) {
+					this.hashtag = this.poi.hashtag;
+				}
+				this.latitude = this.poi.latitude;
+				this.longitude = this.poi.longitude;
+				this.$refs.map.addNewMarker(this.poi.latitude, this.poi.longitude);
 			}
 			this.$refs.map.setEditable(true);
 			this.$refs.map.resizeCanvas();
@@ -173,17 +184,18 @@
 			toggleSelectedCategory: function(id) {
 				this.category_id = id;
 			},
-			suggestNewPoi: function() {
+			editPoi: function() {
 				if (this.categories.length == 1) {
 					this.toggleSelectedCategory(this.categories[0].id);
 				}
 				if (this.validateForm()) {
-					this.$store.dispatch('suggestNewPoi', {
+					this.$store.dispatch('editPoi', {
 						id: this.id,
 						name: this.name,
 						address: this.address,
 						description: this.description,
 						category_id: this.category_id,
+						hashtag: this.hashtag,
 						latitude: this.$refs.map.$canvas.newMarker.x,
 						longitude: this.$refs.map.$canvas.newMarker.y
 					});
@@ -228,6 +240,15 @@
 					this.validations.category.text = '';
 				}
 
+				if (this.hashtag != null && (this.hashtag.includes(' ') || this.hashtag.includes('#'))) {
+					validForm = false;
+					this.validations.hashtag.is_valid = false;
+					this.validations.hashtag.text = 'L\'hashtag non deve contenere spazi o il carattere #';
+				} else {
+					this.validations.hashtag.is_valid = true;
+					this.validations.hashtag.text = '';
+				}
+
 				if (this.$refs.map.$canvas.newMarker == null) {
 					validForm = false;
 					this.validations.position.is_valid = false;
@@ -248,6 +269,7 @@
 					this.$refs.map.$canvas.newMarker = null;
 				}
 				this.category_id = null;
+				this.hashtag = '';
 				this.validations = {
 					name: {
 						is_valid: true,
@@ -265,12 +287,16 @@
 						is_valid: true,
 						text: ''
 					},
+					hashtag: {
+						is_valid: true,
+						text: ''
+					},
 					position: {
 						is_valid: true,
 						text: ''
 					}
 				};
-			},
+			}
 		}
 	}
 </script>

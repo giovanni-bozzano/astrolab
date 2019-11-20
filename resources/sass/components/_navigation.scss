@@ -14,8 +14,7 @@ div#navigation {
 		margin-top: 40px;
 	}
 	li.menu-inner {
-		font-family: 'IBM Plex Mono', monospace;
-		color: white;
+		color: var(--foreground-color);
 		letter-spacing: 0.06em;
 		width: 90px;
 		line-height: 40px;
@@ -25,15 +24,15 @@ div#navigation {
 		padding-left: 10px;
 	}
 	div.active li.menu-inner {
-		color: black;
+		color: var(--background-color);
 	}
 	div.active {
-		background-color: white;
+		background-color: var(--foreground-color);
 	}
 	div.menu-section:hover li.menu-inner,
 	div.menu-section:hover {
-		background-color: white;
-		color: black;
+		background-color: var(--foreground-color);
+		color: var(--background-color);
 		cursor: pointer;
 	}
 	div.logo-container {

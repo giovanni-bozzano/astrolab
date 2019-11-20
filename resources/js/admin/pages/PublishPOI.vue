@@ -9,7 +9,7 @@
 			<br />
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-10 medium-10 small-12">
-					<table id="table" class="responsive-card-table">
+					<table id="publish-poi-table" class="responsive-card-table">
 						<thead>
 							<tr>
 								<th>Nome</th>
@@ -24,8 +24,8 @@
 								<td data-label="Nome">{{ suggestedPoi.name }}</td>
 								<td data-label="Data di aggiunta">{{ suggestedPoi.created_at }}</td>
 								<td data-label="Utente">{{ suggestedPoi.user.name }}</td>
-								<td class="fit"><router-link :to="{ name: 'publish-poi-new', params: { id: suggestedPoi.id }}" class="button">Pubblica</router-link></td>
-								<td class="fit"><a v-on:click="deleteSuggestedPoi(suggestedPoi.id)" class="button">Elimina</a></td>
+								<td class="fit"><center><router-link :to="{ name: 'publish-poi-new', params: { id: suggestedPoi.id }}" class="button">Approva</router-link></center></td>
+								<td class="fit"><center><a v-on:click="rejectSuggestedPoi(suggestedPoi.id)" class="button">Rifiuta</a></center></td>
 							</tr>
 						</tbody>
 					</table>
@@ -33,7 +33,7 @@
 			</div>
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-8 medium-9 small-12">
-					<router-link :to="{ name: 'publish-poi-new', params: { id: 0 }}" class="button">Aggiungi</router-link>
+					<router-link :to="{ name: 'publish-poi-new' }" class="button">Aggiungi</router-link>
 				</div>
 			</div>
 		</div>
@@ -59,7 +59,7 @@
 			suggestedPoisLoadStatus: function() {
 				if (this.suggestedPoisLoadStatus == 2) {
 					$(document).ready(function() {
-						$('#table').DataTable({
+						$('#publish-poi-table').DataTable({
 							'language': {
 								'url': 'https://cdn.datatables.net/plug-ins/1.10.20/i18n/Italian.json'
 							},
@@ -82,7 +82,7 @@
 		},
 		mounted: function() {
 			if (this.suggestedPoisLoadStatus == 2) {
-				$('#table').DataTable({
+				$('#publish-poi-table').DataTable({
 					'language': {
 						'url': 'https://cdn.datatables.net/plug-ins/1.10.20/i18n/Italian.json'
 					},
@@ -94,12 +94,12 @@
 				});
 			}
 			EventBus.$on('destroy-datatable', function() {
-				$('#table').DataTable().destroy();
+				$('#publish-poi-table').DataTable().destroy();
 			}.bind(this));
 		},
 		methods: {
-			deleteSuggestedPoi(id) {
-				this.$store.dispatch('deleteSuggestedPoi', {
+			rejectSuggestedPoi(id) {
+				this.$store.dispatch('rejectSuggestedPoi', {
 					id: id
 				});
 			}

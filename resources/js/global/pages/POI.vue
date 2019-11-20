@@ -1,5 +1,5 @@
 <template>
-	<div id="map-poi-page" class="top-padding bottom-padding">
+	<div id="poi-page" class="top-padding bottom-padding">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-10 medium-10 small-10">
@@ -26,65 +26,13 @@
 					</div>
 				</div>
 			</div>
-			<infinite-loading @infinite="infiniteHandler">
+			<infinite-loading force-use-infinite-wrapper @infinite="infiniteHandler">
 				<div slot="no-more"></div>
 				<div slot="no-results"></div>
 			</infinite-loading>
 		</div>
 	</div>
 </template>
-
-<style lang="scss">
-#map-poi-page {
-	.instagram-grid {
-		margin-left: -0.1rem;
-		margin-right: -0.1rem;
-	}
-	.instagram-cell {
-		padding: 0.1rem;
-	}
-	.instagram-container {
-		position: relative;
-		padding-top: 100%;
-		background-size: cover;
-		background-position: center center;
-		background-repeat: no-repeat;
-	}
-	.instagram-container .instagram-text-container {
-		display: none;
-	}
-	.instagram-container:hover .instagram-text-container {
-		display: flex;
-	}
-	.instagram-text-container {
-		flex-direction: column;
-		-webkit-justify-content: center;
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		padding: 0.5rem;
-		background-color: rgba(0, 0, 0, 0.7);
-	}
-	.instagram-title {
-		text-align: center;
-		color: #fff;
-		overflow: hidden;
-		margin-bottom: 0.6rem;
-		margin-top: 0.3rem;
-		overflow: hidden;
-		display: -webkit-box;
-		-webkit-line-clamp: 8;
-		-webkit-box-orient: vertical;
-	}
-	.instagram-date {
-		text-align: center;
-		color: #ccc;
-		font-size: 0.7rem;
-	}
-}
-</style>
 
 <script>
 	import POIsAPI from '../api/pois.js';
@@ -129,6 +77,7 @@
 				POIsAPI.getPoiInstagramPosts(this.$route.params.id, this.endCursor).then(({ data }) => {
 					if (data.list.length) {
 						this.endCursor = data.endCursor;
+						data.list.forEach(element => element.date = new Date(element.date * 1000).toLocaleString());
 						this.instagramList.push(...data.list);
 						if (this.endCursor == null) {
 							$state.complete();
@@ -142,6 +91,6 @@
 					$state.complete();
 				});
 			},
-		},
+		}
 	}
 </script>

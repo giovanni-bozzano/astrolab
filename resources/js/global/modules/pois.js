@@ -15,6 +15,7 @@ export const pois = {
 		pois: [],
 		poisLoadStatus: 0,
 		poiAddStatus: 0,
+		poiEditStatus: 0,
 		poiDeleteStatus: 0
 	},
 
@@ -152,6 +153,13 @@ export const pois = {
 		},
 
 		/*
+			Set the POI edit status.
+		*/
+		setPoiEditStatus(state, status) {
+			state.poiEditStatus = status;
+		},
+
+		/*
 			Set the POI delete status.
 		*/
 		setPoiDeleteStatus(state, status) {
@@ -198,6 +206,13 @@ export const pois = {
 		*/
 		getPoiAddStatus(state) {
 			return state.poiAddStatus;
+		},
+
+		/*
+			Gets the POI edit status.
+		*/
+		getPoiEditStatus(state) {
+			return state.poiEditStatus;
 		},
 
 		/*

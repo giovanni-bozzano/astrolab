@@ -2,12 +2,10 @@
 	<div id="app-layout">
 		<success-notification></success-notification>
 		<error-notification></error-notification>
-		<!--
-		<div id="background" class="show-for-medium">
+		<div id="background" class="show-for-large" v-show="$route.name.endsWith('map')">
 			<div class="background-surf"></div>
 			<div class="background"></div>
 		</div>
-		-->
 		<div class="shadow-box-top"></div>
 		<div class="shadow-box-bottom"></div>
 		<div class="title-bar hide-for-medium">
@@ -61,13 +59,11 @@
 		},
 
 		created: function() {
-			/*
-			document.addEventListener('mousemove', this.update);
-			document.addEventListener('touchmove', this.update);
-			*/
 			this.$store.dispatch('loadPois');
 			this.$store.dispatch('loadUser');
 			this.$store.dispatch('loadCategories');
+			document.addEventListener('mousemove', this.update);
+			document.addEventListener('touchmove', this.update);
 		},
 
 		mounted: function() {
@@ -75,12 +71,10 @@
 		},
 
 		methods: {
-			/*
 			update: function(e) {
 				document.documentElement.style.setProperty('--cursorX', e.clientX + 'px');
 				document.documentElement.style.setProperty('--cursorY', e.clientY + 'px');
 			}
-			*/
 		}
 	}
 </script>

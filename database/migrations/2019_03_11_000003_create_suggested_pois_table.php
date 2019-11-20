@@ -24,6 +24,7 @@ class CreateSuggestedPOIsTable extends Migration
 			$table->decimal('longitude', 11, 8);
 			$table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
 			$table->timestamps();
 		});
 	}

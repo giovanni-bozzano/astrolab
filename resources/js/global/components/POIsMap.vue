@@ -47,7 +47,7 @@
 			},
 
 			selectedCategory: function() {
-				this.highlightCategory();
+				// this.highlightCategory();
 			},
 
 			selectedPoi: function() {
@@ -58,7 +58,8 @@
 		mounted: function() {
 			this.$canvas = new fabric.Canvas('pois-map-canvas', {
 				selection: false,
-				height: 500
+				height: 500,
+				allowTouchScrolling: true
 			});
 			this.$canvas.hoverCursor = 'pointer';
 			this.resizeCanvas();
@@ -73,17 +74,18 @@
 			let router = this.$router;
 			let elements = this.$elements;
 			let canvas = this;
-			this.$canvas.on('mouse:down', function(event) {
+			this.$canvas.on('mouse:up', function(event) {
+				event.e.preventDefault();
 				if (!this.editable) {
 					if (event.target != null && event.target.poi != null) {
-						router.push({ name: 'map-poi', params: { id: event.target.poi.id } });
+						router.push({ name: 'poi', params: { id: event.target.poi.id } });
 					}
 					return;
 				}
 				if (this.newMarker != null) {
 					this.remove(this.newMarker);
 				}
-				canvas.addNewMarker(event.e.offsetX / canvas.$canvas.getWidth(), event.e.offsetY / canvas.$canvas.getWidth());
+				canvas.addNewMarker(event.pointer.x / canvas.$canvas.getWidth(), event.pointer.y / canvas.$canvas.getWidth());
 			});
 			this.$canvas.on('mouse:over', function(event) {
 				if (this.editable) {
@@ -91,11 +93,17 @@
 				}
 				if (event.target != null && event.target.poi != null) {
 					for (let i = 0; i < elements[event.target.poi.category.id].length; i++) {
+						if (elements[event.target.poi.category.id][i].poi !== undefined && elements[event.target.poi.category.id][i].poi.id == event.target.poi.id) {
+							elements[event.target.poi.category.id][i].scale(elements[event.target.poi.category.id][i].get('scaleX') + 0.2);
+							break;
+						}
+						/*
 						if (elements[event.target.poi.category.id][i].type == 'line') {
 							elements[event.target.poi.category.id][i].set('strokeWidth', 5);
 						} else {
 							elements[event.target.poi.category.id][i].scale(elements[event.target.poi.category.id][i].get('scaleX') + 0.2);
 						}
+						*/
 					}
 					this.renderAll();
 					console.log(event.target.poi.id + ' ' + event.target.poi.latitude + ' ' + event.target.poi.longitude);
@@ -107,15 +115,22 @@
 				}
 				if (event.target != null && event.target.poi != null) {
 					for (let i = 0; i < elements[event.target.poi.category.id].length; i++) {
+						if (elements[event.target.poi.category.id][i].poi !== undefined && elements[event.target.poi.category.id][i].poi.id == event.target.poi.id) {
+							elements[event.target.poi.category.id][i].scale(elements[event.target.poi.category.id][i].get('scaleX') - 0.2);
+							break;
+						}
+						/*
 						if (elements[event.target.poi.category.id][i].type == 'line') {
 							elements[event.target.poi.category.id][i].set('strokeWidth', 3);
 						} else {
 							elements[event.target.poi.category.id][i].scale(elements[event.target.poi.category.id][i].get('scaleX') - 0.2);
 						}
+						*/
 					}
 					this.renderAll();
 				}
 			});
+			this.resizeCanvas();
 			this.clearMarkers();
 			this.buildMarkers();
 		},
@@ -134,11 +149,13 @@
 			buildMarkers: function() {
 				if (this.$canvas.newMarker != null) {
 					let canvas = this.$canvas;
-					fabric.Image.fromURL('/img/poi-marker.png', function(image) {
+					fabric.Image.fromURL('/img/poi-marker.svg', function(image) {
 						let previousX = canvas.newMarker.x;
 						let previousY = canvas.newMarker.y;
 						image.set({
 							selectable: false,
+							width: 16,
+							height: 16,
 							left: canvas.newMarker.x * canvas.getWidth(),
 							top: canvas.newMarker.y * canvas.getHeight(),
 							originX: 'center',
@@ -168,12 +185,14 @@
 					for (; remainingPois.length > 0; poi = nearestPoi) {
 						let canvas = this.$canvas;
 						let marker = new Image();
-						marker.src = '/img/poi-marker.png';
+						marker.src = '/img/poi-marker.svg';
 						marker.poi = poi;
 						marker.onload = function() {
 							let image = new fabric.Image(marker);
 							image.set({
 								selectable: false,
+								width: 16,
+								height: 16,
 								left: parseFloat(marker.poi.latitude) * canvas.getWidth(),
 								top: parseFloat(marker.poi.longitude) * canvas.getHeight(),
 								originX: 'center',
@@ -220,9 +239,11 @@
 
 			addNewMarker: function(x, y) {
 				let canvas = this.$canvas;
-				fabric.Image.fromURL('/img/poi-marker.png', function(image) {
+				fabric.Image.fromURL('/img/poi-marker.svg', function(image) {
 					image.set({
 						selectable: false,
+						width: 16,
+						height: 16,
 						left: x * canvas.getWidth(),
 						top: y * canvas.getHeight(),
 						originX: 'center',
@@ -332,6 +353,7 @@
 									color: '#ffffff',
 									blur: 0
 								});
+								this.$elements[categoryId][i].scale(this.$elements[categoryId][i].get('scaleX') - 0.2);
 								found = true;
 								break;
 							}
@@ -348,6 +370,7 @@
 								color: '#ffffff',
 								blur: 15
 							});
+							this.$elements[this.selectedCategory][i].scale(this.$elements[this.selectedCategory][i].get('scaleX') + 0.2);
 							break;
 						}
 					}

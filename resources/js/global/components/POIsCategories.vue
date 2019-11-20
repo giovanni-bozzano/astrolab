@@ -1,22 +1,23 @@
 <template>
 	<div id="pois-categories">
+<!--
 		<div v-for="category in categories" v-if="categories.length > 1">
 			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
 				<img class="category-icon" src="/img/poi-marker.png"></img><li class="category-name"> {{ category.name }}</li>
 			</div>
 			<div class="category-pois" v-bind:class="{ 'collapsed': category.id != expandedCategory }">
-				<router-link :to="{ name: 'map-poi', params: { id: poi.id }}" v-for="poi in expandedPois(categories[0].id)" v-bind:key="poi.id">
+				<router-link :to="{ name: 'poi', params: { id: poi.id }}" v-for="poi in expandedPois(categories[0].id)" v-bind:key="poi.id">
 					<div class="poi" v-on:mouseenter="toggleSelectedPoi(category.id, poi.id)" v-on:mouseleave="toggleSelectedPoi(null, null)">
 						<li class="poi-name">{{ poi.name }}</li>
 					</div>
 				</router-link>
 			</div>
 		</div>
-		<div v-else>
-			<router-link :to="{ name: 'map-poi', params: { id: poi.id }}" v-for="poi in expandedPois(categories[0].id)" v-bind:key="poi.id">
-				<div class="poi" v-on:mouseenter="toggleSelectedPoi(categories[0].id, poi.id)" v-on:mouseleave="toggleSelectedPoi(null, null)">
-					<li class="poi-name">{{ poi.name }}</li>
-				</div>
+-->
+		<div v-for="category in categories">
+			<router-link :to="{ name: 'poi', params: { id: poi.id }}" v-for="poi in expandedPois(categories[0].id)" v-bind:key="poi.id">
+				<button class="button" v-on:mouseenter="toggleSelectedPoi(categories[0].id, poi.id)" v-on:mouseleave="toggleSelectedPoi(null, null)">{{ poi.name }}</button>
+				<br class="show-for-large" />
 			</router-link>
 		</div>
 	</div>

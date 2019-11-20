@@ -2,24 +2,47 @@
 	font-family: 'lemurmure-regular';
 	src: url('/fonts/lemurmure-regular.woff');
 }
+:root {
+	--cursorX: -100vw;
+	--cursorY: -100vh;
+	--background-color: #000;
+	--foreground-color: #fff;
+	--background-color-rgba-000: rgba(0, 0, 0, 0.01);
+	--background-color-rgba-050: rgba(0, 0, 0, 0.5);
+	--background-color-rgba-095: rgba(0, 0, 0, 0.95);
+}
+:root:before {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 100%;
+	z-index: -2;
+	position: fixed;
+	pointer-events: none;
+	background: radial-gradient(
+		circle 20vmax at var(--cursorX) var(--cursorY),
+		var(--background-color-rgba-000) 0%,
+		var(--background-color-rgba-050) 40%,
+		var(--background-color-rgba-095) 100%
+	)
+}
+::-webkit-scrollbar {
+	width: 0px;
+	background: transparent;
+}
 html {
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
 }
 body {
-	background-color: #000000;
+	background-color: var(--background-color);
 	font-family: 'IBM Plex Mono', monospace;
 	font-size: 0.8rem;
 	line-height: 1.6;
-	color: $primary-color;
-	-webkit-user-select: none;
+	color: var(--foreground-color);
 	-webkit-tap-highlight-color: transparent;
 	-webkit-touch-callout: none;
-}
-::-webkit-scrollbar {
-	width: 0px;
-	background: transparent;
 }
 .top-padding {
 	padding-top: 3rem;
@@ -41,19 +64,26 @@ body {
 .position-left.reveal-for-medium ~ .off-canvas-content {
 	margin-left: 10rem;
 }
+.position-left.is-transition-push {
+	box-shadow: none;
+}
 .title-bar {
 	z-index: 2;
 	height: 3rem;
 	width: 100vw;
 	padding: 1rem;
-	color: white;
-	border-bottom: solid 2.5px white;
+	color: var(--foreground-color);
+	border-bottom: solid 2.5px var(--foreground-color);
 	position: fixed;
     top: 0;
-    background: #000;
+    background: var(--background-color);
 }
 .menu-icon {
 	outline: none;
+}
+.menu-icon::after {
+	background: var(--foreground-color);
+	box-shadow: 0 7px 0 var(--foreground-color), 0 14px 0 var(--foreground-color);
 }
 .off-canvas {
 	height: auto;
@@ -101,13 +131,12 @@ div.footer-container {
 	width: 100%;
 	bottom: 0;
 	position: fixed;
-	border-top: solid 2.5px #fff;
-	background: #000;
+	border-top: solid 2.5px var(--foreground-color);
+	background: var(--background-color);
 }
 div.back-container {
 	text-align: right;
 }
-/*
 div.background {
 	position: fixed;
 	height: calc(100% - 50px);
@@ -125,7 +154,6 @@ div.background-surf {
 	background-size: cover;
 	background-position: center;
 }
-*/
 @media #{$large-up} {
 	div.off-canvas {
 		margin-bottom: 3rem;

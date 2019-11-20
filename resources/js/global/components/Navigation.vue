@@ -2,13 +2,13 @@
 	<div id="navigation">
 		<div class="title-bar hide-for-medium"></div>
 		<div class="navigation-content">
-		    <div class="logo-container" data-close="navigation">
-		        <figure class="logo-wrap">
-		            <router-link :to="{ name: 'map'}">
-		            	<img class="logo" src="/img/logo-white.svg" width="65px" height="auto">
-		            </router-link>
-		        </figure>
-		    </div>
+			<div class="logo-container" data-close="navigation">
+				<figure class="logo-wrap">
+					<router-link :to="{ name: 'map'}">
+						<img class="logo" src="/img/logo-white.svg" width="65px" height="auto">
+					</router-link>
+				</figure>
+			</div>
 			<nav id="nav" class="menu-sections-container">
 				<div class="menu-section" data-close="navigation" v-if="isUserLoggedIn && isUserAdministrator">
 					<a href="/admin">
@@ -33,6 +33,11 @@
 				<div class="menu-section" data-close="navigation" v-bind:class="{ 'active': $route.name.includes(['suggest-poi']) }">
 					<router-link :to="{ name: 'suggest-poi' }">
 						<li class="menu-inner">Consigli</li>
+					</router-link>
+				</div>
+				<div class="menu-section" data-close="navigation" v-bind:class="{ 'active': $route.name.includes(['archive']) }">
+					<router-link :to="{ name: 'archive' }">
+						<li class="menu-inner">Archivio</li>
 					</router-link>
 				</div>
 				<div class="menu-section" data-close="navigation">

@@ -21,12 +21,99 @@ export const admin = {
 	*/
 	actions: {
 		/*
-			Loads a user.
+			Edits a POI.
+		*/
+		editPoi({ commit, state, dispatch }, data) {
+			commit('setPoiEditStatus', 1);
+			AdminAPI.editPoi(data.id, data.name, data.address, data.description, data.category_id, data.hashtag, data.latitude, data.longitude).then(function(response) {
+				commit('setNotificationText', response.data);
+				commit('setPoiEditStatus', 2);
+
+				/*
+					Load the POIs.
+				*/
+				EventBus.$emit('destroy-datatable');
+				dispatch('loadPois');
+			}).catch(function() {
+				if (error.response.status == 401) {
+					commit('setNotificationText', error.response.data);
+				}
+				commit('setPoiEditStatus', 3);
+			});
+		},
+
+		/*
+			Shows a POI.
+		*/
+		showPoi({ commit, state, dispatch }, data) {
+			commit('setPoiEditStatus', 1);
+			AdminAPI.showPoi(data.id).then(function(response) {
+				commit('setNotificationText', response.data);
+				commit('setPoiEditStatus', 2);
+
+				/*
+					Load the POIs.
+				*/
+				EventBus.$emit('destroy-datatable');
+				dispatch('loadPois');
+			}).catch(function() {
+				if (error.response.status == 401) {
+					commit('setNotificationText', error.response.data);
+				}
+				commit('setPoiEditStatus', 3);
+			});
+		},
+
+		/*
+			Hides a POI.
+		*/
+		hidePoi({ commit, state, dispatch }, data) {
+			commit('setPoiEditStatus', 1);
+			AdminAPI.hidePoi(data.id).then(function(response) {
+				commit('setNotificationText', response.data);
+				commit('setPoiEditStatus', 2);
+
+				/*
+					Load the POIs.
+				*/
+				EventBus.$emit('destroy-datatable');
+				dispatch('loadPois');
+			}).catch(function() {
+				if (error.response.status == 401) {
+					commit('setNotificationText', error.response.data);
+				}
+				commit('setPoiEditStatus', 3);
+			});
+		},
+
+		/*
+			Deletes a POI.
+		*/
+		deletePoi({ commit, state, dispatch }, data) {
+			commit('setPoiDeleteStatus', 1);
+			AdminAPI.deletePoi(data.id).then(function(response) {
+				commit('setNotificationText', response.data);
+				commit('setPoiDeleteStatus', 2);
+
+				/*
+					Load the POIs.
+				*/
+				EventBus.$emit('destroy-datatable');
+				dispatch('loadPois');
+			}).catch(function() {
+				if (error.response.status == 401) {
+					commit('setNotificationText', error.response.data);
+				}
+				commit('setPoiDeleteStatus', 3);
+			});
+		},
+
+		/*
+			Loads suggested POIs.
 		*/
 		loadSuggestedPois({ commit }) {
 			commit('setSuggestedPoisLoadStatus', 1);
 			AdminAPI.getSuggestedPois().then(function(response) {
-				EventBus.$emit('destroy-datatable');
 				commit('setSuggestedPois', response.data);
 				commit('setSuggestedPoisLoadStatus', 2);
 			}).catch(function() {
@@ -47,7 +134,9 @@ export const admin = {
 				/*
 					Load the POIs.
 				*/
+				EventBus.$emit('destroy-datatable');
 				dispatch('loadPois');
+				dispatch('loadSuggestedPois');
 			}).catch(function() {
 				if (error.response.status == 401) {
 					commit('setNotificationText', error.response.data);
@@ -57,17 +146,18 @@ export const admin = {
 		},
 
 		/*
-			Deletes a suggested POI.
+			Rejects a suggested POI.
 		*/
-		deleteSuggestedPoi({ commit, state, dispatch }, data) {
+		rejectSuggestedPoi({ commit, state, dispatch }, data) {
 			commit('setPoiDeleteStatus', 1);
-			AdminAPI.deleteSuggestedPoi(data.id).then(function(response) {
+			AdminAPI.rejectSuggestedPoi(data.id).then(function(response) {
 				commit('setNotificationText', response.data);
 				commit('setPoiDeleteStatus', 2);
 
 				/*
 					Load the suggested POIs.
 				*/
+				EventBus.$emit('destroy-datatable');
 				dispatch('loadSuggestedPois');
 			}).catch(function(error) {
 				if (error.response.status == 403) {

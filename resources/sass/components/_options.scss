@@ -3,9 +3,8 @@ div.options {
 	div.option {
 		font-size: 13px;
 		color: #666666;
-		font-family: 'IBM Plex Mono', monospace;
 		border-radius: 4px;
-		background-color: #F9F9FA;
+		background-color: #f9f9fA;
 		width: 200px;
 		height: 57px;
 		float: left;
@@ -14,10 +13,10 @@ div.options {
 		padding: 5px;
 		cursor: pointer;
 		position: relative;
-
+		
 		&.active {
-			color: white;
-			background-color: $secondary-color;
+			color: var(--foreground-color);
+			background-color: var(--background-color);
 		}
 
 		div.option-container {

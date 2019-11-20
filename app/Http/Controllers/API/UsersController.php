@@ -26,6 +26,8 @@ class UsersController extends Controller
 		if (!$user) {
 			return null;
 		}
-		return User::with('suggestedPois')->find($user)->first();
+		return User::with(['suggestedPois' => function($query) {
+			$query->where('status', 'pending');
+		}])->find($user)->first();
 	}
 }

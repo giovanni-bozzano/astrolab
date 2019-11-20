@@ -36,8 +36,8 @@ export default new VueRouter({
 				},
 				{
 					path: 'map/:id',
-					name: 'map-poi',
-					component: Vue.component('MapPOI', require('./pages/MapPOI.vue').default)
+					name: 'poi',
+					component: Vue.component('POI', require('./pages/POI.vue').default)
 				},
 				{
 					path: 'pois/suggest',
@@ -58,6 +58,11 @@ export default new VueRouter({
 					path: 'about',
 					name: 'about',
 					component: Vue.component('About', require('./pages/About.vue').default)
+				},
+				{
+					path: 'archive',
+					name: 'archive',
+					component: Vue.component('Archive', require('./pages/Archive.vue').default)
 				}
 			]
 		}

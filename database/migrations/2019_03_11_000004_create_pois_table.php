@@ -24,6 +24,8 @@ class CreatePOIsTable extends Migration
 			$table->decimal('longitude', 11, 8);
 			$table->text('hashtag')->nullable();
 			$table->boolean('is_hidden')->default(false);
+			$table->unsignedBigInteger('suggestion_id')->nullable();
+			$table->foreign('suggestion_id')->references('id')->on('suggested_poi');
 			$table->timestamps();
 		});
 	}

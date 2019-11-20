@@ -5,6 +5,55 @@ import { CONFIG } from '../../config.js';
 
 export default {
 	/*
+		POST /api/v1/admin/pois/edit/{id}
+	*/
+	editPoi: function(id, name, address, description, category_id, hashtag, latitude, longitude) {
+		/*
+			Initialize the form data
+		*/
+		let formData = new FormData();
+
+		/*
+			Add the form data we need to submit
+		*/
+		formData.append('id', id);
+		formData.append('name', name);
+		formData.append('address', address);
+		formData.append('description', description);
+		formData.append('category_id', category_id);
+		formData.append('hashtag', hashtag);
+		formData.append('latitude', latitude);
+		formData.append('longitude', longitude);
+
+		return axios.post(CONFIG.URL + 'api/v1/admin/pois/edit', formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			}
+		});
+	},
+
+	/*
+		POST /api/v1/admin/pois/show/{id}
+	*/
+	showPoi: function(id) {
+		return axios.post(CONFIG.URL + 'api/v1/admin/pois/show/' + id);
+	},
+
+	/*
+		POST /api/v1/admin/pois/hide/{id}
+	*/
+	hidePoi: function(id) {
+		return axios.post(CONFIG.URL + 'api/v1/admin/pois/hide/' + id);
+	},
+
+	/*
+		POST /api/v1/admin/pois/delete/{id}
+	*/
+	deletePoi: function(id) {
+		return axios.post(CONFIG.URL + 'api/v1/admin/pois/delete/' + id);
+	},
+
+	/*
 		GET /api/v1/admin/pois/suggested
 	*/
 	getSuggestedPois: function() {
@@ -40,9 +89,9 @@ export default {
 	},
 
 	/*
-		POST /api/v1/admin/pois/delete-suggested/{id}
+		POST /api/v1/admin/pois/reject-suggested/{id}
 	*/
-	deleteSuggestedPoi: function(id) {
-		return axios.post(CONFIG.URL + 'api/v1/admin/pois/delete-suggested/' + id);
+	rejectSuggestedPoi: function(id) {
+		return axios.post(CONFIG.URL + 'api/v1/admin/pois/reject-suggested/' + id);
 	}
 }

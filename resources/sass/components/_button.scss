@@ -1,3 +1,4 @@
+/*
 .button {
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 	hyphens: manual;
@@ -11,4 +12,23 @@
 .button:focus, .button:hover {
 	background-color: #fff;
 	color: #161721;
+	outline: 0;
+}
+*/
+.button {
+	background-color: transparent;
+	border: 2.5px solid var(--foreground-color);
+	padding: 8px;
+	text-align: center;
+	display: inline-block;
+	border-radius: 40px;
+	padding-left: 16px;
+	padding-right: 16px;
+	margin: 0;
+}
+
+.button:focus, .button:hover {
+	background-color: var(--foreground-color);
+	color: #161721;
+	outline: 0;
 }

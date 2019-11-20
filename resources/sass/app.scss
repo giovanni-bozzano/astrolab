@@ -7,8 +7,8 @@
 /**
  * Table of Contents:
  *
- *  1. Vendors
- *  2. Abstracts
+ *  1. Abstracts
+ *  2. Vendors
  *  3. Base
  *  4. Layouts
  *  5. Pages
@@ -19,21 +19,23 @@
 @import 'node_modules/foundation-sites/assets/foundation.scss';
 
  /**
- * Chapter 1: Vendor
- */
-@import 'vendors/responsive-card-table';
-
- /**
- * Chapter 2: Abstracts
+ * Chapter 1: Abstracts
  */
 @import 'abstracts/variables';
+
+ /**
+ * Chapter 2: Vendor
+ */
+@import 'vendors/responsive-card-table';
 
 /**
  * Chapter 3: Base
  */
+@import 'base/grid';
 @import 'base/h';
 @import 'base/input';
 @import 'base/label';
+@import 'base/p';
 @import 'base/textarea';
 
 /**
@@ -53,7 +55,7 @@
  * Chapter 6: Components
  */
 @import 'components/button';
-@import 'components/grid';
+@import 'components/instagram';
 @import 'components/navigation';
 @import 'components/notification';
 @import 'components/options';

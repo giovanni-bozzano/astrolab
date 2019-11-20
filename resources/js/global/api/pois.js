@@ -19,6 +19,13 @@ export default {
 	},
 
 	/*
+		GET /api/v1/instagram/{endCursor}
+	*/
+	getInstagramPosts: function(endCursor) {
+		return axios.get(CONFIG.URL + 'api/v1/instagram/' + endCursor);
+	},
+
+	/*
 		POST /api/v1/pois/suggest
 	*/
 	suggestNewPoi: function(id, name, address, description, category_id, latitude, longitude) {

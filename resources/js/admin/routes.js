@@ -28,8 +28,18 @@ export default new VueRouter({
 			path: '/',
 			name: 'layout',
 			component: Vue.component('Layout', require('./pages/Layout.vue').default),
-			redirect: { name: 'publish-poi' },
+			redirect: { name: 'current-pois' },
 			children: [
+				{
+					path: 'pois',
+					name: 'current-pois',
+					component: Vue.component('CurrentPOIs', require('./pages/CurrentPOIs.vue').default)
+				},
+				{
+					path: 'pois/edit/:id?',
+					name: 'edit-poi',
+					component: Vue.component('EditPOI', require('./pages/EditPOI.vue').default)
+				},
 				{
 					path: 'pois/publish',
 					name: 'publish-poi',

@@ -12,7 +12,7 @@ use Auth;
 use Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-
+use Illuminate\Support\Facades\Log;
 /**
  * The POIs controller handles all API requests that manage POIs data.
  */
@@ -25,7 +25,12 @@ class POIsController extends Controller
 	*/
 	public function getPois()
 	{
-		$pois = POI::with('category')->get();
+		Log::info(Auth::guard('api')->user());
+		if (Auth::guard('api')->user() != null && Auth::guard('api')->user()->getIsAdministratorAttribute()) {
+			$pois = POI::with('category')->get();
+		} else {
+			$pois = POI::with('category')->where('is_hidden', false)->get();
+		}
 		return response()->json($pois);
 	}
 
@@ -40,14 +45,21 @@ class POIsController extends Controller
 	public function getPoiInstagramPosts($id, $endCursor = null)
 	{
 		$client = New Client();
+		$poi = POI::find($id);
+		if (!$poi) {
+			return response('Il luogo non esiste.', 403);
+		}
+		if (is_null($poi->hashtag)) {
+			return response()->json();
+		}
 		if (!is_null($endCursor)) {
 			try {
-				$response = $client->get('https://www.instagram.com/explore/tags/landscape/?__a=1&max_id='.$endCursor);
+				$response = $client->get('https://www.instagram.com/explore/tags/'.$poi->hashtag.'/?__a=1&max_id='.$endCursor);
 			} catch (ClientException $e) {
 				return response(null, 403);
 			}
 		} else {
-			$response = $client->get('https://www.instagram.com/explore/tags/landscape/?__a=1');
+			$response = $client->get('https://www.instagram.com/explore/tags/'.$poi->hashtag.'/?__a=1');
 		}
 		$json = json_decode($response->getBody(), true);
 		$response = new \stdClass();
@@ -69,13 +81,129 @@ class POIsController extends Controller
 	}
 
 	/*
+	| URL:            /api/v1/instagram
+	| Method:         GET
+	| Description:    Gets Instagram posts.
+	| Parameters:
+	| 	$endCursor -> Endpoint end cursor.
+	*/
+	public function getInstagramPosts($endCursor = null)
+	{
+		$client = New Client();
+		if (!is_null($endCursor)) {
+			try {
+				$response = $client->get('https://www.instagram.com/explore/tags/raccontamiparma/?__a=1&max_id='.$endCursor);
+			} catch (ClientException $e) {
+				return response(null, 403);
+			}
+		} else {
+			$response = $client->get('https://www.instagram.com/explore/tags/raccontamiparma/?__a=1');
+		}
+		$json = json_decode($response->getBody(), true);
+		$response = new \stdClass();
+		$response->endCursor = $json['graphql']['hashtag']['edge_hashtag_to_media']['page_info']['end_cursor'];
+		$response->list = array();
+		foreach($json['graphql']['hashtag']['edge_hashtag_to_media']['edges'] as $node) {
+			$item = new \stdClass();
+			$item->imageUrl = $node['node']['display_url'];
+			$item->url = 'https://www.instagram.com/p/'.$node['node']['shortcode'];
+			if (!empty($node['node']['edge_media_to_caption']['edges'])) {
+				$item->title = $node['node']['edge_media_to_caption']['edges'][0]['node']['text'];
+			} else {
+				$item->title = null;
+			}
+			$item->date = $node['node']['taken_at_timestamp'];
+			array_push($response->list, $item);
+		}
+		return response()->json($response);
+	}
+
+	/*
+	| URL:            /api/v1/admin/pois/edit/{id}
+	| Method:         POST
+	| Description:    Edits a POI in the application.
+	| Parameters:
+	| 	$id   -> Unique ID of the POI we are editing.
+	*/
+	public function editPoi(StorePOIRequest $request)
+	{
+		$poi = POI::find($request->get('id'));
+		$suggestedPoi = SuggestedPOI::find($request->get('id'));
+		if ($poi) {
+			$poi->name = $request->get('name');
+			$poi->address = $request->get('address');
+			$poi->description = $request->get('description');
+			$poi->category_id = $request->get('category_id');
+			$poi->hashtag = $request->get('hashtag');
+			$poi->latitude = $request->get('latitude');
+			$poi->longitude = $request->get('longitude');
+			$poi->save();
+			return response($request->get('name').' è stato modificato!', 201);
+		}
+		return response('Il luogo non esiste.', 403);
+	}
+
+	/*
+	| URL:            /api/v1/admin/pois/show/{id}
+	| Method:         POST
+	| Description:    Shows a POI in the application.
+	| Parameters:
+	| 	$id   -> Unique ID of the POI we are showing.
+	*/
+	public function showPoi($id)
+	{
+		$poi = POI::find($id);
+		if ($poi) {
+			$poi->is_hidden = false;
+			$poi->save();
+			return response($poi->name.' è stato mostrato!', 201);
+		}
+		return response('Il luogo non esiste.', 403);
+	}
+
+	/*
+	| URL:            /api/v1/admin/pois/hide/{id}
+	| Method:         POST
+	| Description:    Hides a POI in the application.
+	| Parameters:
+	| 	$id   -> Unique ID of the POI we are hiding.
+	*/
+	public function hidePoi($id)
+	{
+		$poi = POI::find($id);
+		if ($poi) {
+			$poi->is_hidden = true;
+			$poi->save();
+			return response($poi->name.' è stato nascosto!', 201);
+		}
+		return response('Il luogo non esiste.', 403);
+	}
+
+	/*
+	| URL:            /api/v1/admin/pois/delete/{id}
+	| Method:         POST
+	| Description:    Deletes a POI in the application.
+	| Parameters:
+	| 	$id   -> Unique ID of the POI we are deleting.
+	*/
+	public function deletePoi($id)
+	{
+		$poi = POI::find($id);
+		if ($poi) {
+			$poi->delete();
+			return response($poi->name.' è stato rimosso!', 201);
+		}
+		return response('Il luogo non esiste.', 403);
+	}
+
+	/*
 	| URL:            /api/v1/admin/pois/suggested
 	| Method:         GET
 	| Description:    Gets all of the suggested POIs in the application.
 	*/
 	public function getSuggestedPois()
 	{
-		$suggestedPois = SuggestedPOI::with('user')->get();
+		$suggestedPois = SuggestedPOI::with('user')->where('status', 'pending')->get();
 		return response()->json($suggestedPois);
 	}
 
@@ -86,11 +214,13 @@ class POIsController extends Controller
 	*/
 	public function publishNewPoi(StorePOIRequest $request)
 	{
+		$poi = new POI();
 		$suggestedPoi = SuggestedPOI::find($request->get('id'));
 		if ($suggestedPoi) {
-			$suggestedPoi->delete();
+			$suggestedPoi->status = 'approved';
+			$suggestedPoi->save();
+			$poi->suggestion_id = $suggestedPoi->id;
 		}
-		$poi = new POI();
 		$poi->name = $request->get('name');
 		$poi->address = $request->get('address');
 		$poi->description = $request->get('description');
@@ -103,18 +233,19 @@ class POIsController extends Controller
 	}
 
 	/*
-	| URL:            /api/v1/admin/pois/delete-suggested/{id}
+	| URL:            /api/v1/admin/pois/reject-suggested/{id}
 	| Method:         POST
-	| Description:    Deletes a suggested POI in the application.
+	| Description:    Rejects a suggested POI in the application.
 	| Parameters:
-	| 	$id   -> Unique ID of the POI we are deleting.
+	| 	$id   -> Unique ID of the POI we are rejecting.
 	*/
-	public function deleteSuggestedPoi($id)
+	public function rejectSuggestedPoi($id)
 	{
 		$suggestedPoi = SuggestedPOI::find($id);
 		if ($suggestedPoi) {
-			$suggestedPoi->delete();
-			return response($suggestedPoi->name.' è stato cancellato!', 201);
+			$suggestedPoi->status = 'rejected';
+			$suggestedPoi->save();
+			return response($suggestedPoi->name.' è stato rifiutato!', 201);
 		}
 		return response('Il suggerimento non esiste.', 403);
 	}
@@ -153,7 +284,6 @@ class POIsController extends Controller
 	*/
 	public function deleteUserSuggestedPoi($id)
 	{
-		
 		$suggestedPoi = SuggestedPOI::where('id', $id)->where('user_id', Auth::guard('api')->user()->id)->first();
 		if ($suggestedPoi) {
 			$suggestedPoi->delete();

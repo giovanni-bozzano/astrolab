@@ -13,7 +13,7 @@
 			max-width: 530px;
 			min-width: 320px;
 			padding: 20px;
-			background-color: #fff;
+			background-color: var(--foreground-color);
 			border: 1px solid #ddd;
 			-webkit-box-shadow: 0 1px 3px rgba(50, 50, 50, 0.08);
 			box-shadow: 0 1px 3px rgba(50, 50, 50, 0.08);
@@ -32,40 +32,16 @@
 				margin-bottom: 10px;
 			}
 			div.login-label {
-				color: black;
-				font-family: "Lato", sans-serif;
+				color: var(--background-color);
 				font-weight: bold;
 				text-transform: uppercase;
 				text-align: center;
 				margin-top: 20px;
 				margin-bottom: 20px;
 			}
-			p.learn-more-description {
-				color: #666666;
-				text-align: center;
-			}
-			a.learn-more-button {
-				border: 2px solid $secondary-color;
-				border-radius: 3px;
-				text-transform: uppercase;
-				font-family: "Lato", sans-serif;
-				color: $secondary-color;
-				width: 360px;
-				font-size: 16px;
-				text-align: center;
-				padding: 10px;
-				margin-top: 20px;
-				display: block;
-				margin: auto;
-				&:hover{
-					color: white;
-					background-color: $secondary-color;
-				}
-			}
 		}
 	}
-	/* Small only */
-	@media screen and (max-width: 39.9375em) {
+	@media #{$small-only} {
 		div#login-modal {
 			div.login-box {
 				width: 95%;
@@ -75,14 +51,6 @@
 				}
 			}
 		}
-	}
-	/* Medium only */
-	@media screen and (min-width: 40em) and (max-width: 63.9375em) {
-
-	}
-	/* Large only */
-	@media screen and (min-width: 64em) and (max-width: 74.9375em) {
-
 	}
 </style>
 

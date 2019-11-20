@@ -1,12 +1,11 @@
 $responsive-card-table-bottom-gap: 1.5rem;
-$responsive-card-table-border: 1px solid $white;
-$responsive-card-table-stack-point: 640px;
+$responsive-card-table-border: 2.5px solid var(--foreground-color);
 $responsive-card-table-label-bg: rgba(202, 202, 202, 0.3);
 
 table {
 	thead {
 		background-color: transparent;
-		color: $white;
+		color: var(--foreground-color);
 	}
 
 	tbody {
@@ -31,9 +30,9 @@ table {
 	hyphens: manual;
 	padding: 0.1875rem 0.625rem;
 	margin: 0;
-	color: #a7a9ac;
-	background-color: #231f20;
-	border: 3px solid #a7a9ac;
+	color: var(--foreground-color);
+	background-color: transparent;
+	border: 3px solid var(--foreground-color);
 	letter-spacing: 3px;
 	transition: background-color 0.25s ease-out, color 0.25s ease-out;
 }
@@ -43,18 +42,18 @@ table {
 }
 
 .pagination > li:hover, .pagination > li:focus, .pagination > li.current {
-	background-color: #fff;
+	background-color: var(--foreground-color);
 	color: #161721;
 }
 
 .pagination > li.disabled:hover, .pagination > li.disabled:focus {
-	background-color: #231f20;
-	color: #a7a9ac;
+	background-color: transparent;
+	color: var(--foreground-color);
 }
 
 .pagination > li > a {
 	padding: 0.1875rem 0.625rem;
-	color: #a7a9ac;
+	color: var(--foreground-color);
 	background-color: transparent;
 	background: transparent;
 }
@@ -72,8 +71,21 @@ table {
 		box-sizing: border-box;
 		width: 1%;
 	}
+}
 
-	@media screen and (max-width: $responsive-card-table-stack-point) {
+@media #{$medium-only} {
+	.dataTables_wrapper > .row > .cell {
+		width: 100%;
+
+		.dataTables_filter > label, .dataTables_paginate {
+			float: none;
+			margin-top: 0.5rem;
+		}
+	}
+}
+
+@media #{$small-only} {
+	.responsive-card-table {
 		thead tr {
 			position: absolute;
 			top: -9999em;
@@ -123,6 +135,15 @@ table {
 
 		.fit {
 			width: 100%;
+		}
+	}
+
+	.dataTables_wrapper > .row > .cell {
+		width: 100%;
+
+		.dataTables_filter > label, .dataTables_paginate {
+			float: none;
+			margin-top: 0.5rem;
 		}
 	}
 }

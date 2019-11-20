@@ -1,5 +1,5 @@
 <template>
-	<div id="suggest-poi-page" class="top-padding bottom-padding">
+	<div id="publish-poi-new-page" class="top-padding bottom-padding">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-6 medium-7 small-10">
@@ -36,7 +36,7 @@
 				<div class="cell large-8 medium-9 small-12">
 					<label>Categoria</label>
 					<div class="options">
-						<div class="category option" v-on:click="toggleSelectedCategory(category.id)" v-for="category in categories" v-bind:class="{'active': category.id == selectedCategory }">
+						<div class="category option" v-on:click="toggleSelectedCategory(category.id)" v-for="category in categories" v-bind:class="{'active': category.id == category_id }">
 							<div class="option-container">
 								<img class="option-icon" v-bind:src="'/img/icons/' + category.icon + '.svg'"/> <span class="option-name">{{ category.name }}</span>
 							</div>
@@ -49,7 +49,8 @@
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-8 medium-9 small-12">
 					<label>Hashtag</label>
-					<input type="text" id="hashtag" placeholder="Inserisci un hashtag..." class="form-input" autocomplete="off" v-model="hashtag"/>
+					<input type="text" id="hashtag" placeholder="Inserisci un hashtag..." class="form-input" autocomplete="off" v-model="hashtag" v-bind:class="{'invalid' : !validations.hashtag.is_valid }"/>
+					<div class="validation" v-show="!validations.hashtag.is_valid">{{ validations.hashtag.text }}</div>
 				</div>
 			</div>
 			<div class="grid-x grid-padding-x">
@@ -85,7 +86,7 @@
 				name: '',
 				address: '',
 				description: '',
-				selectedCategory: null,
+				category_id: null,
 				hashtag: '',
 				validations: {
 					name: {
@@ -101,6 +102,10 @@
 						text: ''
 					},
 					category: {
+						is_valid: true,
+						text: ''
+					},
+					hashtag: {
 						is_valid: true,
 						text: ''
 					},
@@ -171,7 +176,7 @@
 				Toggles the selected category
 			*/
 			toggleSelectedCategory: function(id) {
-				this.selectedCategory = id;
+				this.category_id = id;
 			},
 			publishNewPoi: function() {
 				if (this.categories.length == 1) {
@@ -183,7 +188,7 @@
 						name: this.name,
 						address: this.address,
 						description: this.description,
-						category_id: this.selectedCategory,
+						category_id: this.category_id,
 						hashtag: this.hashtag,
 						latitude: this.$refs.map.$canvas.newMarker.x,
 						longitude: this.$refs.map.$canvas.newMarker.y
@@ -220,13 +225,22 @@
 					this.validations.description.text = '';
 				}
 
-				if (this.selectedCategory == null) {
+				if (this.category_id == null) {
 					validForm = false;
 					this.validations.category.is_valid = false;
 					this.validations.category.text = 'Seleziona una categoria per il nuovo luogo!';
 				} else {
 					this.validations.category.is_valid = true;
 					this.validations.category.text = '';
+				}
+
+				if (this.hashtag != null && (this.hashtag.includes(' ') || this.hashtag.includes('#'))) {
+					validForm = false;
+					this.validations.hashtag.is_valid = false;
+					this.validations.hashtag.text = 'L\'hashtag non deve contenere spazi o il carattere #';
+				} else {
+					this.validations.hashtag.is_valid = true;
+					this.validations.hashtag.text = '';
 				}
 
 				if (this.$refs.map.$canvas.newMarker == null) {
@@ -248,7 +262,7 @@
 				if (this.$refs.map.$canvas.newMarker != null) {
 					this.$refs.map.$canvas.newMarker = null;
 				}
-				this.selectedCategory = null;
+				this.category_id = null;
 				this.hashtag = '';
 				this.validations = {
 					name: {
@@ -264,6 +278,10 @@
 						text: ''
 					},
 					category: {
+						is_valid: true,
+						text: ''
+					},
+					hashtag: {
 						is_valid: true,
 						text: ''
 					},

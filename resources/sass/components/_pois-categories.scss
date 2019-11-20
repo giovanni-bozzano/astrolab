@@ -1,33 +1,4 @@
 div#pois-categories {
-	img.category-icon,
-	li.category-name,
-	li.poi-name {
-		display: inline-block;
-		vertical-align: middle;
-	}
-	li.category-name,
-	li.poi-name {
-		font-family: 'IBM Plex Mono', monospace;
-		color: white;
-		letter-spacing: 0.06em;
-		line-height: 40px;
-	}
-	li.category-name {
-		padding-left: 20px;
-	}
-	li.poi-name {
-		padding-left: 1rem;
-		padding-right: 1rem;
-		font-weight: lighter;
-	}
-	div.category:hover li.category-name,
-	div.poi:hover li.poi-name,
-	div.category:hover,
-	div.poi:hover {
-		background-color: white;
-		color: black;
-		cursor: pointer;
-	}
 	div.category-pois {
 		height: auto;
 		overflow: hidden;    
