@@ -2,16 +2,19 @@
 	<div id="app-layout">
 		<success-notification></success-notification>
 		<error-notification></error-notification>
+		<div class="shadow-box-top"></div>
+		<div class="shadow-box-bottom"></div>
 		<div id="background" class="show-for-large" v-show="$route.name.endsWith('map')">
 			<div class="background-surf"></div>
 			<div class="background"></div>
 		</div>
-		<div class="shadow-box-top"></div>
-		<div class="shadow-box-bottom"></div>
 		<div class="title-bar hide-for-medium">
-			<div class="title-bar-left">
-				<button class="menu-icon" type="button" data-open="navigation"></button>
-			</div>
+			<button class="menu-icon" type="button" data-open="navigation"></button>
+			<figure class="logo-wrap-small">
+				<router-link :to="{ name: 'map'}">
+					<img class="logo" src="/img/logo-white-small.svg" width="45px" height="auto">
+				</router-link>
+			</figure>
 		</div>
 		<div class="off-canvas-wrapper">
 			<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
@@ -25,7 +28,7 @@
 		</div>
 		<app-footer class="footer-container show-for-large"></app-footer>
 		<login-modal></login-modal>
-		<cookie-consent></cookie-consent>
+		<cookies-consent></cookies-consent>
 		<loader></loader>
 	</div>
 </template>
@@ -44,7 +47,7 @@
 	import Navigation from '../components/Navigation.vue';
 	import Footer from '../components/Footer.vue';
 	import LoginModal from '../components/LoginModal.vue';
-	import CookieConsent from '../components/CookieConsent.vue';
+	import CookiesConsent from '../components/CookiesConsent.vue';
 	import Loader from '../components/Loader.vue';
 
 	export default {
@@ -54,7 +57,7 @@
 			'navigation': Navigation,
 			'app-footer': Footer,
 			'login-modal': LoginModal,
-			'cookie-consent': CookieConsent,
+			'cookies-consent': CookiesConsent,
 			'loader': Loader
 		},
 

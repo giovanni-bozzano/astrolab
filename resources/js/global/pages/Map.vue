@@ -1,5 +1,5 @@
 <template>
-	<div id="map-page" class="top-padding bottom-padding">
+	<div id="map-page" class="page">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-3 medium-12 small-12 categories-cell">

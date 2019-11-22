@@ -1,0 +1,21 @@
+/**
+ * ----------------------------------------
+ * animation scale-out-opacity
+ * ----------------------------------------
+ */
+@-webkit-keyframes scale-out-opacity {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+@keyframes scale-out-opacity {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}

@@ -13,5 +13,13 @@ export default {
 
 	logout: function() {
 		return axios.post(CONFIG.URL + 'logout');
+	},
+
+	getCookiesConsent: function() {
+		return axios.get(CONFIG.URL + 'api/v1/cookies-consent');
+	},
+
+	giveCookiesConsent: function() {
+		return axios.post(CONFIG.URL + 'api/v1/cookies-consent/give');
 	}
 }

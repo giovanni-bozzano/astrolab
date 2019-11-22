@@ -13,6 +13,7 @@ use Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Log;
+
 /**
  * The POIs controller handles all API requests that manage POIs data.
  */
@@ -122,8 +123,6 @@ class POIsController extends Controller
 	| URL:            /api/v1/admin/pois/edit/{id}
 	| Method:         POST
 	| Description:    Edits a POI in the application.
-	| Parameters:
-	| 	$id   -> Unique ID of the POI we are editing.
 	*/
 	public function editPoi(StorePOIRequest $request)
 	{
@@ -132,6 +131,7 @@ class POIsController extends Controller
 		if ($poi) {
 			$poi->name = $request->get('name');
 			$poi->address = $request->get('address');
+			$poi->coordinates = $request->get('coordiantes');
 			$poi->description = $request->get('description');
 			$poi->category_id = $request->get('category_id');
 			$poi->hashtag = $request->get('hashtag');
@@ -223,6 +223,7 @@ class POIsController extends Controller
 		}
 		$poi->name = $request->get('name');
 		$poi->address = $request->get('address');
+		$poi->coordiantes = $request->get('coordiantes');
 		$poi->description = $request->get('description');
 		$poi->category_id = $request->get('category_id');
 		$poi->hashtag = $request->get('hashtag');

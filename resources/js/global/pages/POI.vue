@@ -1,5 +1,5 @@
 <template>
-	<div id="poi-page" class="top-padding bottom-padding">
+	<div id="poi-page" class="page">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-10 medium-10 small-10">
@@ -13,7 +13,14 @@
 			</div>
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-10 medium-10 small-12">
-					<p>{{ description }}</p>
+					<p class="spectral">{{ description }}</p>
+				</div>
+			</div>
+			<div class="grid-x grid-padding-x poi-position-section">
+				<div class="cell large-10 medium-10 small-12">
+					<h2 class="position">Posizione</h2>
+					<h3 class="address">{{ address }}</h3>
+					<h3 v-if="coordinates != ''">{{ coordinates }}</h3>
 				</div>
 			</div>
 			<div class="grid-x grid-padding-x instagram-grid">
@@ -46,12 +53,15 @@
 			return {
 				name: null,
 				description: null,
+				address: null,
+				coordinates: null,
 				instagramList: [],
 				endCursor: ''
 			}
 		},
 		computed: {
 			poi: function() {
+				console.log(this.$store.getters.getPoi(this.$route.params.id));
 				return this.$store.getters.getPoi(this.$route.params.id);
 			},
 			poisLoadStatus: function() {
@@ -63,6 +73,8 @@
 				if (this.poisLoadStatus == 2) {
 					this.name = this.poi.name;
 					this.description = this.poi.description;
+					this.address = this.poi.address;
+					this.coordinates = this.poi.coordinates;
 				}
 			}
 		},
@@ -70,6 +82,8 @@
 			if (this.poisLoadStatus == 2) {
 				this.name = this.poi.name;
 				this.description = this.poi.description;
+				this.address = this.poi.address;
+				this.coordinates = this.poi.coordinates;
 			}
 		},
 		methods: {

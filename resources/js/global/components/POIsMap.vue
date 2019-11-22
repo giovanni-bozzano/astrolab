@@ -8,8 +8,8 @@
 	export default {
 		data: function() {
 			return {
-				prieviouslySelectedCategory: null,
-				prieviouslySelectedPoi: null
+				previouslySelectedCategory: null,
+				previouslySelectedPoi: null
 			}
 		},
 
@@ -63,17 +63,17 @@
 			});
 			this.$canvas.hoverCursor = 'pointer';
 			this.resizeCanvas();
-			window.onresize = (e) => {
-				this.resizeCanvas();
-				this.clearMarkers();
-				this.buildMarkers();
-			};
+			let canvas = this;
+			window.addEventListener('resize', function(e) {
+				canvas.resizeCanvas();
+				canvas.clearMarkers();
+				canvas.buildMarkers();
+			});
 			this.$canvas.editable = false;
 			this.$elements = [];
 
 			let router = this.$router;
 			let elements = this.$elements;
-			let canvas = this;
 			this.$canvas.on('mouse:up', function(event) {
 				event.e.preventDefault();
 				if (!this.editable) {
@@ -92,6 +92,8 @@
 					return;
 				}
 				if (event.target != null && event.target.poi != null) {
+					canvas.$store.dispatch('toggleSelectedCategory', event.target.poi.category.id);
+					canvas.$store.dispatch('toggleSelectedPoi', event.target.poi.id);
 					for (let i = 0; i < elements[event.target.poi.category.id].length; i++) {
 						if (elements[event.target.poi.category.id][i].poi !== undefined && elements[event.target.poi.category.id][i].poi.id == event.target.poi.id) {
 							elements[event.target.poi.category.id][i].scale(elements[event.target.poi.category.id][i].get('scaleX') + 0.2);
@@ -99,7 +101,7 @@
 						}
 						/*
 						if (elements[event.target.poi.category.id][i].type == 'line') {
-							elements[event.target.poi.category.id][i].set('strokeWidth', 5);
+							elements[event.target.poi.category.id][i].set('strokeWidth', 3);
 						} else {
 							elements[event.target.poi.category.id][i].scale(elements[event.target.poi.category.id][i].get('scaleX') + 0.2);
 						}
@@ -114,6 +116,8 @@
 					return;
 				}
 				if (event.target != null && event.target.poi != null) {
+					canvas.$store.dispatch('toggleSelectedCategory', null);
+					canvas.$store.dispatch('toggleSelectedPoi', null);
 					for (let i = 0; i < elements[event.target.poi.category.id].length; i++) {
 						if (elements[event.target.poi.category.id][i].poi !== undefined && elements[event.target.poi.category.id][i].poi.id == event.target.poi.id) {
 							elements[event.target.poi.category.id][i].scale(elements[event.target.poi.category.id][i].get('scaleX') - 0.2);
@@ -121,7 +125,7 @@
 						}
 						/*
 						if (elements[event.target.poi.category.id][i].type == 'line') {
-							elements[event.target.poi.category.id][i].set('strokeWidth', 3);
+							elements[event.target.poi.category.id][i].set('strokeWidth', 2);
 						} else {
 							elements[event.target.poi.category.id][i].scale(elements[event.target.poi.category.id][i].get('scaleX') - 0.2);
 						}
@@ -149,7 +153,7 @@
 			buildMarkers: function() {
 				if (this.$canvas.newMarker != null) {
 					let canvas = this.$canvas;
-					fabric.Image.fromURL('/img/poi-marker.svg', function(image) {
+					fabric.Image.fromURL('/img/poi-marker.png', function(image) {
 						let previousX = canvas.newMarker.x;
 						let previousY = canvas.newMarker.y;
 						image.set({
@@ -185,7 +189,7 @@
 					for (; remainingPois.length > 0; poi = nearestPoi) {
 						let canvas = this.$canvas;
 						let marker = new Image();
-						marker.src = '/img/poi-marker.svg';
+						marker.src = '/img/poi-marker.png';
 						marker.poi = poi;
 						marker.onload = function() {
 							let image = new fabric.Image(marker);
@@ -208,7 +212,7 @@
 							let line = new fabric.Line([ parseFloat(poi.latitude) * canvas.getWidth(), parseFloat(poi.longitude) * canvas.getHeight(), parseFloat(nearestPoi.latitude) * canvas.getWidth(), parseFloat(nearestPoi.longitude) * canvas.getHeight() ], {
 								fill: 'white',
 								stroke: 'white',
-								strokeWidth: 3,
+								strokeWidth: 2,
 								selectable: false,
 								evented: false,
 								originX: 'center',
@@ -220,7 +224,7 @@
 							let line = new fabric.Line([ parseFloat(poi.latitude) * canvas.getWidth(), parseFloat(poi.longitude) * canvas.getHeight(), parseFloat(firstPoi.latitude) * canvas.getWidth(), parseFloat(firstPoi.longitude) * canvas.getHeight() ], {
 								fill: 'white',
 								stroke: 'white',
-								strokeWidth: 3,
+								strokeWidth: 2,
 								selectable: false,
 								evented: false,
 								originX: 'center',
@@ -239,7 +243,7 @@
 
 			addNewMarker: function(x, y) {
 				let canvas = this.$canvas;
-				fabric.Image.fromURL('/img/poi-marker.svg', function(image) {
+				fabric.Image.fromURL('/img/poi-marker.png', function(image) {
 					image.set({
 						selectable: false,
 						width: 16,
@@ -261,7 +265,11 @@
 					return;
 				}
 				if (this.$canvas.editable) {
-					var width = document.getElementById('pois-map').offsetWidth / 1.5;
+					if (window.matchMedia('(max-width: 639px)').matches) {
+						var width = document.getElementById('pois-map').offsetWidth;
+					} else {
+						var width = document.getElementById('pois-map').offsetWidth / 1.5;
+					}
 					this.$canvas.setWidth(width);
 					this.$canvas.setHeight(width);
 					return;
@@ -277,13 +285,6 @@
 				}
 				if (document.getElementById('map-cell')) {
 					document.getElementById('map-cell').style.height = width + 'px';
-				}
-				if (document.getElementById('pois-categories')) {
-					if (window.matchMedia('(max-width: 640px)').matches) {
-						document.getElementById('pois-categories').style.maxHeight = 'calc(100vh - 3rem - 8rem - 2rem - ' + width + 'px)';
-					} else {
-						document.getElementById('pois-categories').style.maxHeight = '';
-					}
 				}
 			},
 
@@ -308,15 +309,15 @@
 					return;
 				}
 				if (this.selectedCategory == null) {
-					if (this.prieviouslySelectedCategory == null) {
+					if (this.previouslySelectedCategory == null) {
 						return;
 					}
-					if (this.$elements[this.prieviouslySelectedCategory] !== undefined) {
-						for (let i = 0; i < this.$elements[this.prieviouslySelectedCategory].length; i++) {
-							if (this.$elements[this.prieviouslySelectedCategory][i].type == 'line') {
-								this.$elements[this.prieviouslySelectedCategory][i].set('strokeWidth', 3);
+					if (this.$elements[this.previouslySelectedCategory] !== undefined) {
+						for (let i = 0; i < this.$elements[this.previouslySelectedCategory].length; i++) {
+							if (this.$elements[this.previouslySelectedCategory][i].type == 'line') {
+								this.$elements[this.previouslySelectedCategory][i].set('strokeWidth', 2);
 							} else {
-								this.$elements[this.prieviouslySelectedCategory][i].scale(this.$elements[this.prieviouslySelectedCategory][i].get('scaleX') - 0.2);
+								this.$elements[this.previouslySelectedCategory][i].scale(this.$elements[this.previouslySelectedCategory][i].get('scaleX') - 0.2);
 							}
 						}
 						this.$canvas.renderAll();
@@ -325,7 +326,7 @@
 					if (this.$elements[this.selectedCategory] !== undefined) {
 						for (let i = 0; i < this.$elements[this.selectedCategory].length; i++) {
 							if (this.$elements[this.selectedCategory][i].type == 'line') {
-								this.$elements[this.selectedCategory][i].set('strokeWidth', 5);
+								this.$elements[this.selectedCategory][i].set('strokeWidth', 3);
 							} else {
 								this.$elements[this.selectedCategory][i].scale(this.$elements[this.selectedCategory][i].get('scaleX') + 0.2);
 							}
@@ -333,7 +334,7 @@
 						this.$canvas.renderAll();
 					}
 				}
-				this.prieviouslySelectedCategory = this.selectedCategory;
+				this.previouslySelectedCategory = this.selectedCategory;
 			},
 
 			highlightPoi: function() {
@@ -341,14 +342,14 @@
 					return;
 				}
 				if (this.selectedPoi == null) {
-					if (this.prieviouslySelectedPoi == null) {
+					if (this.previouslySelectedPoi == null) {
 						return;
 					}
 					var categoryId;
 					for (categoryId in this.$elements) {
 						let found = false;
 						for (let i = 0; i < this.$elements[categoryId].length; i++) {
-							if (this.$elements[categoryId][i].poi != null && this.$elements[categoryId][i].poi.id == this.prieviouslySelectedPoi) {
+							if (this.$elements[categoryId][i].poi != null && this.$elements[categoryId][i].poi.id == this.previouslySelectedPoi) {
 								this.$elements[categoryId][i].setShadow({
 									color: '#ffffff',
 									blur: 0
@@ -376,7 +377,7 @@
 					}
 					this.$canvas.renderAll();
 				}
-				this.prieviouslySelectedPoi = this.selectedPoi;
+				this.previouslySelectedPoi = this.selectedPoi;
 			}
 		}
 	}

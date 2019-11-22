@@ -5,9 +5,12 @@
 		<div class="shadow-box-top"></div>
 		<div class="shadow-box-bottom"></div>
 		<div class="title-bar hide-for-medium">
-			<div class="title-bar-left">
-				<button class="menu-icon" type="button" data-open="navigation"></button>
-			</div>
+			<button class="menu-icon" type="button" data-open="navigation"></button>
+			<figure class="logo-wrap-small">
+				<router-link :to="{ name: 'map'}">
+					<img class="logo" src="/img/logo-white-small.svg" width="45px" height="auto">
+				</router-link>
+			</figure>
 		</div>
 		<div class="off-canvas-wrapper">
 			<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>

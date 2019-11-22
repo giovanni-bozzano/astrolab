@@ -19,6 +19,7 @@ export default {
 		formData.append('id', id);
 		formData.append('name', name);
 		formData.append('address', address);
+		formData.append('coordiantes', coordiantes);
 		formData.append('description', description);
 		formData.append('category_id', category_id);
 		formData.append('hashtag', hashtag);
@@ -75,6 +76,7 @@ export default {
 		formData.append('id', id);
 		formData.append('name', name);
 		formData.append('address', address);
+		formData.append('coordiantes', coordiantes);
 		formData.append('description', description);
 		formData.append('category_id', category_id);
 		formData.append('hashtag', hashtag);

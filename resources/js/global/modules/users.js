@@ -12,7 +12,8 @@ export const users = {
 	*/
 	state: {
 		user: {},
-		userLoadStatus: 0
+		userLoadStatus: 0,
+		cookiesConsent: true
 	},
 
 	/*
@@ -40,6 +41,17 @@ export const users = {
 			UsersAPI.logout().then(function () {
 				location.reload();
 			});
+		},
+
+		loadCookiesConsent({ commit }) {
+			UsersAPI.getCookiesConsent().then(function(response) {
+				commit('setCookiesConsent', response.data);
+			});
+		},
+
+		giveCookiesConsent({ commit }) {
+			UsersAPI.giveCookiesConsent();
+			commit('setCookiesConsent', true);
 		}
 	},
 
@@ -56,6 +68,10 @@ export const users = {
 
 		setUserLoadStatus(state, userLoadStatus) {
 			state.userLoadStatus = userLoadStatus;
+		},
+
+		setCookiesConsent(state, cookiesConsent) {
+			state.cookiesConsent = cookiesConsent;
 		}
 	},
 
@@ -72,6 +88,10 @@ export const users = {
 
 		getUserLoadStatus(state) {
 			return state.userLoadStatus;
+		},
+
+		getCookiesConsent(state) {
+			return state.cookiesConsent;
 		},
 
 		/*

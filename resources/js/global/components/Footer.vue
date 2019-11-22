@@ -1,17 +1,12 @@
 <style lang="scss">
-	@import 'resources/sass/abstracts/_variables.scss';
 	.footer-wrap {
-		padding-top: 0.8rem;
-		padding-bottom: 0.8rem;
-	}
-	#mail {
-		text-decoration: none;
-		color: var(--foreground-color);
+		padding-top: 0.5rem;
+		font-size: 1.2em;
 	}
 </style>
 <template>
 	<div class="footer-wrap">
-		<text-marquee :speed="40">Per qualsiasi informazione // <a class="mail" href="mailto:progettoastrolab@gmail.com" target="_blank">progettoastrolab@gmail.com</a></text-marquee>
+		<text-marquee :speed="40">Per qualsiasi informazione // <a href="mailto:progettoastrolab@gmail.com" target="_blank">progettoastrolab@gmail.com</a> <a href="https://www.facebook.com/progettoastrolab/" target="_blank">Facebook</a> o <a href="https://www.instagram.com/progettoastrolab/" target="_blank">Instagram</a></text-marquee>
 	</div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-	<div id="suggest-poi-page" class="top-padding bottom-padding">
+	<div id="suggest-poi-page" class="page">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-12 medium-12 small-12">
@@ -8,8 +8,8 @@
 			</div>
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-10 medium-10 small-12">
-					<p>La rete di AstroLab è in continua crescita. Guidaci nei tuoi luoghi della città e ... ... ...</p>
-					<p>La sezione è privata e i tuoi suggerimenti saranno controllati dal team di AstroLab. Una volta approvata la scelta, il luogo verrà pubblicato e diventerà ufficialmente parte dei percorsi AstroLab.</p>
+					<p class="spectral">La rete di AstroLab è in continua crescita. Guidaci nei tuoi luoghi della città e ... ... ...</p>
+					<p class="spectral">La sezione è privata e i tuoi suggerimenti saranno controllati dal team di AstroLab. Una volta approvata la scelta, il luogo verrà pubblicato e diventerà ufficialmente parte dei percorsi AstroLab.</p>
 				</div>
 			</div>
 			<br />

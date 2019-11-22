@@ -1,5 +1,5 @@
 <template>
-	<div id="edit-poi-page" class="top-padding bottom-padding">
+	<div id="edit-poi-page" class="page">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-6 medium-7 small-10">
@@ -23,6 +23,12 @@
 					<label>Indirizzo</label>
 					<input type="text" id="address" placeholder="Inserisci un indirizzo..." class="form-input" autocomplete="off" v-model="address" v-bind:class="{'invalid' : !validations.address.is_valid }"/>
 					<div class="validation" v-show="!validations.address.is_valid">{{ validations.address.text }}</div>
+				</div>
+			</div>
+			<div class="grid-x grid-padding-x">
+				<div class="cell large-8 medium-9 small-12">
+					<label>Coordinate</label>
+					<input type="text" id="address" placeholder="Inserisci delle coordinate..." class="form-input" autocomplete="off" v-model="coordinates"/>
 				</div>
 			</div>
 			<div class="grid-x grid-padding-x">
@@ -85,6 +91,7 @@
 				id: null,
 				name: '',
 				address: '',
+				coordinates: '',
 				description: '',
 				category_id: null,
 				hashtag: '',
@@ -145,6 +152,9 @@
 					this.id = this.poi.id;
 					this.name = this.poi.name;
 					this.address = this.poi.address;
+					if (this.poi.coordinates != null) {
+						this.coordinates = this.poi.coordinates;
+					}
 					this.description = this.poi.description;
 					this.category_id = this.poi.category_id;
 					if (this.poi.hashtag != null) {
@@ -161,6 +171,9 @@
 				this.id = this.poi.id;
 				this.name = this.poi.name;
 				this.address = this.poi.address;
+				if (this.poi.coordinates != null) {
+					this.coordinates = this.poi.coordinates;
+				}
 				this.description = this.poi.description;
 				this.category_id = this.poi.category_id;
 				if (this.poi.hashtag != null) {
@@ -193,6 +206,7 @@
 						id: this.id,
 						name: this.name,
 						address: this.address,
+						coordinates: this.coordinates,
 						description: this.description,
 						category_id: this.category_id,
 						hashtag: this.hashtag,
@@ -207,7 +221,7 @@
 				if (this.name.trim() == '') {
 					validForm = false;
 					this.validations.name.is_valid = false;
-					this.validations.name.text = 'Inserisci un nome per il nuovo luogo!';
+					this.validations.name.text = 'Inserisci un nome per il luogo!';
 				} else {
 					this.validations.name.is_valid = true;
 					this.validations.name.text = '';
@@ -216,7 +230,7 @@
 				if (this.address.trim() == '') {
 					validForm = false;
 					this.validations.address.is_valid = false;
-					this.validations.address.text = 'Inserisci un indirizzo per il nuovo luogo!';
+					this.validations.address.text = 'Inserisci un indirizzo per il luogo!';
 				} else {
 					this.validations.address.is_valid = true;
 					this.validations.address.text = '';
@@ -225,7 +239,7 @@
 				if (this.description.trim() == '') {
 					validForm = false;
 					this.validations.description.is_valid = false;
-					this.validations.description.text = 'Inserisci una descrizione per il nuovo luogo!';
+					this.validations.description.text = 'Inserisci una descrizione per il luogo!';
 				} else {
 					this.validations.description.is_valid = true;
 					this.validations.description.text = '';
@@ -234,7 +248,7 @@
 				if (this.category_id == null) {
 					validForm = false;
 					this.validations.category.is_valid = false;
-					this.validations.category.text = 'Seleziona una categoria per il nuovo luogo!';
+					this.validations.category.text = 'Seleziona una categoria per il luogo!';
 				} else {
 					this.validations.category.is_valid = true;
 					this.validations.category.text = '';
@@ -264,6 +278,7 @@
 				this.id = null;
 				this.name = '';
 				this.address = '';
+				this.coordinates = '';
 				this.description = '';
 				if (this.$refs.map.$canvas.newMarker != null) {
 					this.$refs.map.$canvas.newMarker = null;

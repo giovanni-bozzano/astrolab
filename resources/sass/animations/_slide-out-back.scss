@@ -1,9 +1,9 @@
 /**
  * ----------------------------------------
- * animation slide-out-bck-center
+ * animation slide-out-back-center
  * ----------------------------------------
  */
-@-webkit-keyframes slide-out-bck-center {
+@-webkit-keyframes slide-out-back-center {
 	0% {
 		-webkit-transform: translateZ(0);
 				transform: translateZ(0);
@@ -15,7 +15,7 @@
 		opacity: 0;
 	}
 }
-@keyframes slide-out-bck-center {
+@keyframes slide-out-back-center {
 	0% {
 		-webkit-transform: translateZ(0);
 				transform: translateZ(0);

@@ -1,11 +1,13 @@
 div#map-page {
-	height: calc(100vh);
-	div.categories {
+	// Full view - bottom margin
+	height: calc(100vh - 8rem);
+	margin-top: 0;
+	.categories {
 		overflow: auto;
 	}
-	div.map {
+	.map {
 		height: 100%;
-		div.canvas-container {
+		.canvas-container {
 			margin-right: auto;
 			margin-left: auto;
 		}
@@ -18,41 +20,72 @@ div#map-page {
 	}
 	.categories-cell {
 		overflow: auto;
-		// Full view - top size - bottom padding
-		max-height: calc(100vh - 3rem - 8rem);
+		white-space: nowrap;
+	}
+	.categories-cell:after {
+		pointer-events: none;
+		position: absolute;
+		top: 0;
+		left: 13rem;
+		height: 100%;
+		width: calc(100% - 13rem - 3rem);
+		content: '';
+		background: linear-gradient(to right, var(--background-color) 0, var(--background-color) 0.625rem, rgba(0, 0, 0, 0) 5rem, rgba(0, 0, 0, 0) calc(100% - 5rem), var(--background-color) calc(100% - 0.625rem), var(--background-color) 100%);
+	}
+	.pois-categories-wrapper {
+		display: inline-block;
+		margin-top: 3rem;
+		margin-left: 2rem;
+		margin-right: 2rem;
+		margin-bottom: 0;
 	}
 	.map-cell {
-		// Full view - top size - bottom padding
+		margin-top: 2rem;
+		// Full view - top size - bottom margin
 		max-height: calc(100vh - 3rem - 8rem);
 	}
 	.button {
-		margin-bottom: 1rem;
 		margin-right: 1rem;
 	}
 }
 @media #{$large-up} {
 	div#map-page {
-		// Full view - bottom size
-		height: calc(100vh - 3rem);
+		// Full view - bottom margin - bottom size
+		height: calc(100vh - 8rem - 3rem);
 		.categories-cell {
-			// Full view - top size - bottom padding - bottom size
-			max-height: calc(100vh - 3rem - 8rem - 3rem);
+			// Full view - top size - bottom size
+			max-height: calc(100vh - 3rem);
+		}
+		.categories-cell:after {
+			background: none;
+		}
+		.pois-categories-wrapper {
+			margin-left: 0;
+			margin-right: 0;
+			margin-bottom: 8rem;
 		}
 		.map-cell {
-			// Full view - top size - bottom padding - bottom size
+			margin-top: 3rem;
+			// Full view - top size - bottom margin - bottom size
 			max-height: calc(100vh - 3rem - 8rem - 3rem);
+		}
+		.button {
+			margin-bottom: 1rem
 		}
 	}
 }
 
 @media #{$small-only} {
 	div#map-page {
-		// Full view - top size
-		height: calc(100vh - 3rem);
+		// Full view - top size - bottom margin
+		height: calc(100vh - 5.25rem - 8rem);
 		.map-cell {
-			padding-top: 2rem;
-			// Full view - top size - bottom padding - padding between rows - minimum upper row height
+			// Full view - top size - bottom margin - margin between rows - minimum upper row height
 			max-height: calc(100vh - 3rem - 8rem - 2rem - 10rem);
+		}
+		.categories-cell:after {
+			left: 1rem;
+			width: calc(100% - 1rem - 1rem);
 		}
 	}
 }

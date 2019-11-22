@@ -1,21 +1,20 @@
 <template>
 	<div id="navigation">
-		<div class="title-bar hide-for-medium"></div>
 		<div class="navigation-content">
-			<div class="logo-container" data-close="navigation">
+			<div class="logo-container hide-for-small-only" data-close="navigation">
 				<figure class="logo-wrap">
 					<router-link :to="{ name: 'map'}">
-						<img class="logo" src="/img/logo-white.svg" width="65px" height="auto">
+						<img class="logo" src="/img/logo-white.svg" width="90px" height="auto">
 					</router-link>
 				</figure>
 			</div>
 			<nav id="nav" class="menu-sections-container">
-				<div class="menu-section" data-close="navigation" v-if="isUserLoggedIn && isUserAdministrator">
+				<div class="menu-section first-section" data-close="navigation" v-if="isUserLoggedIn && isUserAdministrator">
 					<a href="/admin">
 						<li class="menu-inner"><strong>Admin</strong></li>
 					</a>
 				</div>
-				<div class="menu-section" data-close="navigation" v-bind:class="{ 'active': $route.name.includes(['map']) }">
+				<div class="menu-section" data-close="navigation" v-bind:class="{ 'first-section': !isUserLoggedIn || !isUserAdministrator, 'active': $route.name.includes(['map']) }">
 					<router-link :to="{ name: 'map' }">
 						<li class="menu-inner">Mappa</li>
 					</router-link>
@@ -25,9 +24,9 @@
 						<li class="menu-inner">Progetto</li>
 					</router-link>
 				</div>
-				<div class="menu-section" data-close="navigation" v-bind:class="{ 'active': $route.name.includes(['about']) }">
-					<router-link :to="{ name: 'about' }">
-						<li class="menu-inner">Chi Siamo</li>
+				<div class="menu-section" data-close="navigation" v-bind:class="{ 'active': $route.name.includes(['archive']) }">
+					<router-link :to="{ name: 'archive' }">
+						<li class="menu-inner">Archivio</li>
 					</router-link>
 				</div>
 				<div class="menu-section" data-close="navigation" v-bind:class="{ 'active': $route.name.includes(['suggest-poi']) }">
@@ -35,9 +34,9 @@
 						<li class="menu-inner">Consigli</li>
 					</router-link>
 				</div>
-				<div class="menu-section" data-close="navigation" v-bind:class="{ 'active': $route.name.includes(['archive']) }">
-					<router-link :to="{ name: 'archive' }">
-						<li class="menu-inner">Archivio</li>
+				<div class="menu-section last-section" data-close="navigation" v-bind:class="{ 'active': $route.name.includes(['about']) }">
+					<router-link :to="{ name: 'about' }">
+						<li class="menu-inner">Chi Siamo</li>
 					</router-link>
 				</div>
 				<div class="menu-section" data-close="navigation">

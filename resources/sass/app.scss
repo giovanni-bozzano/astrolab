@@ -31,10 +31,13 @@
 /**
  * Chapter 3: Base
  */
+@import 'base/a';
+@import 'base/button';
 @import 'base/grid';
 @import 'base/h';
 @import 'base/input';
 @import 'base/label';
+@import 'base/li';
 @import 'base/p';
 @import 'base/textarea';
 
@@ -49,13 +52,14 @@
 @import 'pages/about';
 @import 'pages/map';
 @import 'pages/new-poi';
+@import 'pages/poi';
 @import 'pages/project';
 
 /**
  * Chapter 6: Components
  */
-@import 'components/button';
 @import 'components/instagram';
+@import 'components/login-modal';
 @import 'components/navigation';
 @import 'components/notification';
 @import 'components/options';
@@ -68,6 +72,8 @@
  * Chapter 7: Animations
  */
 @import 'animations/scale-in-center';
+@import 'animations/scale-in-opacity';
+@import 'animations/scale-out-opacity';
 @import 'animations/slide-in-left';
 @import 'animations/slide-in-right';
 @import 'animations/slide-out-back';

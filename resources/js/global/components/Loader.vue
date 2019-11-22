@@ -8,7 +8,7 @@
 		right: 0;
 		z-index: 99999;
 		background-color: #000;
-		span {
+		p {
 			position: fixed;
 			top: 0;
 			bottom: 0;
@@ -22,7 +22,7 @@
 
 <template>
 	<div class="loader-container" v-show="show">
-		<span>Caricamento...</span>
+		<p>Caricamento...</p>
 	</div>
 </template>
 

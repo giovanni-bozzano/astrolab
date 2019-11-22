@@ -1,5 +1,5 @@
 <template>
-	<div id="pois-categories">
+	<div id="pois-categories" class="pois-categories-wrapper">
 <!--
 		<div v-for="category in categories" v-if="categories.length > 1">
 			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
@@ -16,7 +16,7 @@
 -->
 		<div v-for="category in categories">
 			<router-link :to="{ name: 'poi', params: { id: poi.id }}" v-for="poi in expandedPois(categories[0].id)" v-bind:key="poi.id">
-				<button class="button" v-on:mouseenter="toggleSelectedPoi(categories[0].id, poi.id)" v-on:mouseleave="toggleSelectedPoi(null, null)">{{ poi.name }}</button>
+				<button :ref="'poi-' + poi.id" class="button" v-on:mouseenter="toggleSelectedPoi(categories[0].id, poi.id)" v-on:mouseleave="toggleSelectedPoi(null, null)">{{ poi.name }}</button>
 				<br class="show-for-large" />
 			</router-link>
 		</div>
@@ -27,7 +27,8 @@
 	export default {
 		data: function() {
 			return {
-				expandedCategory: null
+				expandedCategory: null,
+				previouslySelectedPoi: null
 			}
 		},
 		/*
@@ -42,6 +43,18 @@
 			},
 			categories: function() {
 				return this.$store.getters.getCategories;
+			},
+			/*
+				Gets the selected POI
+			*/
+			selectedPoi: function() {
+				return this.$store.getters.getSelectedPoi;
+			}
+		},
+
+		watch: {
+			selectedPoi: function() {
+				this.highlightPoi();
 			}
 		},
 
@@ -67,6 +80,14 @@
 			toggleSelectedPoi: function(categoryId, poiId) {
 				this.$store.dispatch('toggleSelectedCategory', categoryId);
 				this.$store.dispatch('toggleSelectedPoi', poiId);
+			},
+			highlightPoi: function() {
+				if (this.selectedPoi == null) {
+					this.$refs['poi-' + this.previouslySelectedPoi][0].blur();
+					return;
+				}
+				this.$refs['poi-' + this.selectedPoi][0].focus();
+				this.previouslySelectedPoi = this.selectedPoi;
 			}
 		}
 	}

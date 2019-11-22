@@ -1,0 +1,80 @@
+div#login-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: table;
+	transition: all 0.5s linear;
+	z-index: 99999;
+	.login-background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, .6);
+	}
+	.login-wrapper {
+		position: relative;
+		display: table-cell;
+		vertical-align: middle;
+		padding: 0.625rem;
+		.login-container {
+			max-width: 530px;
+			min-width: 320px;
+			padding: 20px;
+			margin: 0 auto;
+			background-color: var(--foreground-color);
+			border: 1px solid #ddd;
+			-webkit-box-shadow: 0 1px 3px rgba(50, 50, 50, 0.08);
+			box-shadow: 0 1px 3px rgba(50, 50, 50, 0.08);
+			-webkit-border-radius: 4px;
+			border-radius: 4px;
+			font-size: 16px;
+			.social-link {
+				display: block;
+				margin: auto;
+				width: 230px;
+				margin-top: 10px;
+				margin-bottom: 10px;
+			}
+			p {
+				font-size: 1.2em;
+				color: var(--background-color);
+				font-weight: bold;
+				text-transform: uppercase;
+				text-align: center;
+				margin-top: 20px;
+				margin-bottom: 20px;
+			}
+		}
+	}
+}
+@media #{$small-only} {
+	div#login-modal {
+		div.login-container {
+			width: 95%;
+
+			a.learn-more-button {
+				width: 300px;
+			}
+		}
+	}
+}
+.login-scale-in-center-enter-active .login-background {
+	-webkit-animation: scale-in-opacity 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+			animation: scale-in-opacity 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+.login-scale-in-center-enter-active .login-wrapper {
+	-webkit-animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+			animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+.login-scale-in-center-leave-active .login-background {
+	-webkit-animation: scale-out-opacity 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+			animation: scale-out-opacity 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+.login-scale-in-center-leave-active .login-wrapper {
+	-webkit-animation: slide-out-back-center 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+			animation: slide-out-back-center 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}

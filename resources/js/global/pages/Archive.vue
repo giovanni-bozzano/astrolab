@@ -1,9 +1,9 @@
 <template>
-	<div id="archive-page" class="top-padding bottom-padding">
+	<div id="archive-page" class="page">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-10 medium-10 small-12">
-					<h1>Archivio AstroLab</h1>
+					<h1>Archivio</h1>
 				</div>
 			</div>
 			<div class="grid-x grid-padding-x instagram-grid">

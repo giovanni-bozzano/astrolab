@@ -1,16 +1,15 @@
 <template>
 	<div id="navigation">
-		<div class="title-bar hide-for-medium"></div>
 		<div class="navigation-content">
-			<div class="logo-container" data-close="navigation">
+			<div class="logo-container hide-for-small-only" data-close="navigation">
 				<figure class="logo-wrap">
 					<router-link :to="{ name: 'current-pois'}">
-						<img class="logo" src="/img/logo-white.svg" width="65px" height="auto">
+						<img class="logo" src="/img/logo-white.svg" width="90px" height="auto">
 					</router-link>
 				</figure>
 			</div>
 			<nav id="nav" class="menu-sections-container">
-				<div class="menu-section" data-close="navigation">
+				<div class="menu-section first-section" data-close="navigation">
 					<a href="/">
 						<li class="menu-inner"><strong>Sito</strong></li>
 					</a>
@@ -20,7 +19,7 @@
 						<li class="menu-inner">Modifica</li>
 					</router-link>
 				</div>
-				<div class="menu-section" data-close="navigation" v-bind:class="{ 'active': $route.name.includes(['publish-poi']) }">
+				<div class="menu-section last-section" data-close="navigation" v-bind:class="{ 'active': $route.name.includes(['publish-poi']) }">
 					<router-link :to="{ name: 'publish-poi' }">
 						<li class="menu-inner">Pubblica</li>
 					</router-link>

@@ -14,7 +14,6 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="viewport" content="width=device-width, user-scalable=no" />
 
-		<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,500&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Spectral:300&display=swap" rel="stylesheet">
 
 		<link href="{{ mix('/css/app.css' ) }}" rel="stylesheet" type="text/css"/>

@@ -1,5 +1,5 @@
 <template>
-	<div id="suggest-poi-new-page" class="top-padding bottom-padding">
+	<div id="suggest-poi-new-page" class="page">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-6 medium-7 small-10">

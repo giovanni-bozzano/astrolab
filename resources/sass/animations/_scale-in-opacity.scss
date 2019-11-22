@@ -1,0 +1,21 @@
+/**
+ * ----------------------------------------
+ * animation scale-in-opacity
+ * ----------------------------------------
+ */
+@-webkit-keyframes scale-in-opacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes scale-in-opacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

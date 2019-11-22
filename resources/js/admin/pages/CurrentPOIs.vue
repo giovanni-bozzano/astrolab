@@ -1,5 +1,5 @@
 <template>
-	<div id="current-pois-page" class="top-padding bottom-padding">
+	<div id="current-pois-page" class="page">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-12 medium-12 small-12">

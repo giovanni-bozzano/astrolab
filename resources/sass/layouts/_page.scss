@@ -2,6 +2,10 @@
 	font-family: 'lemurmure-regular';
 	src: url('/fonts/lemurmure-regular.woff');
 }
+@font-face {
+	font-family: 'IBMPlexMono';
+	src: url('/fonts/IBMPlexMono.woff');
+}
 :root {
 	--cursorX: -100vw;
 	--cursorY: -100vh;
@@ -37,18 +41,16 @@ html {
 }
 body {
 	background-color: var(--background-color);
-	font-family: 'IBM Plex Mono', monospace;
-	font-size: 0.8rem;
-	line-height: 1.6;
 	color: var(--foreground-color);
 	-webkit-tap-highlight-color: transparent;
 	-webkit-touch-callout: none;
+	font-family: 'IBMPlexMono';
 }
-.top-padding {
-	padding-top: 3rem;
-}
-.bottom-padding {
-	padding-bottom: 8rem;
+.page {
+	// Full view - top margin - bottom margin
+	height: calc(100vh - 3rem - 8rem);
+	margin-top: 3rem;
+	margin-bottom: 8rem;
 }
 .off-canvas-wrapper {
 	overflow: auto;
@@ -69,14 +71,14 @@ body {
 }
 .title-bar {
 	z-index: 2;
-	height: 3rem;
+	height: 5.25rem;
 	width: 100vw;
 	padding: 1rem;
 	color: var(--foreground-color);
 	border-bottom: solid 2.5px var(--foreground-color);
 	position: fixed;
-    top: 0;
-    background: var(--background-color);
+	top: 0;
+	background: var(--background-color);
 }
 .menu-icon {
 	outline: none;
@@ -89,7 +91,9 @@ body {
 	height: auto;
 	width: 10rem;
 	bottom: 0;
-	border-right: solid 1px rgba(208, 208, 208, 0.31);
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 3rem, var(--foreground-color) 5rem, var(--foreground-color) calc(100% - 5rem), rgba(0, 0, 0, 0) calc(100% - 3rem), rgba(0, 0, 0, 0) 100%) 1 100%;
 	background: none;
 	transition-timing-function: ease-in-out;
 }
@@ -99,7 +103,7 @@ body {
 	transition: visibility 0.3s linear, opacity 0.3s linear;
 }
 .menu-icon[aria-expanded='false'] {
-	visibility: show;
+	visibility: visible;
 	opacity: 1;
 	transition: visibility 0.3s linear, opacity 0.3s linear;
 }
@@ -112,7 +116,7 @@ body {
 .js-off-canvas-overlay.is-visible {
 	visibility: hidden;
 }
-div.off-canvas-content {
+.off-canvas-content {
 	top: 0;
 	bottom: 0;
 	left: 0;
@@ -120,13 +124,13 @@ div.off-canvas-content {
 	margin-bottom: 0;
 	transition-timing-function: ease-in-out;
 }
-div.app-page {
+.app-page {
 	height: 100%;
-	overflow: auto;
-	padding-left: 3rem;
-	padding-right: 3rem;
+	overflow: hidden;
+	margin-left: 3rem;
+	margin-right: 3rem;
 }
-div.footer-container {
+.footer-container {
 	height: 3rem;
 	width: 100%;
 	bottom: 0;
@@ -134,10 +138,10 @@ div.footer-container {
 	border-top: solid 2.5px var(--foreground-color);
 	background: var(--background-color);
 }
-div.back-container {
+.back-container {
 	text-align: right;
 }
-div.background {
+.background {
 	position: fixed;
 	height: calc(100% - 50px);
 	width: 100%;
@@ -145,7 +149,7 @@ div.background {
 	z-index: -3;
 	mix-blend-mode: multiply;
 }
-div.background-surf {
+.background-surf {
 	position: fixed;
 	z-index: -3;
 	height: calc(100% - 50px);
@@ -154,12 +158,36 @@ div.background-surf {
 	background-size: cover;
 	background-position: center;
 }
+.logo-container {
+	text-align: center;
+	height: auto;
+	margin-top: 3rem;
+	.logo-wrap {
+		width: 90px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 40px;
+	}
+}
+.logo-wrap-small {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 45px;
+	margin-left: auto;
+	margin-right: auto;
+}
 @media #{$large-up} {
-	div.off-canvas {
+	.off-canvas {
 		margin-bottom: 3rem;
 	}
-	div.off-canvas-content {
+	.off-canvas-content {
 		margin-bottom: 3rem;
+	}
+	.page {
+		// Full view - top margin - bottom margin - bottom size
+		height: calc(100vh - 3rem - 8rem - 3rem);
 	}
 }
 @media #{$small-only} {
@@ -169,13 +197,18 @@ div.background-surf {
 	.top-padding {
 		padding-top: 2rem;
 	}
-	div.app-page {
-		padding-top: 3rem;
-		padding-left: 1rem;
-		padding-right: 1rem;
+	.app-page {
+		margin-top: 5.25rem;
+		margin-left: 1rem;
+		margin-right: 1rem;
 	}
-	div.off-canvas {
-		padding-top: 3rem;
+	.off-canvas {
+		margin-top: 5.25rem;
 		width: 100%;
+		border-right: none;
+	}
+	.page {
+		// Full view - top margin - top size - bottom margin
+		height: calc(100vh - 3rem - 5.25rem - 8rem);
 	}
 }

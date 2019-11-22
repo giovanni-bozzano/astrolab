@@ -27,6 +27,7 @@ class StorePOIRequest extends FormRequest
 			'id' => 'sometimes',
 			'name' => 'required',
 			'address' => 'required',
+			'coordinates' => 'sometimes',
 			'description' => 'required',
 			'category_id' => 'required',
 			'hashtag' => 'sometimes',

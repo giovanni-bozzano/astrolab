@@ -1,5 +1,5 @@
 <template>
-	<div id="publish-poi-new-page" class="top-padding bottom-padding">
+	<div id="publish-poi-new-page" class="page">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
 				<div class="cell large-6 medium-7 small-10">
@@ -23,6 +23,12 @@
 					<label>Indirizzo</label>
 					<input type="text" id="address" placeholder="Inserisci un indirizzo..." class="form-input" autocomplete="off" v-model="address" v-bind:class="{'invalid' : !validations.address.is_valid }"/>
 					<div class="validation" v-show="!validations.address.is_valid">{{ validations.address.text }}</div>
+				</div>
+			</div>
+			<div class="grid-x grid-padding-x">
+				<div class="cell large-8 medium-9 small-12">
+					<label>Coordinate</label>
+					<input type="text" id="address" placeholder="Inserisci delle coordinate..." class="form-input" autocomplete="off" v-model="coordinates"/>
 				</div>
 			</div>
 			<div class="grid-x grid-padding-x">
@@ -85,6 +91,7 @@
 				id: null,
 				name: '',
 				address: '',
+				coordinates: '',
 				description: '',
 				category_id: null,
 				hashtag: '',
@@ -187,6 +194,7 @@
 						id: this.id,
 						name: this.name,
 						address: this.address,
+						coordinates: this.coordinates,
 						description: this.description,
 						category_id: this.category_id,
 						hashtag: this.hashtag,
@@ -258,6 +266,7 @@
 				this.id = null;
 				this.name = '';
 				this.address = '';
+				this.coordinates = '';
 				this.description = '';
 				if (this.$refs.map.$canvas.newMarker != null) {
 					this.$refs.map.$canvas.newMarker = null;

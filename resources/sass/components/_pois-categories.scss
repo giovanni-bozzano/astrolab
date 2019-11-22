@@ -13,8 +13,3 @@ div#pois-categories {
 		max-height: 0;
 	}
 }
-@media #{$small-only} {
-	div#pois-categories {
-		min-height: 10rem;
-	}
-}

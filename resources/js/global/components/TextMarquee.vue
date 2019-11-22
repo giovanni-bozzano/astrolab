@@ -17,7 +17,7 @@
 
 <template>
 	<div class="v-marquee" @click="$emit('click',$event)">
-		<div :style="{'animation-duration':time,'animation-name':name}" :class="animate?'running':'pause'">
+		<div :style="{'animation-duration': time,'animation-name': name}" :class="animate ? 'running' : 'pause'" @mouseover="pause()" @mouseleave="resume()">
 			<slot>
 				<div v-html="content"></div>
 			</slot>
@@ -35,16 +35,13 @@
 				default: 50,
 			},
 			content: String,
-			animate: {
-				type: Boolean,
-				default: true,
-			},
 		},
 		data() {
 			count++;
 			return {
 				time: 0,
 				name: 'marquee' + count,
+				animate: true,
 				styleEl: document.createElement('style'),
 			};
 		},
@@ -54,9 +51,15 @@
 			},
 			speed() {
 				this.start();
-			},
+			}
 		},
 		methods: {
+			pause() {
+				this.animate = false;
+			},
+			resume() {
+				this.animate = true;
+			},
 			getTime() {
 				return Math.max(this.$el.firstChild.offsetWidth, this.$el.offsetWidth) / this.speed + 's';
 			},
@@ -78,10 +81,18 @@
 					this.time = this.getTime();
 					this.keyframes();
 				});
-			},
+			}
 		},
 		mounted() {
+			let textMarquee = this;
+			let previousWindowWidth = $(window).width();
+			window.addEventListener('resize', function(e) {
+				if (previousWindowWidth < 1024 && $(window).width() >= 1024) {
+					textMarquee.start();
+				}
+				previousWindowWidth = $(window).width();
+			});
 			this.start();
-		},
+		}
 	}
 </script>

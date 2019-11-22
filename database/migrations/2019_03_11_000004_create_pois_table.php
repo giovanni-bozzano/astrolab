@@ -17,6 +17,7 @@ class CreatePOIsTable extends Migration
 			$table->bigIncrements('id');
 			$table->string('name');
 			$table->text('address');
+			$table->text('coordinates');
 			$table->text('description');
 			$table->unsignedBigInteger('category_id')->nullable();
 			$table->foreign('category_id')->references('id')->on('categories');

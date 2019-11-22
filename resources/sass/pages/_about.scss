@@ -1,7 +1,4 @@
 div#about-page {
-	div.grid-container {
-		max-width: 50rem;
-	}
 	div.grid-x {
 		margin-top: -0.9375rem;
 		margin-bottom: -0.9375rem;
@@ -11,26 +8,16 @@ div#about-page {
 		padding-bottom: 0.9375rem;
 	}
 	div.team-member {
-		font-size: 0.8em;
-		color: var(--foreground-color);
-		width: 13.5rem;
-		height: 12.5rem;
-		float: left;
-		margin-right: 0.5rem;
-		margin-bottom: 0.5rem;
-		position: relative;
-		display: inline-table;
 		img.team-image {
-			width: 7.5rem;
-			height: 7.5rem;
+			width: 150px;
+			height: 150px;
 			margin-bottom: 1rem;
-			border-radius: 5%;
-		}
-		h2, h3 {
-			max-width: 9rem;
 		}
 		h2 {
 			padding-bottom: 0.3rem;
+		}
+		h3 {
+			padding-bottom: 0.6rem;
 		}
 	}
 	footer {

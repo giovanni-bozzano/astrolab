@@ -15,6 +15,22 @@ Route::group(['prefix' => 'v1'], function() {
 	Route::get('/user', 'API\UsersController@getUser');
 
 	/*
+	| URL:            /api/v1/cookies-consent
+	| Controller:     API\UsersController@getCookiesConsent
+	| Method:         GET
+	| Description:    Gets the cookies consent status.
+	*/
+	Route::get('/cookies-consent', 'API\UsersController@getCookiesConsent');
+
+	/*
+	| URL:            /api/v1/cookies-consent/give
+	| Controller:     API\UsersController@giveCookiesConsent
+	| Method:         POST
+	| Description:    Give cookies consent.
+	*/
+	Route::post('/cookies-consent/give', 'API\UsersController@giveCookiesConsent');
+
+	/*
 	| URL:            /api/v1/pois
 	| Controller:     API\POIsController@getPois
 	| Method:         GET
