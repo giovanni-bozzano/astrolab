@@ -14,19 +14,17 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="viewport" content="width=device-width, user-scalable=no" />
 
-		<link href="https://fonts.googleapis.com/css?family=Spectral:300&display=swap" rel="stylesheet">
-
-		<link href="{{ mix('/css/app.css' ) }}" rel="stylesheet" type="text/css"/>
+		<link href="{{ mix('css/app.css' ) }}" rel="stylesheet" type="text/css"/>
 		<link href="https://cdn.datatables.net/v/zf/dt-1.10.20/datatables.min.css" rel="stylesheet" type="text/css"/>
 
-		<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
 		<link rel="apple-touch-icon" sizes="1024x1024" href="assets/icon-maskable-7a2eb399.png">
-		<link rel="manifest" href="/manifest.json" />
+		<link rel="manifest" href="manifest.json" />
 
 		<title>Progetto AstroLab 2020</title>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.0.0/fabric.min.js"></script>
-		<script type='text/javascript'>
+		<script type="text/javascript">
 			window.Laravel = <?php echo json_encode([
 				'csrfToken' => csrf_token(),
 			]); ?>

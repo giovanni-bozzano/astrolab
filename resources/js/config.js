@@ -5,10 +5,10 @@ var url = '';
 
 switch (process.env.NODE_ENV) {
 	case 'development':
-		url = 'https://astrolab.giovannibozzano.tk/';
+		url = 'http://test.astrolabparma.com/';
 		break;
 	case 'production':
-		url = 'https://astrolab.giovannibozzano.tk/';
+		url = 'http://test.astrolabparma.com/';
 		break;
 }
 

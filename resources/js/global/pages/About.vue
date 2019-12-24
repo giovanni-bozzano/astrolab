@@ -2,7 +2,7 @@
 	<div id="about-page" class="page">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
-				<div class="cell large-12 medium-12 small-12">
+				<div class="cell large-12 medium-12 small-12 page-title">
 					<h1>Il nostro team</h1>
 				</div>
 			</div>
@@ -73,6 +73,7 @@
 				</div>
 			</div>
 			<footer><p>Grazie ai ragazzi dell'associazione Vita Activa, che hanno reso possibile questo progetto.</p></footer>
+			<footer class="hide-for-medium"><p>Per qualsiasi informazione // <a href="mailto:progettoastrolab@gmail.com" target="_blank">progettoastrolab@gmail.com</a>, <a href="https://www.facebook.com/progettoastrolab/" target="_blank">Facebook</a>, o <a href="https://www.instagram.com/progettoastrolab/" target="_blank">Instagram</a></p></footer>
 		</div>
 	</div>
 </template>

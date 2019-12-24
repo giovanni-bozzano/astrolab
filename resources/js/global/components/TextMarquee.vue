@@ -87,7 +87,7 @@
 			let textMarquee = this;
 			let previousWindowWidth = $(window).width();
 			window.addEventListener('resize', function(e) {
-				if (previousWindowWidth < 1024 && $(window).width() >= 1024) {
+				if (previousWindowWidth < 640 && $(window).width() >= 640) {
 					textMarquee.start();
 				}
 				previousWindowWidth = $(window).width();

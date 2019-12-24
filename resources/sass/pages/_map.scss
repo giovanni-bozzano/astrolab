@@ -1,6 +1,6 @@
 div#map-page {
-	// Full view - bottom margin
-	height: calc(100vh - 8rem);
+	// Full view - bottom margin - bottom size
+	height: calc(100vh - 100px - 50px);
 	margin-top: 0;
 	.categories {
 		overflow: auto;
@@ -34,7 +34,7 @@ div#map-page {
 	}
 	.pois-categories-wrapper {
 		display: inline-block;
-		margin-top: 3rem;
+		margin-top: 50px;
 		margin-left: 2rem;
 		margin-right: 2rem;
 		margin-bottom: 0;
@@ -42,7 +42,7 @@ div#map-page {
 	.map-cell {
 		margin-top: 2rem;
 		// Full view - top size - bottom margin
-		max-height: calc(100vh - 3rem - 8rem);
+		max-height: calc(100vh - 50px - 100px);
 	}
 	.button {
 		margin-right: 1rem;
@@ -50,11 +50,9 @@ div#map-page {
 }
 @media #{$large-up} {
 	div#map-page {
-		// Full view - bottom margin - bottom size
-		height: calc(100vh - 8rem - 3rem);
 		.categories-cell {
 			// Full view - top size - bottom size
-			max-height: calc(100vh - 3rem);
+			max-height: calc(100vh - 50px);
 		}
 		.categories-cell:after {
 			background: none;
@@ -62,12 +60,12 @@ div#map-page {
 		.pois-categories-wrapper {
 			margin-left: 0;
 			margin-right: 0;
-			margin-bottom: 8rem;
+			margin-bottom: 100px;
 		}
 		.map-cell {
-			margin-top: 3rem;
+			margin-top: 50px;
 			// Full view - top size - bottom margin - bottom size
-			max-height: calc(100vh - 3rem - 8rem - 3rem);
+			max-height: calc(100vh - 50px - 100px - 50px);
 		}
 		.button {
 			margin-bottom: 1rem
@@ -78,10 +76,10 @@ div#map-page {
 @media #{$small-only} {
 	div#map-page {
 		// Full view - top size - bottom margin
-		height: calc(100vh - 5.25rem - 8rem);
+		height: calc(100vh - 5.25rem - 100px);
 		.map-cell {
 			// Full view - top size - bottom margin - margin between rows - minimum upper row height
-			max-height: calc(100vh - 3rem - 8rem - 2rem - 10rem);
+			max-height: calc(100vh - 50px - 100px - 2rem - 10rem);
 		}
 		.categories-cell:after {
 			left: 1rem;

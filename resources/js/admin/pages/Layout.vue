@@ -2,13 +2,13 @@
 	<div id="app-layout">
 		<success-notification></success-notification>
 		<error-notification></error-notification>
-		<div class="shadow-box-top"></div>
+		<div class="shadow-box-top show-for-medium"></div>
 		<div class="shadow-box-bottom"></div>
 		<div class="title-bar hide-for-medium">
 			<button class="menu-icon" type="button" data-open="navigation"></button>
 			<figure class="logo-wrap-small">
-				<router-link :to="{ name: 'map'}">
-					<img class="logo" src="/img/logo-white-small.svg" width="45px" height="auto">
+				<router-link :to="{ name: 'current-pois'}">
+					<img class="logo" data-close="navigation" src="/img/logo-white-small.svg" width="45px" height="auto">
 				</router-link>
 			</figure>
 		</div>
@@ -22,8 +22,8 @@
 				</div>
 			</div>
 		</div>
-		<app-footer class="footer-container show-for-large"></app-footer>
-		<cookie-consent></cookie-consent>
+		<app-footer class="footer-container show-for-medium"></app-footer>
+		<cookies-consent></cookies-consent>
 		<loader></loader>
 	</div>
 </template>
@@ -41,7 +41,7 @@
 	import ErrorNotification from '../../global/components/ErrorNotification.vue';
 	import Navigation from '../components/Navigation.vue';
 	import Footer from '../../global/components/Footer.vue';
-	import CookieConsent from '../../global/components/CookieConsent.vue';
+	import CookiesConsent from '../../global/components/CookiesConsent.vue';
 	import Loader from '../../global/components/Loader.vue';
 
 	export default {
@@ -50,7 +50,7 @@
 			'error-notification': ErrorNotification,
 			'navigation': Navigation,
 			'app-footer': Footer,
-			'cookie-consent': CookieConsent,
+			'cookies-consent': CookiesConsent,
 			'loader': Loader
 		},
 

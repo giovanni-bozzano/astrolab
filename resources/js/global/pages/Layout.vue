@@ -2,7 +2,7 @@
 	<div id="app-layout">
 		<success-notification></success-notification>
 		<error-notification></error-notification>
-		<div class="shadow-box-top"></div>
+		<div class="shadow-box-top show-for-medium"></div>
 		<div class="shadow-box-bottom"></div>
 		<div id="background" class="show-for-large" v-show="$route.name.endsWith('map')">
 			<div class="background-surf"></div>
@@ -12,7 +12,7 @@
 			<button class="menu-icon" type="button" data-open="navigation"></button>
 			<figure class="logo-wrap-small">
 				<router-link :to="{ name: 'map'}">
-					<img class="logo" src="/img/logo-white-small.svg" width="45px" height="auto">
+					<img class="logo" data-close="navigation" src="/img/logo-white-small.svg" width="45px" height="auto">
 				</router-link>
 			</figure>
 		</div>
@@ -26,7 +26,7 @@
 				</div>
 			</div>
 		</div>
-		<app-footer class="footer-container show-for-large"></app-footer>
+		<app-footer class="footer-container show-for-medium"></app-footer>
 		<login-modal></login-modal>
 		<cookies-consent></cookies-consent>
 		<loader></loader>

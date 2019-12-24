@@ -1,13 +1,13 @@
 div#navigation {
 	.menu-sections-container {
-		margin-bottom: 8rem;
+		margin-bottom: 100px;
 		margin-left: auto;
 		margin-right: auto;
 	}
 	.menu-inner {
 		color: var(--foreground-color);
 		letter-spacing: 0.06em;
-		width: 127px;
+		width: 90px;
 		line-height: 47px;
 		margin-left: auto;
 		margin-right: auto;
@@ -27,12 +27,13 @@ div#navigation {
 		cursor: pointer;
 	}
 	.last-section {
-		margin-bottom: 94px;
+		margin-bottom: 47px;
 	}
 }
 @media #{$small-only} {
 	div#navigation {
 		.menu-inner {
+			width: auto;
 			text-align: center;
 			padding-left: 0;
 		}

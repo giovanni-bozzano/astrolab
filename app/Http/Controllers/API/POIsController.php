@@ -131,7 +131,7 @@ class POIsController extends Controller
 		if ($poi) {
 			$poi->name = $request->get('name');
 			$poi->address = $request->get('address');
-			$poi->coordinates = $request->get('coordiantes');
+			$poi->coordinates = $request->get('coordinates');
 			$poi->description = $request->get('description');
 			$poi->category_id = $request->get('category_id');
 			$poi->hashtag = $request->get('hashtag');
@@ -223,7 +223,7 @@ class POIsController extends Controller
 		}
 		$poi->name = $request->get('name');
 		$poi->address = $request->get('address');
-		$poi->coordiantes = $request->get('coordiantes');
+		$poi->coordinates = $request->get('coordinates');
 		$poi->description = $request->get('description');
 		$poi->category_id = $request->get('category_id');
 		$poi->hashtag = $request->get('hashtag');

@@ -2,7 +2,7 @@
 	<div id="suggest-poi-new-page" class="page">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
-				<div class="cell large-6 medium-7 small-10">
+				<div class="cell large-10 medium-10 small-10 page-title">
 					<h1>Suggerisci un nuovo luogo</h1>
 				</div>
 				<div class="cell large-2 medium-2 small-2 back-container">

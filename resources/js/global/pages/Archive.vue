@@ -2,7 +2,7 @@
 	<div id="archive-page" class="page">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
-				<div class="cell large-10 medium-10 small-12">
+				<div class="cell large-12 medium-12 small-12 page-title">
 					<h1>Archivio</h1>
 				</div>
 			</div>
@@ -41,6 +41,7 @@
 		mounted: function() {
 			sweep(document.documentElement, '--background-color', '#000', '#fff', {duration: 200});
 			sweep(document.documentElement, '--foreground-color', '#fff', '#000', {duration: 200});
+			sweep(document.documentElement, '--border-color', 'rgba(208, 208, 208, 0.31)', 'rgba(0, 0, 0, 1)', {duration: 200});
 			sweep(document.documentElement, '--background-color-rgba-000', 'rgba(0, 0, 0, 0.01)', 'rgba(255, 255, 255, 0.01)', {duration: 200});
 			sweep(document.documentElement, '--background-color-rgba-050', 'rgba(0, 0, 0, 0.5)', 'rgba(255, 255, 255, 0.5)', {duration: 200});
 			sweep(document.documentElement, '--background-color-rgba-095', 'rgba(0, 0, 0, 0.95)', 'rgba(255, 255, 255, 0.95)', {duration: 200});
@@ -63,6 +64,7 @@
 		beforeDestroy: function() {
 			sweep(document.documentElement, '--background-color', '#fff', '#000', {duration: 200});
 			sweep(document.documentElement, '--foreground-color', '#000', '#fff', {duration: 200});
+			sweep(document.documentElement, '--border-color', 'rgba(0, 0, 0, 1)', 'rgba(208, 208, 208, 0.31)', {duration: 200});
 			sweep(document.documentElement, '--background-color-rgba-000', 'rgba(255, 255, 255, 0.01)', 'rgba(0, 0, 0, 0.01)', {duration: 200});
 			sweep(document.documentElement, '--background-color-rgba-050', 'rgba(255, 255, 255, 0.5)', 'rgba(0, 0, 0, 0.5)', {duration: 200});
 			sweep(document.documentElement, '--background-color-rgba-095', 'rgba(255, 255, 255, 0.95)', 'rgba(0, 0, 0, 0.95)', {duration: 200});
