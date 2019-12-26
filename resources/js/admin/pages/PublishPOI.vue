@@ -55,6 +55,7 @@
 				return this.$store.getters.getPoiDeleteStatus;
 			}
 		},
+
 		watch: {
 			suggestedPoisLoadStatus: function() {
 				if (this.suggestedPoisLoadStatus == 2) {
@@ -97,6 +98,7 @@
 				$('#publish-poi-table').DataTable().destroy();
 			}.bind(this));
 		},
+		
 		methods: {
 			rejectSuggestedPoi(id) {
 				this.$store.dispatch('rejectSuggestedPoi', {

@@ -32,12 +32,14 @@
 		components: {
 			'infinite-loading': InfiniteLoading
 		},
+
 		data: function() {
 			return {
 				instagramList: [],
 				endCursor: ''
-			}
+			};
 		},
+
 		mounted: function() {
 			sweep(document.documentElement, '--background-color', '#000', '#fff', {duration: 200});
 			sweep(document.documentElement, '--foreground-color', '#fff', '#000', {duration: 200});
@@ -61,6 +63,7 @@
 				}
 			});
 		},
+
 		beforeDestroy: function() {
 			sweep(document.documentElement, '--background-color', '#fff', '#000', {duration: 200});
 			sweep(document.documentElement, '--foreground-color', '#000', '#fff', {duration: 200});
@@ -84,6 +87,7 @@
 				}
 			});
 		},
+		
 		methods: {
 			infiniteHandler($state) {
 				POIsAPI.getInstagramPosts(this.endCursor).then(({ data }) => {

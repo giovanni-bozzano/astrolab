@@ -13,9 +13,11 @@
 				return this.$store.getters.getCookiesConsent;
 			}
 		},
+		
 		mounted: function() {
 			this.$store.dispatch('loadCookiesConsent');
 		},
+
 		methods: {
 			accept(id) {
 				this.$store.dispatch('giveCookiesConsent');

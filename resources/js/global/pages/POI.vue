@@ -2,7 +2,7 @@
 	<div id="poi-page" class="page">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
-				<div class="cell large-12 medium-12 small-12 page-title">
+				<div class="cell large-10 medium-10 small-10 page-title">
 					<h1>{{ name }}</h1>
 				</div>
 				<div class="cell large-2 medium-2 small-2 back-container">
@@ -49,6 +49,7 @@
 		components: {
 			'infinite-loading': InfiniteLoading,
 		},
+
 		data: function() {
 			return {
 				name: null,
@@ -57,8 +58,9 @@
 				coordinates: null,
 				instagramList: [],
 				endCursor: ''
-			}
+			};
 		},
+
 		computed: {
 			poi: function() {
 				console.log(this.$store.getters.getPoi(this.$route.params.id));
@@ -68,6 +70,7 @@
 				return this.$store.getters.getPoisLoadStatus;
 			}
 		},
+
 		watch: {
 			poisLoadStatus: function() {
 				if (this.poisLoadStatus == 2) {
@@ -78,6 +81,7 @@
 				}
 			}
 		},
+
 		mounted: function() {
 			if (this.poisLoadStatus == 2) {
 				this.name = this.poi.name;
@@ -86,6 +90,7 @@
 				this.coordinates = this.poi.coordinates;
 			}
 		},
+		
 		methods: {
 			infiniteHandler($state) {
 				POIsAPI.getPoiInstagramPosts(this.$route.params.id, this.endCursor).then(({ data }) => {

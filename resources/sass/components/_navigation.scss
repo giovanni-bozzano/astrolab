@@ -13,6 +13,7 @@ div#navigation {
 		margin-right: auto;
 		display: block;
 		padding-left: 10px;
+		font-size: 0.8em;
 	}
 	.active .menu-inner {
 		color: var(--background-color);
@@ -36,6 +37,7 @@ div#navigation {
 			width: auto;
 			text-align: center;
 			padding-left: 0;
+			font-size: 1em;
 		}
 		.first-section {
 			margin-top: 47px;

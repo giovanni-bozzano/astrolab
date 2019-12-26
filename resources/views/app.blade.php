@@ -16,19 +16,11 @@
 
 		<link href="{{ mix('css/app.css' ) }}" rel="stylesheet" type="text/css"/>
 
-		<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
-		<link rel="apple-touch-icon" sizes="1024x1024" href="assets/icon-maskable-7a2eb399.png">
+		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+		<link rel="apple-touch-icon" sizes="1024x1024" href="icon-maskable.png">
 		<link rel="manifest" href="manifest.json" />
 
 		<title>Progetto AstroLab 2020</title>
-
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.0.0/fabric.min.js"></script>
-		<script type="text/javascript" src="js/sweep.min.js"></script>
-		<script type="text/javascript">
-			window.Laravel = <?php echo json_encode([
-				'csrfToken' => csrf_token(),
-			]); ?>
-		</script>
 	</head>
 	<body>
 
@@ -36,7 +28,20 @@
 			<router-view></router-view>
 		</div>
 
+		<script type="text/javascript">
+			window.Laravel = <?php echo json_encode([
+				'csrfToken' => csrf_token(),
+			]); ?>
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.0.0/fabric.min.js"></script>
+		<script type="text/javascript" src="js/sweep.min.js"></script>
 		<script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
+		<script type="text/javascript">
+			if ('serviceWorker' in navigator) {
+				navigator.serviceWorker.register('sw.js');
+			}
+		</script>
+		<noscript>AstroLab is not available without javascript.</noscript>
 
 	</body>
 </html>

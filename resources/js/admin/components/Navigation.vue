@@ -4,44 +4,39 @@
 			<div class="logo-container hide-for-small-only" data-close="navigation">
 				<figure class="logo-wrap">
 					<router-link :to="{ name: 'current-pois'}">
-						<img class="logo" src="/img/logo-white.svg" width="90px" height="auto">
+						<img class="logo" src="/img/logo-white.svg" alt="Logo" width="90px" height="auto">
 					</router-link>
 				</figure>
 			</div>
 			<nav id="nav" class="menu-sections-container">
 				<div class="menu-section first-section" data-close="navigation">
 					<a href="/">
-						<li class="menu-inner"><strong>Sito</strong></li>
+						<div class="menu-inner"><strong>Sito</strong></div>
 					</a>
 				</div>
 				<div class="menu-section" data-close="navigation" v-bind:class="{ 'active': $route.name.includes(['current-pois']) }">
 					<router-link :to="{ name: 'current-pois' }">
-						<li class="menu-inner">Modifica</li>
+						<div class="menu-inner">Modifica</div>
 					</router-link>
 				</div>
 				<div class="menu-section last-section" data-close="navigation" v-bind:class="{ 'active': $route.name.includes(['publish-poi']) }">
 					<router-link :to="{ name: 'publish-poi' }">
-						<li class="menu-inner">Pubblica</li>
+						<div class="menu-inner">Pubblica</div>
 					</router-link>
 				</div>
-				<div class="menu-section" data-close="navigation">
+				<div class="menu-section">
 					<a v-on:click="logout()">
-						<li class="menu-inner">Logout</li>
+						<div class="menu-inner">Logout</div>
 					</a>
 				</div>
 			</nav>
 	    </div>
 	</div>
 </template>
+
 <script>
 	export default {
-		/*
-			Defines the methods for the component
-		*/
 		methods: {
-			/*
-				Logs the user out.
-			*/
 			logout() {
 				this.$store.dispatch('logoutUser');
 			}

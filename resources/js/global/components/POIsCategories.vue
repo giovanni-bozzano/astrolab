@@ -1,5 +1,5 @@
 <template>
-	<div id="pois-categories" class="pois-categories-wrapper">
+	<div class="pois-categories-wrapper">
 <!--
 		<div v-for="category in categories" v-if="categories.length > 1">
 			<div class="category" v-on:mouseenter="toggleSelectedCategory(category.id)" v-on:mouseleave="toggleSelectedCategory(null)" v-on:click="toggleExpandedCategory($event, category.id)">
@@ -14,7 +14,7 @@
 			</div>
 		</div>
 -->
-		<div v-for="category in categories">
+		<div class="pois-categories-container" v-for="category in categories">
 			<router-link :to="{ name: 'poi', params: { id: poi.id }}" v-for="poi in expandedPois(categories[0].id)" v-bind:key="poi.id">
 				<button :ref="'poi-' + poi.id" class="button" v-on:mouseenter="toggleSelectedPoi(categories[0].id, poi.id)" v-on:mouseleave="toggleSelectedPoi(null, null)">{{ poi.name }}</button>
 				<br class="show-for-large" />
@@ -29,38 +29,27 @@
 			return {
 				expandedCategory: null,
 				previouslySelectedPoi: null
-			}
+			};
 		},
-		/*
-			Defines the computed variables.
-		*/
+
 		computed: {
-			/*
-				Gets the POIs
-			*/
 			pois: function() {
 				return this.$store.getters.getPois;
 			},
 			categories: function() {
 				return this.$store.getters.getCategories;
 			},
-			/*
-				Gets the selected POI
-			*/
 			selectedPoi: function() {
 				return this.$store.getters.getSelectedPoi;
 			}
 		},
-
+		
 		watch: {
 			selectedPoi: function() {
 				this.highlightPoi();
 			}
 		},
 
-		/*
-			Defines the methods used by the component.
-		*/
 		methods: {
 			expandedPois: function(id) {
 				return this.pois.filter(function(poi) {

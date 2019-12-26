@@ -19,60 +19,34 @@ div#map-page {
 		height: inherit;
 	}
 	.categories-cell {
+		// Full view - top size - bottom size
+		max-height: calc(100vh - 50px);
 		overflow: auto;
 		white-space: nowrap;
-	}
-	.categories-cell:after {
-		pointer-events: none;
-		position: absolute;
-		top: 0;
-		left: 13rem;
-		height: 100%;
-		width: calc(100% - 13rem - 3rem);
-		content: '';
-		background: linear-gradient(to right, var(--background-color) 0, var(--background-color) 0.625rem, rgba(0, 0, 0, 0) 5rem, rgba(0, 0, 0, 0) calc(100% - 5rem), var(--background-color) calc(100% - 0.625rem), var(--background-color) 100%);
 	}
 	.pois-categories-wrapper {
 		display: inline-block;
 		margin-top: 50px;
-		margin-left: 2rem;
-		margin-right: 2rem;
-		margin-bottom: 0;
+		margin-left: 0;
+		margin-right: 0;
+		margin-bottom: 100px;
+	}
+	.pois-categories-container {
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		height: 164px;
 	}
 	.map-cell {
-		margin-top: 2rem;
-		// Full view - top size - bottom margin
-		max-height: calc(100vh - 50px - 100px);
+		// Full view - top size - bottom margin - bottom size
+		max-height: calc(100vh - 50px - 100px - 50px);
+		margin-top: 50px;
 	}
 	.button {
 		margin-right: 1rem;
+		margin-bottom: 1rem;
 	}
 }
-@media #{$large-up} {
-	div#map-page {
-		.categories-cell {
-			// Full view - top size - bottom size
-			max-height: calc(100vh - 50px);
-		}
-		.categories-cell:after {
-			background: none;
-		}
-		.pois-categories-wrapper {
-			margin-left: 0;
-			margin-right: 0;
-			margin-bottom: 100px;
-		}
-		.map-cell {
-			margin-top: 50px;
-			// Full view - top size - bottom margin - bottom size
-			max-height: calc(100vh - 50px - 100px - 50px);
-		}
-		.button {
-			margin-bottom: 1rem
-		}
-	}
-}
-
 @media #{$small-only} {
 	div#map-page {
 		// Full view - top size - bottom margin
@@ -80,10 +54,25 @@ div#map-page {
 		.map-cell {
 			// Full view - top size - bottom margin - margin between rows - minimum upper row height
 			max-height: calc(100vh - 50px - 100px - 2rem - 10rem);
+			margin-top: 2rem;
 		}
 		.categories-cell:after {
 			left: 1rem;
 			width: calc(100% - 1rem - 1rem);
+			pointer-events: none;
+			position: absolute;
+			top: 0;
+			height: 100%;
+			content: '';
+			background: linear-gradient(to right, var(--background-color), rgba(0, 0, 0, 0) 3rem, rgba(0, 0, 0, 0) calc(100% - 3rem), var(--background-color));
+		}
+		.pois-categories-wrapper {
+			margin-left: 2rem;
+			margin-right: 2rem;
+			margin-bottom: 0;
+		}
+		.button {
+			margin-bottom: 8px;
 		}
 	}
 }

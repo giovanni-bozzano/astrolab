@@ -72,6 +72,7 @@
 		components: {
 			'pois-map': POIsMap
 		},
+
 		data: function() {
 			return {
 				id: null,
@@ -101,8 +102,9 @@
 						text: ''
 					}
 				}
-			}
+			};
 		},
+
 		computed: {
 			isUserLoggedIn: function() {
 				return this.$store.getters.isUserLoggedIn;
@@ -120,6 +122,7 @@
 				return this.$store.getters.getUserSuggestedPoi(this.$route.params.id);
 			}
 		},
+
 		watch: {
 			isUserLoggedIn: function() {
 				if (!this.isUserLoggedIn) {
@@ -148,6 +151,7 @@
 				}
 			}
 		},
+
 		mounted: function() {
 			if (this.userLoadStatus == 2 && this.suggestedPoi != null) {
 				this.id = this.suggestedPoi.id;
@@ -166,10 +170,8 @@
 			document.getElementById('pois-map-canvas').style.border = '1px solid #FFFFFF';
 			document.getElementById('pois-map').style.marginBottom = '1rem';
 		},
+
 		methods: {
-			/*
-				Toggles the selected category
-			*/
 			toggleSelectedCategory: function(id) {
 				this.category_id = id;
 			},

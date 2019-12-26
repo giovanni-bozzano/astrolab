@@ -50,6 +50,7 @@ body {
 	-webkit-tap-highlight-color: transparent;
 	-webkit-touch-callout: none;
 	font-family: 'IBMPlexMono';
+	overscroll-behavior-y: none;
 }
 .page {
 	// Full view - top margin - bottom margin - bottom size

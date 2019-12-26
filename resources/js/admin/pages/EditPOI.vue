@@ -121,8 +121,9 @@
 						text: ''
 					}
 				}
-			}
+			};
 		},
+
 		computed: {
 			categories: function() {
 				return this.$store.getters.getCategories;
@@ -137,6 +138,7 @@
 				return this.$store.getters.getPoi(this.$route.params.id);
 			}
 		},
+
 		watch: {
 			poiEditStatus: function() {
 				if (this.poiEditStatus == 2) {
@@ -166,6 +168,7 @@
 				}
 			}
 		},
+
 		mounted: function() {
 			if (this.poisLoadStatus == 2 && this.poi != null) {
 				this.id = this.poi.id;
@@ -190,10 +193,8 @@
 			document.getElementById('pois-map-canvas').style.border = '1px solid #FFFFFF';
 			document.getElementById('pois-map').style.marginBottom = '1rem';
 		},
+
 		methods: {
-			/*
-				Toggles the selected category
-			*/
 			toggleSelectedCategory: function(id) {
 				this.category_id = id;
 			},

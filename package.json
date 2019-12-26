@@ -27,6 +27,7 @@
 	},
 	"dependencies": {
 		"vue-infinite-loading": "^2.4.4",
+		"vue-marquee-text-component": "^1.1.1",
 		"what-input": "^5.2.6"
 	}
 }

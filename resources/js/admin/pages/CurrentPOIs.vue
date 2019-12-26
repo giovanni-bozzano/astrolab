@@ -58,6 +58,7 @@
 				return this.$store.getters.getPoiDeleteStatus;
 			}
 		},
+
 		watch: {
 			poisLoadStatus: function() {
 				if (this.poisLoadStatus == 2) {
@@ -90,6 +91,7 @@
 				}
 			}
 		},
+
 		mounted: function() {
 			if (this.poisLoadStatus == 2) {
 				$('#current-pois-table').DataTable({
@@ -107,6 +109,7 @@
 				$('#current-pois-table').DataTable().destroy();
 			}.bind(this));
 		},
+		
 		methods: {
 			showPoi(id) {
 				this.$store.dispatch('showPoi', {

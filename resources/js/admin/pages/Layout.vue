@@ -8,7 +8,7 @@
 			<button class="menu-icon" type="button" data-open="navigation"></button>
 			<figure class="logo-wrap-small">
 				<router-link :to="{ name: 'current-pois'}">
-					<img class="logo" data-close="navigation" src="/img/logo-white-small.svg" width="45px" height="auto">
+					<img class="logo" data-close="navigation" src="/img/logo-white-small.svg" alt="Logo" width="45px" height="auto">
 				</router-link>
 			</figure>
 		</div>
@@ -29,14 +29,7 @@
 </template>
 
 <script>
-	/*
-		Imports the Event Bus to pass events on tag updates
-	*/
 	import { EventBus } from '../../event-bus.js';
-
-	/*
-		Define the components used in the Layout
-	*/
 	import SuccessNotification from '../../global/components/SuccessNotification.vue';
 	import ErrorNotification from '../../global/components/ErrorNotification.vue';
 	import Navigation from '../components/Navigation.vue';

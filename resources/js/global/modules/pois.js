@@ -45,10 +45,6 @@ export const pois = {
 			POIsAPI.suggestNewPoi(data.id, data.name, data.address, data.description, data.category_id, data.latitude, data.longitude).then(function(response) {
 				commit('setNotificationText', response.data);
 				commit('setPoiAddStatus', 2);
-
-				/*
-					Load the suggested POIs.
-				*/
 				dispatch('loadUser');
 			}).catch(function(error) {
 				if (error.response.status == 403) {
@@ -66,10 +62,6 @@ export const pois = {
 			POIsAPI.deleteUserSuggestedPoi(data.id).then(function(response) {
 				commit('setNotificationText', response.data);
 				commit('setPoiDeleteStatus', 2);
-
-				/*
-					Load the suggested POIs.
-				*/
 				dispatch('loadUser');
 			}).catch(function(error) {
 				if (error.response.status == 403) {

@@ -1,7 +1,7 @@
 <template>
 	<transition name="login-scale-in-center">
-		<div id="login-modal" v-show="show" v-on:click="show = false">
-			<div class="login-background"></div>
+		<div id="login-modal" v-show="show">
+			<div class="login-background" v-on:click.self="show = false"></div>
 			<div class="login-wrapper">
 				<div class="login-container">
 					<p>Accedi con Facebook o Google</p>
@@ -18,28 +18,16 @@
 </template>
 
 <script>
-	/*
-		Imports the event bus.
-	*/
 	import { EventBus } from '../../event-bus.js';
 
 	export default {
-		/*
-			Defines the data used by the component.
-		*/
 		data: function() {
 			return {
 				show: false
-			}
+			};
 		},
 
-		/*
-			Sets up the component on the mounted lifecycle hook.
-		*/
 		mounted: function() {
-			/*
-				When prompted for login, show the component.
-			*/
 			EventBus.$on('prompt-login', function() {
 				this.show = true;
 			}.bind(this));

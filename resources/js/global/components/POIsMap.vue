@@ -10,27 +10,16 @@
 			return {
 				previouslySelectedCategory: null,
 				previouslySelectedPoi: null
-			}
+			};
 		},
 
 		computed: {
-			/*
-				Gets the POIs
-			*/
 			pois: function() {
 				return this.$store.getters.getPois;
 			},
-
-			/*
-				Gets the selected category
-			*/
 			selectedCategory: function() {
 				return this.$store.getters.getSelectedCategory;
 			},
-
-			/*
-				Gets the selected POI
-			*/
 			selectedPoi: function() {
 				return this.$store.getters.getSelectedPoi;
 			}

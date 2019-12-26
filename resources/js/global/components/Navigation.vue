@@ -4,47 +4,47 @@
 			<div class="logo-container hide-for-small-only" data-close="navigation">
 				<figure class="logo-wrap">
 					<router-link :to="{ name: 'map'}">
-						<img class="logo" src="/img/logo-white.svg" width="90px" height="auto">
+						<img class="logo" src="/img/logo-white.svg" alt="Logo" width="90px" height="auto">
 					</router-link>
 				</figure>
 			</div>
 			<nav id="nav" class="menu-sections-container">
 				<div class="menu-section first-section" data-close="navigation" v-if="isUserLoggedIn && isUserAdministrator">
 					<a href="/admin">
-						<li class="menu-inner"><strong>Admin</strong></li>
+						<div class="menu-inner"><strong>Admin</strong></div>
 					</a>
 				</div>
 				<div class="menu-section" data-close="navigation" v-bind:class="{ 'first-section': !isUserLoggedIn || !isUserAdministrator, 'active': $route.name.includes(['map']) }">
 					<router-link :to="{ name: 'map' }">
-						<li class="menu-inner">Mappa</li>
+						<div class="menu-inner">Mappa</div>
 					</router-link>
 				</div>
 				<div class="menu-section" data-close="navigation" v-bind:class="{ 'active': $route.name.includes(['project']) }">
 					<router-link :to="{ name: 'project' }">
-						<li class="menu-inner">Progetto</li>
+						<div class="menu-inner">Progetto</div>
 					</router-link>
 				</div>
 				<div class="menu-section" data-close="navigation" v-bind:class="{ 'active': $route.name.includes(['archive']) }">
 					<router-link :to="{ name: 'archive' }">
-						<li class="menu-inner">Archivio</li>
+						<div class="menu-inner">Archivio</div>
 					</router-link>
 				</div>
 				<div class="menu-section" data-close="navigation" v-bind:class="{ 'active': $route.name.includes(['suggest-poi']) }">
 					<router-link :to="{ name: 'suggest-poi' }">
-						<li class="menu-inner">Consigli</li>
+						<div class="menu-inner">Consigli</div>
 					</router-link>
 				</div>
 				<div class="menu-section last-section" data-close="navigation" v-bind:class="{ 'active': $route.name.includes(['about']) }">
 					<router-link :to="{ name: 'about' }">
-						<li class="menu-inner">Chi Siamo</li>
+						<div class="menu-inner">Chi Siamo</div>
 					</router-link>
 				</div>
-				<div class="menu-section" data-close="navigation">
+				<div class="menu-section">
 					<a v-if="isUserLoggedIn" v-on:click="logout()">
-						<li class="menu-inner">Logout</li>
+						<div class="menu-inner">Logout</div>
 					</a>
 					<a v-else v-on:click="login()">
-						<li class="menu-inner">Login</li>
+						<div class="menu-inner">Login</div>
 					</a>
 				</div>
 			</nav>
@@ -52,41 +52,22 @@
 	</div>
 </template>
 <script>
-	/*
-		Imports the event bus.
-	*/
 	import { EventBus } from '../../event-bus.js';
+	
 	export default {
-		/*
-			Defines the computed properties on the component.
-		*/
 		computed: {
-			/*
-				Retrieves whether the User is logged in from Vuex
-			*/
 			isUserLoggedIn() {
 				return this.$store.getters.isUserLoggedIn;
 			},
-			/*
-				Retrieves whether the User is an administrator from Vuex
-			*/
 			isUserAdministrator() {
 				return this.$store.getters.isUserAdministrator;
 			}
 		},
-		/*
-			Defines the methods for the component
-		*/
+
 		methods: {
-			/*
-				Prompts the login form.
-			*/
 			login() {
 				EventBus.$emit('prompt-login');
 			},
-			/*
-				Logs the user out.
-			*/
 			logout() {
 				this.$store.dispatch('logoutUser');
 			}

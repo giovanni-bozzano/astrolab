@@ -54,9 +54,6 @@
 
 	export default {
 		computed: {
-			/*
-				Retrieves whether the User is logged in from Vuex
-			*/
 			isUserLoggedIn() {
 				return this.$store.getters.isUserLoggedIn;
 			},
@@ -67,6 +64,7 @@
 				return this.$store.getters.getPoiDeleteStatus;
 			}
 		},
+
 		watch: {
 			poiDeleteStatus: function() {
 				if (this.poiDeleteStatus == 2) {
@@ -76,15 +74,13 @@
 				}
 			}
 		},
+
 		methods: {
 			deleteUserSuggestedPoi(id) {
 				this.$store.dispatch('deleteUserSuggestedPoi', {
 					id: id
 				});
 			},
-			/*
-				Prompts the login form.
-			*/
 			login() {
 				EventBus.$emit('prompt-login');
 			}

@@ -37,7 +37,6 @@
 @import 'base/h';
 @import 'base/input';
 @import 'base/label';
-@import 'base/li';
 @import 'base/p';
 @import 'base/textarea';
 
@@ -60,6 +59,7 @@
  */
 @import 'components/cookies-consent';
 @import 'components/instagram';
+@import 'components/loader';
 @import 'components/login-modal';
 @import 'components/navigation';
 @import 'components/notification';
