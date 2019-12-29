@@ -127,10 +127,6 @@ body {
 	visibility: hidden;
 }
 .off-canvas-content {
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
 	transition-timing-function: ease-in-out;
 }
 .app-page {
@@ -189,14 +185,13 @@ body {
 	margin-right: auto;
 }
 @media #{$small-only} {
+	.off-canvas-wrapper {
+		margin-top: 5.25rem;
+	}
 	.position-left.reveal-for-medium ~ .off-canvas-content {
 		margin-left: 0;
 	}
-	.top-padding {
-		padding-top: 2rem;
-	}
 	.app-page {
-		margin-top: 5.25rem;
 		margin-left: 1rem;
 		margin-right: 1rem;
 	}
@@ -208,7 +203,6 @@ body {
 	.page {
 		// Full view - top margin - top size - bottom margin
 		min-height: calc(100vh - 50px - 5.25rem - 100px);
-		margin-top: 20px;
 		margin-bottom: 100px;
 	}
 }
