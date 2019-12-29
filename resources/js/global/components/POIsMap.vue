@@ -119,8 +119,8 @@
 						let previousY = canvas.newMarker.y;
 						image.set({
 							selectable: false,
-							width: 18,
-							height: 18,
+							width: 16,
+							height: 16,
 							left: canvas.newMarker.x * canvas.getWidth(),
 							top: canvas.newMarker.y * canvas.getHeight(),
 							originX: 'center',
@@ -155,8 +155,8 @@
 							let image = new fabric.Image(marker);
 							image.set({
 								selectable: false,
-								width: 18,
-								height: 18,
+								width: 16,
+								height: 16,
 								left: parseFloat(marker.poi.latitude) * canvas.getWidth(),
 								top: parseFloat(marker.poi.longitude) * canvas.getHeight(),
 								originX: 'center',
@@ -207,8 +207,8 @@
 				fabric.Image.fromURL('/img/poi-marker.png', function(image) {
 					image.set({
 						selectable: false,
-						width: 18,
-						height: 18,
+						width: 16,
+						height: 16,
 						left: x * canvas.getWidth(),
 						top: y * canvas.getHeight(),
 						originX: 'center',
