@@ -5,9 +5,7 @@
 				<div class="cell large-12 medium-12 small-12 page-title">
 					<h1>Luoghi esistenti</h1>
 				</div>
-			</div>
-			<br />
-			<div class="grid-x grid-padding-x">
+				<br />
 				<div class="cell large-10 medium-10 small-12">
 					<table id="current-pois-table" class="responsive-card-table">
 						<thead>

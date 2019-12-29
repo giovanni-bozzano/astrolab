@@ -10,21 +10,25 @@
 						<img src="/img/close-modal.svg" class="back"/>
 					</router-link>
 				</div>
-			</div>
-			<div class="grid-x grid-padding-x">
-				<div class="cell large-10 medium-10 small-12">
+				<div class="cell large-12 medium-12 small-12 poi-paragraph" v-if="image_url != null">
+					<img v-bind:src="image_url"/>
+				</div>
+				<div class="cell large-12 medium-12 small-12 poi-paragraph">
 					<p class="spectral">{{ description }}</p>
 				</div>
-			</div>
-			<div class="grid-x grid-padding-x poi-position-section">
-				<div class="cell large-10 medium-10 small-12">
-					<h2 class="position">Posizione</h2>
-					<h3 class="address">{{ address }}</h3>
-					<h3 v-if="coordinates != ''">{{ coordinates }}</h3>
+				<div class="cell large-12 medium-12 small-12 poi-paragraph">
+					<h2 class="poi-paragraph-margin-large">Posizione</h2>
+					<h3 class="poi-paragraph-margin-small">{{ address }}</h3>
+					<h3 v-if="coordinates != null">{{ coordinates }}</h3>
+				</div>
+				<div class="cell large-12 medium-12 small-12 poi-paragraph" v-if="email_address != null || phone_number != null">
+					<h2 class="poi-paragraph-margin-large">Contatti</h2>
+					<h3 class="poi-paragraph-margin-large" v-if="email_address != null"><a class="button" target="_blank" rel="noopener" v-bind:href="'mailto:' + email_address">Indirizzo email: {{ email_address }}</a></h3>
+					<h3 v-if="phone_number != null"><a class="button" target="_blank" rel="noopener" v-bind:href="'tel:' + phone_number">Numero di telefono: {{ phone_number }}</a></h3>
 				</div>
 			</div>
 			<div class="grid-x grid-padding-x instagram-grid">
-				<div class="cell large-3 medium-6 small-12 instagram-cell" v-for="post in instagramList">
+				<div class="cell large-6 medium-6 small-12 instagram-cell" v-for="post in instagramList">
 					<div class="instagram-container" :style="{ backgroundImage: 'url(' + post.imageUrl + ')' }">
 						<a :href="post.url" target="_blank" class="instagram-text-container">
 							<div class="instagram-title">{{ post.title }}</div>
@@ -53,9 +57,12 @@
 		data: function() {
 			return {
 				name: null,
+				image_url: null,
 				description: null,
 				address: null,
 				coordinates: null,
+				email_address: null,
+				phone_number: null,
 				instagramList: [],
 				endCursor: ''
 			};
@@ -63,7 +70,6 @@
 
 		computed: {
 			poi: function() {
-				console.log(this.$store.getters.getPoi(this.$route.params.id));
 				return this.$store.getters.getPoi(this.$route.params.id);
 			},
 			poisLoadStatus: function() {
@@ -75,9 +81,12 @@
 			poisLoadStatus: function() {
 				if (this.poisLoadStatus == 2) {
 					this.name = this.poi.name;
+					this.image_url = this.poi.image_url;
 					this.description = this.poi.description;
 					this.address = this.poi.address;
 					this.coordinates = this.poi.coordinates;
+					this.email_address = this.poi.email_address;
+					this.phone_number = this.poi.phone_number;
 				}
 			}
 		},
@@ -85,9 +94,12 @@
 		mounted: function() {
 			if (this.poisLoadStatus == 2) {
 				this.name = this.poi.name;
+				this.image_url = this.poi.image_url;
 				this.description = this.poi.description;
 				this.address = this.poi.address;
 				this.coordinates = this.poi.coordinates;
+				this.email_address = this.poi.email_address;
+				this.phone_number = this.poi.phone_number;
 			}
 		},
 		

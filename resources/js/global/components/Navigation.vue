@@ -9,7 +9,7 @@
 				</figure>
 			</div>
 			<nav id="nav" class="menu-sections-container">
-				<div class="menu-section first-section" data-close="navigation" v-if="isUserLoggedIn && isUserAdministrator">
+				<div class="menu-section first-section" data-close="navigation" v-on:click="showLoader" v-if="isUserLoggedIn && isUserAdministrator">
 					<a href="/admin">
 						<div class="menu-inner"><strong>Admin</strong></div>
 					</a>
@@ -65,10 +65,14 @@
 		},
 
 		methods: {
+			showLoader() {
+				EventBus.$emit('show-loader');
+			},
 			login() {
 				EventBus.$emit('prompt-login');
 			},
 			logout() {
+				this.showLoader();
 				this.$store.dispatch('logoutUser');
 			}
 		}

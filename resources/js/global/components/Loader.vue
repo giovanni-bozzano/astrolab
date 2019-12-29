@@ -5,6 +5,8 @@
 </template>
 
 <script>
+	import { EventBus } from '../../event-bus.js';
+	
 	export default {
 		data: function() {
 			return {
@@ -30,6 +32,9 @@
 			if (this.userLoadStatus == 2) {
 				this.show = false;
 			}
+			EventBus.$on('show-loader', function() {
+				this.show = true;
+			}.bind(this));
 		}
 	}
 </script>

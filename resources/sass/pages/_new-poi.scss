@@ -1,9 +1,11 @@
-div#suggest-poi-page, div#publish-poi-page {
-	h1 {
-		float: left;
+div#suggest-poi-new-page, div#publish-poi-new-page, div#edit-poi-page {
+	.grid-container {
+		max-width: 680px;
 	}
-	img.back {
-		float: right;
-		margin-top: 1rem;
+	.button {
+		margin-bottom: 1rem;
+	}
+	.image-preview {
+		margin-bottom: 1rem;
 	}
 }

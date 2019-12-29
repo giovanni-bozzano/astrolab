@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePOIRequest extends FormRequest
+class SuggestNewPOIRequest extends FormRequest
 {
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -26,11 +26,11 @@ class StorePOIRequest extends FormRequest
 		return [
 			'id' => 'sometimes',
 			'name' => 'required',
-			'address' => 'required',
-			'coordinates' => 'sometimes',
 			'description' => 'required',
+			'address' => 'required',
+			'email_address' => 'sometimes',
+			'phone_number' => 'sometimes',
 			'category_id' => 'required',
-			'hashtag' => 'sometimes',
 			'latitude' => 'required',
 			'longitude' => 'required'
 		];
@@ -44,12 +44,12 @@ class StorePOIRequest extends FormRequest
 	public function messages()
 	{
 		return [
-			'name.required' => 'A name is required to add this POI.',
-			'address.required' => 'An address is required to add this POI.',
-			'description.required' => 'A description is required to add this POI.',
-			'category_id.required' => 'A category is required to add this POI.',
-			'latitude.required' => 'A latitude is required to add this POI.',
-			'longitude.required' => 'A longitude is required to add this POI.'
+			'name.required' => 'Inserisci un nome per il luogo!',
+			'description.required' => 'Inserisci una descrizione per il luogo!',
+			'address.required' => 'Inserisci un indirizzo per il luogo!',
+			'category_id.required' => 'Seleziona una categoria per il luogo!',
+			'latitude.required' => 'Seleziona una posizione nella mappa per il luogo!',
+			'longitude.required' => 'Seleziona una posizione nella mappa per il luogo!'
 		];
 	}
 }

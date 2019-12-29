@@ -5,9 +5,7 @@
 				<div class="cell large-12 medium-12 small-12 page-title">
 					<h1>Pubblica un nuovo luogo</h1>
 				</div>
-			</div>
-			<br />
-			<div class="grid-x grid-padding-x">
+				<br />
 				<div class="cell large-10 medium-10 small-12">
 					<table id="publish-poi-table" class="responsive-card-table">
 						<thead>
@@ -30,8 +28,6 @@
 						</tbody>
 					</table>
 				</div>
-			</div>
-			<div class="grid-x grid-padding-x">
 				<div class="cell large-8 medium-9 small-12">
 					<router-link :to="{ name: 'publish-poi-new' }" class="button">Aggiungi</router-link>
 				</div>

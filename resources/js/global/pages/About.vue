@@ -5,8 +5,6 @@
 				<div class="cell large-12 medium-12 small-12 page-title">
 					<h1>Il nostro team</h1>
 				</div>
-			</div>
-			<div class="grid-x grid-padding-x">
 				<div class="cell large-3 medium-4 small-6">
 					<div class="team-member">
 						<img class="team-image" src="/img/about/valentina_avanzini.jpg" alt="Valentina Avanzini"/>

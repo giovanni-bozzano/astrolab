@@ -1,22 +1,5 @@
-/*
 .button {
-	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-	hyphens: manual;
-	padding: 10px;
-	margin: 0;
-	color: #a7a9ac;
-	background-color: #231f20;
-	border: 3px solid #a7a9ac;
-	letter-spacing: 3px;
-}
-.button:focus, .button:hover {
-	background-color: #fff;
-	color: #161721;
-	outline: 0;
-}
-*/
-.button {
-	font-size: 0.8em;
+	font-size: 0.8rem;
 	color: var(--foreground-color);
 	background-color: transparent;
 	border: 2.5px solid var(--foreground-color);
@@ -28,7 +11,6 @@
 	padding-right: 16px;
 	margin: 0;
 }
-
 .button:focus, .button:hover {
 	background-color: var(--foreground-color);
 	color: #161721;

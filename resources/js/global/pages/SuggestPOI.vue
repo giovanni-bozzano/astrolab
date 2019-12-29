@@ -5,16 +5,12 @@
 				<div class="cell large-12 medium-12 small-12 page-title">
 					<h1>In cerca di nuove stelle</h1>
 				</div>
-			</div>
-			<div class="grid-x grid-padding-x">
 				<div class="cell large-10 medium-10 small-12">
 					<p class="spectral">La rete di AstroLab è in continua crescita. Guidaci nei tuoi luoghi della città e ... ... ...</p>
 					<p class="spectral">La sezione è privata e i tuoi suggerimenti saranno controllati dal team di AstroLab. Una volta approvata la scelta, il luogo verrà pubblicato e diventerà ufficialmente parte dei percorsi AstroLab.</p>
 				</div>
-			</div>
-			<br />
-			<div class="grid-x grid-padding-x" v-if="isUserLoggedIn && userSuggestedPois.length > 0">
-				<div class="cell large-10 medium-10 small-12">
+				<br />
+				<div class="cell large-10 medium-10 small-12" v-if="isUserLoggedIn && userSuggestedPois.length > 0">
 					<table class="responsive-card-table">
 						<thead>
 							<tr>
@@ -34,14 +30,10 @@
 						</tbody>
 					</table>
 				</div>
-			</div>
-			<div class="grid-x grid-padding-x" v-if="isUserLoggedIn">
-				<div class="cell large-8 medium-9 small-12">
+				<div class="cell large-8 medium-9 small-12" v-if="isUserLoggedIn">
 					<router-link :to="{ name: 'suggest-poi-new' }" class="button">Aggiungi</router-link>
 				</div>
-			</div>
-			<div class="grid-x grid-padding-x" v-else>
-				<div class="cell large-8 medium-9 small-12">
+				<div class="cell large-8 medium-9 small-12" v-else>
 					<a class="button" v-on:click="login()">Accedi con <strong>Facebook</strong> o <strong>Google</strong></a>
 				</div>
 			</div>

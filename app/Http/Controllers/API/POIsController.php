@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePOIRequest;
-use App\Http\Requests\StoreSuggestedPOIRequest;
+use App\Http\Requests\EditPOIRequest;
+use App\Http\Requests\PublishNewPOIRequest;
+use App\Http\Requests\SuggestNewPOIRequest;
 use App\Models\POI;
 use App\Models\SuggestedPOI;
 
@@ -12,7 +13,7 @@ use Auth;
 use Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-use Illuminate\Support\Facades\Log;
+use Intervention\Image\ImageManagerStatic as Image;
 
 /**
  * The POIs controller handles all API requests that manage POIs data.
@@ -26,7 +27,6 @@ class POIsController extends Controller
 	*/
 	public function getPois()
 	{
-		Log::info(Auth::guard('api')->user());
 		if (Auth::guard('api')->user() != null && Auth::guard('api')->user()->getIsAdministratorAttribute()) {
 			$pois = POI::with('category')->get();
 		} else {
@@ -124,17 +124,31 @@ class POIsController extends Controller
 	| Method:         POST
 	| Description:    Edits a POI in the application.
 	*/
-	public function editPoi(StorePOIRequest $request)
+	public function editPoi(EditPOIRequest $request)
 	{
 		$poi = POI::find($request->get('id'));
 		$suggestedPoi = SuggestedPOI::find($request->get('id'));
 		if ($poi) {
 			$poi->name = $request->get('name');
+			if ($request->hasFile('image')) {
+				$image = $request->file('image');
+				$filename = $request->get('id').'.png';
+				$image = Image::make($image->getRealPath());  
+				if ($image->width() > 680) {            
+					$image->resize(680, null, function ($constraint) {
+						$constraint->aspectRatio();
+					});
+				}
+				$image->save(public_path('img/pois/' .$filename));
+				$poi->image_url = '/img/pois/'.$filename;
+			}
+			$poi->description = $request->get('description');
 			$poi->address = $request->get('address');
 			$poi->coordinates = $request->get('coordinates');
-			$poi->description = $request->get('description');
-			$poi->category_id = $request->get('category_id');
+			$poi->email_address = $request->get('email_address');
+			$poi->phone_number = $request->get('phone_number');
 			$poi->hashtag = $request->get('hashtag');
+			$poi->category_id = $request->get('category_id');
 			$poi->latitude = $request->get('latitude');
 			$poi->longitude = $request->get('longitude');
 			$poi->save();
@@ -190,6 +204,7 @@ class POIsController extends Controller
 	{
 		$poi = POI::find($id);
 		if ($poi) {
+			unlink(public_path($poi->image_url));
 			$poi->delete();
 			return response($poi->name.' è stato rimosso!', 201);
 		}
@@ -212,23 +227,40 @@ class POIsController extends Controller
 	| Method:         POST
 	| Description:    Adds a new POI to the application.
 	*/
-	public function publishNewPoi(StorePOIRequest $request)
+	public function publishNewPoi(PublishNewPOIRequest $request)
 	{
 		$poi = new POI();
-		$suggestedPoi = SuggestedPOI::find($request->get('id'));
+		$suggestedPoi = SuggestedPOI::find($request->get('suggestion_id'));
 		if ($suggestedPoi) {
+			if ($suggestedPoi->status != 'pending') {
+				return response('Il suggerimento è già stato giudicato.', 403);
+			}
 			$suggestedPoi->status = 'approved';
 			$suggestedPoi->save();
-			$poi->suggestion_id = $suggestedPoi->id;
 		}
 		$poi->name = $request->get('name');
+		if ($request->hasFile('image')) {
+			$image = $request->file('image');
+			$filename = $request->get('id').'.png';
+			$image = Image::make($image->getRealPath());  
+			if ($image->width() > 680) {            
+				$image->resize(680, null, function ($constraint) {
+					$constraint->aspectRatio();
+				});
+			}
+			$image->save(public_path('img/pois/' .$filename));
+			$poi->image_url = '/img/pois/'.$filename;
+		}
+		$poi->description = $request->get('description');
 		$poi->address = $request->get('address');
 		$poi->coordinates = $request->get('coordinates');
-		$poi->description = $request->get('description');
-		$poi->category_id = $request->get('category_id');
+		$poi->email_address = $request->get('email_address');
+		$poi->phone_number = $request->get('phone_number');
 		$poi->hashtag = $request->get('hashtag');
+		$poi->category_id = $request->get('category_id');
 		$poi->latitude = $request->get('latitude');
 		$poi->longitude = $request->get('longitude');
+		$poi->suggestion_id = $request->get('suggestion_id');
 		$poi->save();
 		return response($request->get('name').' è stato pubblicato!', 201);
 	}
@@ -244,6 +276,9 @@ class POIsController extends Controller
 	{
 		$suggestedPoi = SuggestedPOI::find($id);
 		if ($suggestedPoi) {
+			if ($suggestedPoi->status != 'pending') {
+				return response('Il suggerimento è già stato giudicato.', 403);
+			}
 			$suggestedPoi->status = 'rejected';
 			$suggestedPoi->save();
 			return response($suggestedPoi->name.' è stato rifiutato!', 201);
@@ -256,7 +291,7 @@ class POIsController extends Controller
 	| Method:         POST
 	| Description:    Adds a new suggested POI to the application.
 	*/
-	public function suggestNewPoi(StoreSuggestedPOIRequest $request)
+	public function suggestNewPoi(SuggestNewPOIRequest $request)
 	{
 		$suggestedPoi = SuggestedPOI::where('id', $request->get('id'))->where('user_id', Auth::guard('api')->user()->id)->first();
 		if (!$suggestedPoi) {
@@ -266,8 +301,10 @@ class POIsController extends Controller
 			$suggestedPoi = new SuggestedPOI();
 		}
 		$suggestedPoi->name = $request->get('name');
-		$suggestedPoi->address = $request->get('address');
 		$suggestedPoi->description = $request->get('description');
+		$suggestedPoi->address = $request->get('address');
+		$suggestedPoi->email_address = $request->get('email_address');
+		$suggestedPoi->phone_number = $request->get('phone_number');
 		$suggestedPoi->category_id = $request->get('category_id');
 		$suggestedPoi->latitude = $request->get('latitude');
 		$suggestedPoi->longitude = $request->get('longitude');

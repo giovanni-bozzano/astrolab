@@ -9,7 +9,7 @@
 				</figure>
 			</div>
 			<nav id="nav" class="menu-sections-container">
-				<div class="menu-section first-section" data-close="navigation">
+				<div class="menu-section first-section" data-close="navigation" v-on:click="showLoader">
 					<a href="/">
 						<div class="menu-inner"><strong>Sito</strong></div>
 					</a>
@@ -35,9 +35,15 @@
 </template>
 
 <script>
+	import { EventBus } from '../../event-bus.js';
+	
 	export default {
 		methods: {
+			showLoader() {
+				EventBus.$emit('show-loader');
+			},
 			logout() {
+				this.showLoader();
 				this.$store.dispatch('logoutUser');
 			}
 		}

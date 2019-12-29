@@ -15,15 +15,18 @@ class CreatePOIsTable extends Migration
 	{
 		Schema::create('pois', function($table) {
 			$table->bigIncrements('id');
-			$table->string('name');
+			$table->text('name');
+			$table->text('image_url')->nullable();
+			$table->text('description');
 			$table->text('address');
 			$table->text('coordinates')->nullable();
-			$table->text('description');
+			$table->text('email_address')->nullable();
+			$table->text('phone_number')->nullable();
+			$table->text('hashtag')->nullable();
 			$table->unsignedBigInteger('category_id')->nullable();
 			$table->foreign('category_id')->references('id')->on('categories');
 			$table->decimal('latitude', 11, 8);
 			$table->decimal('longitude', 11, 8);
-			$table->text('hashtag')->nullable();
 			$table->boolean('is_hidden')->default(false);
 			$table->unsignedBigInteger('suggestion_id')->nullable();
 			$table->foreign('suggestion_id')->references('id')->on('suggested_poi');

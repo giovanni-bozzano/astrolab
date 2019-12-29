@@ -1,12 +1,14 @@
 div#poi-page {
-	div.poi-position-section {
-		margin-top: 1rem;
-		margin-bottom: 2rem;
+	.grid-container {
+		max-width: 680px;
 	}
-	.position {
-		margin-bottom: 1rem;
+	.poi-paragraph {
+		margin-bottom: 1.8em;
 	}
-	.address {
-		margin-bottom: 0.2rem;
+	.poi-paragraph-margin-large {
+		margin-bottom: 1em;
+	}
+	.poi-paragraph-margin-small {
+		margin-bottom: 0.2em;
 	}
 }

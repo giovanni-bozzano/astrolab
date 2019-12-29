@@ -25,7 +25,7 @@ export const admin = {
 		*/
 		editPoi({ commit, state, dispatch }, data) {
 			commit('setPoiEditStatus', 1);
-			AdminAPI.editPoi(data.id, data.name, data.address, data.coordinates, data.description, data.category_id, data.hashtag, data.latitude, data.longitude).then(function(response) {
+			AdminAPI.editPoi(data.id, data.name, data.image, data.description, data.address, data.coordinates, data.email_address, data.phone_number, data.hashtag, data.category_id, data.latitude, data.longitude).then(function(response) {
 				commit('setNotificationText', response.data);
 				commit('setPoiEditStatus', 2);
 
@@ -127,7 +127,7 @@ export const admin = {
 		*/
 		publishNewPoi({ commit, state, dispatch }, data) {
 			commit('setPoiAddStatus', 1);
-			AdminAPI.publishNewPoi(data.id, data.name, data.address, data.coordinates, data.description, data.category_id, data.hashtag, data.latitude, data.longitude).then(function(response) {
+			AdminAPI.publishNewPoi(data.name, data.image, data.description, data.address, data.coordinates, data.email_address, data.phone_number, data.hashtag, data.category_id, data.latitude, data.longitude, data.suggestion_id).then(function(response) {
 				commit('setNotificationText', response.data);
 				commit('setPoiAddStatus', 2);
 

@@ -17,9 +17,10 @@
 		<link href="{{ mix('css/app.css' ) }}" rel="stylesheet" type="text/css"/>
 		<link href="https://cdn.datatables.net/v/zf/dt-1.10.20/datatables.min.css" rel="stylesheet" type="text/css"/>
 
-		<link rel="icon" href="../favicon.ico" type="image/x-icon"/>
-		<link rel="apple-touch-icon" sizes="1024x1024" href="../icon-maskable.png">
-		<link rel="manifest" href="../manifest.json" />
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/favicon.ico" type="image/x-icon">
+		<link rel="apple-touch-icon" sizes="1024x1024" href="/icon-maskable.png">
+		<link rel="manifest" href="/manifest.json" />
 
 		<title>Progetto AstroLab 2020</title>
 	</head>
@@ -39,7 +40,7 @@
 		<script type="text/javascript" src="https://cdn.datatables.net/v/zf/dt-1.10.20/datatables.min.js"></script>
 		<script type="text/javascript">
 			if ('serviceWorker' in navigator) {
-				navigator.serviceWorker.register('../sw.js');
+				navigator.serviceWorker.register('/sw.js');
 			}
 		</script>
 		<noscript>AstroLab is not available without javascript.</noscript>

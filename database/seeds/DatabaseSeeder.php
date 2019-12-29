@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Category;
 use App\Models\Role;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +14,15 @@ class DatabaseSeeder extends Seeder
 	public function run()
 	{
 		Eloquent::unguard();
-        Role::create([
-            'name' => 'User'
-        ]);
-        Role::create([
-            'name' => 'Administrator'
-        ]);
+		Role::create([
+			'name' => 'User'
+		]);
+		Role::create([
+			'name' => 'Administrator'
+		]);
+		Category::create([
+			'name' => 'Default',
+			'icon' => 'default'
+		]);
 	}
 }

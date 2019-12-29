@@ -15,9 +15,11 @@ class CreateSuggestedPOIsTable extends Migration
 	{
 		Schema::create('suggested_pois', function($table) {
 			$table->bigIncrements('id');
-			$table->string('name');
-			$table->text('address');
+			$table->text('name');
 			$table->text('description');
+			$table->text('address');
+			$table->text('email_address')->nullable();
+			$table->text('phone_number')->nullable();
 			$table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
 			$table->decimal('latitude', 11, 8);

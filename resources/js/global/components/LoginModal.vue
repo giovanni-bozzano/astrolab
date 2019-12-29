@@ -5,10 +5,10 @@
 			<div class="login-wrapper">
 				<div class="login-container">
 					<p>Accedi con Facebook o Google</p>
-					<a href="/login/google" class="social-link">
+					<a class="social-link" href="/login/google" v-on:click="showLoader">
 						<img src="/img/google-login.svg"/>
 					</a>
-					<a href="/login/facebook" class="social-link">
+					<a class="social-link" href="/login/facebook" v-on:click="showLoader">
 						<img src="/img/facebook-login.svg"/>
 					</a>
 				</div>
@@ -31,6 +31,12 @@
 			EventBus.$on('prompt-login', function() {
 				this.show = true;
 			}.bind(this));
+		},
+
+		methods: {
+			showLoader() {
+				EventBus.$emit('show-loader');
+			}
 		}
 	}
 </script>

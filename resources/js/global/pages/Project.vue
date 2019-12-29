@@ -5,8 +5,6 @@
 				<div class="cell large-12 medium-12 small-12 page-title">
 					<h1>Il progetto AstroLab</h1>
 				</div>
-			</div>
-			<div class="grid-x grid-padding-x">
 				<div class="cell large-12 medium-12 small-12">
 					<p class="spectral">Il progetto AstroLab nasce dall’impegno e dalla volontà di creare una connessione viva tra la cittadinanza e quelle realtà che, attraverso la loro virtuosa attività sul territorio, rendono Parma una città attenta alla bellezza, alla cultura, alla vulnerabilità, alla diversità come fonte di ricchezza e non di paura.</p>
 					<p class="spectral">«Città è ogni sede in grado di produrre un’immagine materiale, pubblica e perciò condivisa, della forma e del funzionamento del mondo o di una sua parte» (Franco Farinelli)</p>
