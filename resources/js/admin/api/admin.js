@@ -7,7 +7,7 @@ export default {
 	/*
 		POST /api/v1/admin/pois/edit/{id}
 	*/
-	editPoi: function(id, name, image, description, address, coordinates, email_address, phone_number, hashtag, category_id, latitude, longitude) {
+	editPoi: function(id, name, image, description, address, coordinates, email_address, phone_number, website, hashtag, category_id, latitude, longitude) {
 		/*
 			Initialize the form data
 		*/
@@ -26,6 +26,7 @@ export default {
 		formData.append('coordinates', coordinates);
 		formData.append('email_address', email_address);
 		formData.append('phone_number', phone_number);
+		formData.append('website', website);
 		formData.append('hashtag', hashtag);
 		formData.append('category_id', category_id);
 		formData.append('latitude', latitude);
@@ -69,7 +70,7 @@ export default {
 	/*
 		POST /api/v1/admin/pois/publish
 	*/
-	publishNewPoi: function(name, image, description, address, coordinates, email_address, phone_number, hashtag, category_id, latitude, longitude, suggestion_id) {
+	publishNewPoi: function(name, image, description, address, coordinates, email_address, phone_number, website, hashtag, category_id, latitude, longitude, suggestion_id) {
 		/*
 			Initialize the form data
 		*/
@@ -87,6 +88,7 @@ export default {
 		formData.append('coordinates', coordinates);
 		formData.append('email_address', email_address);
 		formData.append('phone_number', phone_number);
+		formData.append('website', website);
 		formData.append('hashtag', hashtag);
 		formData.append('category_id', category_id);
 		formData.append('latitude', latitude);

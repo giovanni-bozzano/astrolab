@@ -30,6 +30,7 @@ class SuggestNewPOIRequest extends FormRequest
 			'address' => 'required',
 			'email_address' => 'sometimes',
 			'phone_number' => 'sometimes',
+			'website' => 'sometimes',
 			'category_id' => 'required',
 			'latitude' => 'required',
 			'longitude' => 'required'

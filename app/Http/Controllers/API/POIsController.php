@@ -147,6 +147,7 @@ class POIsController extends Controller
 			$poi->coordinates = $request->get('coordinates');
 			$poi->email_address = $request->get('email_address');
 			$poi->phone_number = $request->get('phone_number');
+			$poi->website = $request->get('website');
 			$poi->hashtag = $request->get('hashtag');
 			$poi->category_id = $request->get('category_id');
 			$poi->latitude = $request->get('latitude');
@@ -256,6 +257,7 @@ class POIsController extends Controller
 		$poi->coordinates = $request->get('coordinates');
 		$poi->email_address = $request->get('email_address');
 		$poi->phone_number = $request->get('phone_number');
+		$poi->website = $request->get('website');
 		$poi->hashtag = $request->get('hashtag');
 		$poi->category_id = $request->get('category_id');
 		$poi->latitude = $request->get('latitude');
@@ -305,6 +307,7 @@ class POIsController extends Controller
 		$suggestedPoi->address = $request->get('address');
 		$suggestedPoi->email_address = $request->get('email_address');
 		$suggestedPoi->phone_number = $request->get('phone_number');
+		$suggestedPoi->website = $request->get('website');
 		$suggestedPoi->category_id = $request->get('category_id');
 		$suggestedPoi->latitude = $request->get('latitude');
 		$suggestedPoi->longitude = $request->get('longitude');

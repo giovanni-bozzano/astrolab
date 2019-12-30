@@ -47,6 +47,10 @@
 					<input type="text" id="phone_number" placeholder="Inserisci un numero di telefono..." class="form-input" autocomplete="off" v-model="phone_number"/>
 				</div>
 				<div class="cell large-12 medium-12 small-12">
+					<label>Sito web</label>
+					<input type="text" id="website" placeholder="Inserisci un indirizzo web..." class="form-input" autocomplete="off" v-model="website"/>
+				</div>
+				<div class="cell large-12 medium-12 small-12">
 					<label>Hashtag</label>
 					<input type="text" id="hashtag" placeholder="Inserisci un hashtag..." class="form-input" autocomplete="off" v-model="hashtag" v-bind:class="{'invalid' : !validations.hashtag.is_valid }"/>
 					<div class="validation" v-show="!validations.hashtag.is_valid">{{ validations.hashtag.text }}</div>
@@ -100,6 +104,7 @@
 				coordinates: '',
 				email_address: '',
 				phone_number: '',
+				website: '',
 				hashtag: '',
 				category_id: null,
 				suggestion_id: '',
@@ -172,6 +177,9 @@
 					if (this.suggestedPoi.phone_number != null) {
 						this.phone_number = this.suggestedPoi.phone_number;
 					}
+					if (this.suggestedPoi.website != null) {
+						this.website = this.suggestedPoi.website;
+					}
 					this.category_id = this.suggestedPoi.category_id;
 					this.latitude = this.suggestedPoi.latitude;
 					this.longitude = this.suggestedPoi.longitude;
@@ -191,6 +199,9 @@
 				}
 				if (this.suggestedPoi.phone_number != null) {
 					this.phone_number = this.suggestedPoi.phone_number;
+				}
+				if (this.suggestedPoi.website != null) {
+					this.website = this.suggestedPoi.website;
 				}
 				this.category_id = this.suggestedPoi.category_id;
 				this.latitude = this.suggestedPoi.latitude;
@@ -239,6 +250,7 @@
 						coordinates: this.coordinates,
 						email_address: this.email_address,
 						phone_number: this.phone_number,
+						website: this.website,
 						hashtag: this.hashtag,
 						category_id: this.category_id,
 						latitude: this.$refs.map.$canvas.newMarker.x,
@@ -316,6 +328,7 @@
 				this.coordinates = '';
 				this.email_address = '';
 				this.phone_number = '';
+				this.website = '';
 				this.hashtag = '';
 				this.category_id = null;
 				this.suggestion_id = '';

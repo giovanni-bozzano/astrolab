@@ -21,13 +21,14 @@
 					<h3 class="poi-paragraph-margin-small">{{ address }}</h3>
 					<h3 v-if="coordinates != null">{{ coordinates }}</h3>
 				</div>
-				<div class="cell large-12 medium-12 small-12 poi-paragraph" v-if="email_address != null || phone_number != null">
+				<div class="cell large-12 medium-12 small-12 poi-paragraph" v-if="email_address != null || phone_number != null || website != null">
 					<h2 class="poi-paragraph-margin-large">Contatti</h2>
 					<h3 class="poi-paragraph-margin-large" v-if="email_address != null"><a class="button" target="_blank" rel="noopener" v-bind:href="'mailto:' + email_address">Indirizzo email: {{ email_address }}</a></h3>
 					<h3 v-if="phone_number != null"><a class="button" target="_blank" rel="noopener" v-bind:href="'tel:' + phone_number">Numero di telefono: {{ phone_number }}</a></h3>
+					<h3 v-if="website != null"><a class="button" target="_blank" rel="noopener" v-bind:href="website">Sito web: {{ website }}</a></h3>
 				</div>
 			</div>
-			<div class="grid-x grid-padding-x instagram-grid">
+			<div class="grid-x grid-padding-x instagram-grid" v-if="hashtag != null">
 				<div class="cell large-6 medium-6 small-12 instagram-cell" v-for="post in instagramList">
 					<div class="instagram-container" :style="{ backgroundImage: 'url(' + post.imageUrl + ')' }">
 						<a :href="post.url" target="_blank" class="instagram-text-container">
@@ -37,7 +38,7 @@
 					</div>
 				</div>
 			</div>
-			<infinite-loading force-use-infinite-wrapper @infinite="infiniteHandler">
+			<infinite-loading force-use-infinite-wrapper @infinite="infiniteHandler" v-if="hashtag != null">
 				<div slot="no-more"></div>
 				<div slot="no-results"></div>
 			</infinite-loading>
@@ -63,6 +64,7 @@
 				coordinates: null,
 				email_address: null,
 				phone_number: null,
+				website: null,
 				instagramList: [],
 				endCursor: ''
 			};
@@ -87,6 +89,7 @@
 					this.coordinates = this.poi.coordinates;
 					this.email_address = this.poi.email_address;
 					this.phone_number = this.poi.phone_number;
+					this.website = this.poi.website;
 				}
 			}
 		},
@@ -100,6 +103,7 @@
 				this.coordinates = this.poi.coordinates;
 				this.email_address = this.poi.email_address;
 				this.phone_number = this.poi.phone_number;
+				this.website = this.poi.website;
 			}
 		},
 		

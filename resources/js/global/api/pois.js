@@ -28,7 +28,7 @@ export default {
 	/*
 		POST /api/v1/pois/suggest
 	*/
-	suggestNewPoi: function(id, name, description, address, email_address, phone_number, category_id, latitude, longitude) {
+	suggestNewPoi: function(id, name, description, address, email_address, phone_number, website, category_id, latitude, longitude) {
 		/*
 			Initialize the form data
 		*/
@@ -43,6 +43,7 @@ export default {
 		formData.append('address', address);
 		formData.append('email_address', email_address);
 		formData.append('phone_number', phone_number);
+		formData.append('website', website);
 		formData.append('category_id', category_id);
 		formData.append('latitude', latitude);
 		formData.append('longitude', longitude);

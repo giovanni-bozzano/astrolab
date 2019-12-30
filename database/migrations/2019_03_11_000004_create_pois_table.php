@@ -22,6 +22,7 @@ class CreatePOIsTable extends Migration
 			$table->text('coordinates')->nullable();
 			$table->text('email_address')->nullable();
 			$table->text('phone_number')->nullable();
+			$table->text('website')->nullable();
 			$table->text('hashtag')->nullable();
 			$table->unsignedBigInteger('category_id')->nullable();
 			$table->foreign('category_id')->references('id')->on('categories');

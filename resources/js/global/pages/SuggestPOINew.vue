@@ -33,6 +33,10 @@
 					<label>Numero di telefono</label>
 					<input type="text" id="phone_number" placeholder="Inserisci un numero di telefono..." class="form-input" autocomplete="off" v-model="phone_number"/>
 				</div>
+				<div class="cell large-12 medium-12 small-12">
+					<label>Sito web</label>
+					<input type="text" id="website" placeholder="Inserisci un indirizzo web..." class="form-input" autocomplete="off" v-model="website"/>
+				</div>
 				<div class="cell large-12 medium-12 small-12" v-if="categories.length > 1">
 					<label>Categoria *</label>
 					<div class="options">
@@ -80,6 +84,7 @@
 				address: '',
 				email_address: '',
 				phone_number: '',
+				website: '',
 				category_id: null,
 				validations: {
 					name: {
@@ -151,6 +156,9 @@
 					if (this.suggestedPoi.phone_number != null) {
 						this.phone_number = this.suggestedPoi.phone_number;
 					}
+					if (this.suggestedPoi.website != null) {
+						this.website = this.suggestedPoi.website;
+					}
 					this.category_id = this.suggestedPoi.category_id;
 					this.latitude = this.suggestedPoi.latitude;
 					this.longitude = this.suggestedPoi.longitude;
@@ -170,6 +178,9 @@
 				}
 				if (this.suggestedPoi.phone_number != null) {
 					this.phone_number = this.suggestedPoi.phone_number;
+				}
+				if (this.suggestedPoi.website != null) {
+					this.website = this.suggestedPoi.website;
 				}
 				this.category_id = this.suggestedPoi.category_id;
 				this.latitude = this.suggestedPoi.latitude;
@@ -200,6 +211,7 @@
 						address: this.address,
 						email_address: this.email_address,
 						phone_number: this.phone_number,
+						website: this.website,
 						category_id: this.category_id,
 						latitude: this.$refs.map.$canvas.newMarker.x,
 						longitude: this.$refs.map.$canvas.newMarker.y
@@ -263,6 +275,7 @@
 				this.address = '';
 				this.email_address = '';
 				this.phone_number = '';
+				this.website = '';
 				this.category_id = null;
 				if (this.$refs.map.$canvas.newMarker != null) {
 					this.$refs.map.$canvas.newMarker = null;

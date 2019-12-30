@@ -31,6 +31,7 @@ class PublishNewPOIRequest extends FormRequest
 			'coordinates' => 'sometimes',
 			'email_address' => 'sometimes',
 			'phone_number' => 'sometimes',
+			'website' => 'sometimes',
 			'hashtag' => 'sometimes',
 			'category_id' => 'required',
 			'latitude' => 'required',

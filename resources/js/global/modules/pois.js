@@ -42,7 +42,7 @@ export const pois = {
 		*/
 		suggestNewPoi({ commit, state, dispatch }, data) {
 			commit('setPoiAddStatus', 1);
-			POIsAPI.suggestNewPoi(data.id, data.name, data.description, data.address, data.email_address, data.phone_number, data.category_id, data.latitude, data.longitude).then(function(response) {
+			POIsAPI.suggestNewPoi(data.id, data.name, data.description, data.address, data.email_address, data.phone_number, data.website, data.category_id, data.latitude, data.longitude).then(function(response) {
 				commit('setNotificationText', response.data);
 				commit('setPoiAddStatus', 2);
 				dispatch('loadUser');

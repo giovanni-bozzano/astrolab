@@ -20,6 +20,7 @@ class CreateSuggestedPOIsTable extends Migration
 			$table->text('address');
 			$table->text('email_address')->nullable();
 			$table->text('phone_number')->nullable();
+			$table->text('website')->nullable();
 			$table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
 			$table->decimal('latitude', 11, 8);
