@@ -27,7 +27,7 @@ class SuggestNewPOIRequest extends FormRequest
 			'id' => 'sometimes',
 			'name' => 'required',
 			'description' => 'required',
-			'address' => 'required',
+			'address' => 'sometimes',
 			'email_address' => 'sometimes',
 			'phone_number' => 'sometimes',
 			'website' => 'sometimes',
@@ -47,7 +47,6 @@ class SuggestNewPOIRequest extends FormRequest
 		return [
 			'name.required' => 'Inserisci un nome per il luogo!',
 			'description.required' => 'Inserisci una descrizione per il luogo!',
-			'address.required' => 'Inserisci un indirizzo per il luogo!',
 			'category_id.required' => 'Seleziona una categoria per il luogo!',
 			'latitude.required' => 'Seleziona una posizione nella mappa per il luogo!',
 			'longitude.required' => 'Seleziona una posizione nella mappa per il luogo!'

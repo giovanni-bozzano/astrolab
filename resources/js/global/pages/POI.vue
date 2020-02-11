@@ -16,9 +16,9 @@
 				<div class="cell large-12 medium-12 small-12 poi-paragraph">
 					<p class="spectral">{{ description }}</p>
 				</div>
-				<div class="cell large-12 medium-12 small-12 poi-paragraph">
+				<div class="cell large-12 medium-12 small-12 poi-paragraph" v-if="address != null || coordinates != null">
 					<h2 class="poi-paragraph-margin-large">Posizione</h2>
-					<h3 class="poi-paragraph-margin-small">{{ address }}</h3>
+					<h3 class="poi-paragraph-margin-small" v-if="address != null">{{ address }}</h3>
 					<h3 v-if="coordinates != null">{{ coordinates }}</h3>
 				</div>
 				<div class="cell large-12 medium-12 small-12 poi-paragraph" v-if="email_address != null || phone_number != null || website != null">

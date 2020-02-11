@@ -17,7 +17,7 @@ class CreateSuggestedPOIsTable extends Migration
 			$table->bigIncrements('id');
 			$table->text('name');
 			$table->text('description');
-			$table->text('address');
+			$table->text('address')->nullable();
 			$table->text('email_address')->nullable();
 			$table->text('phone_number')->nullable();
 			$table->text('website')->nullable();

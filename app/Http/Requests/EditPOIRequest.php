@@ -28,7 +28,7 @@ class EditPOIRequest extends FormRequest
 			'name' => 'required',
 			'image' => 'sometimes|image|mimes:jpeg,jpg,png',
 			'description' => 'required',
-			'address' => 'required',
+			'address' => 'sometimes',
 			'coordinates' => 'sometimes',
 			'email_address' => 'sometimes',
 			'phone_number' => 'sometimes',
@@ -50,7 +50,6 @@ class EditPOIRequest extends FormRequest
 		return [
 			'name.required' => 'Inserisci un nome per il luogo!',
 			'description.required' => 'Inserisci una descrizione per il luogo!',
-			'address.required' => 'Inserisci un indirizzo per il luogo!',
 			'category_id.required' => 'Seleziona una categoria per il luogo!',
 			'latitude.required' => 'Seleziona una posizione nella mappa per il luogo!',
 			'longitude.required' => 'Seleziona una posizione nella mappa per il luogo!'

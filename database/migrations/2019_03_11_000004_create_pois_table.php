@@ -18,7 +18,7 @@ class CreatePOIsTable extends Migration
 			$table->text('name');
 			$table->text('image_url')->nullable();
 			$table->text('description');
-			$table->text('address');
+			$table->text('address')->nullable();
 			$table->text('coordinates')->nullable();
 			$table->text('email_address')->nullable();
 			$table->text('phone_number')->nullable();

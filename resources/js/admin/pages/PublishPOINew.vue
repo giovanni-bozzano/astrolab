@@ -30,9 +30,8 @@
 					<div class="validation" v-show="!validations.description.is_valid">{{ validations.description.text }}</div>
 				</div>
 				<div class="cell large-12 medium-12 small-12">
-					<label>Indirizzo *</label>
-					<input type="text" id="address" placeholder="Inserisci un indirizzo..." class="form-input" autocomplete="off" v-model="address" v-bind:class="{'invalid' : !validations.address.is_valid }"/>
-					<div class="validation" v-show="!validations.address.is_valid">{{ validations.address.text }}</div>
+					<label>Indirizzo</label>
+					<input type="text" id="address" placeholder="Inserisci un indirizzo..." class="form-input" autocomplete="off" v-model="address"/>
 				</div>
 				<div class="cell large-12 medium-12 small-12">
 					<label>Coordinate</label>
@@ -121,10 +120,6 @@
 						is_valid: true,
 						text: ''
 					},
-					address: {
-						is_valid: true,
-						text: ''
-					},
 					hashtag: {
 						is_valid: true,
 						text: ''
@@ -170,7 +165,9 @@
 				if (this.suggestedPoisLoadStatus == 2 && this.suggestedPoi != null) {
 					this.name = this.suggestedPoi.name;
 					this.description = this.suggestedPoi.description;
-					this.address = this.suggestedPoi.address;
+					if (this.suggestedPoi.address != null) {
+						this.address = this.suggestedPoi.address;
+					}
 					if (this.suggestedPoi.email_address != null) {
 						this.email_address = this.suggestedPoi.email_address;
 					}
@@ -193,7 +190,9 @@
 			if (this.suggestedPoisLoadStatus == 2 && this.suggestedPoi != null) {
 				this.name = this.suggestedPoi.name;
 				this.description = this.suggestedPoi.description;
-				this.address = this.suggestedPoi.address;
+				if (this.suggestedPoi.address != null) {
+					this.address = this.suggestedPoi.address;
+				}
 				if (this.suggestedPoi.email_address != null) {
 					this.email_address = this.suggestedPoi.email_address;
 				}
@@ -280,15 +279,6 @@
 					this.validations.description.text = '';
 				}
 
-				if (this.address.trim() == '') {
-					validForm = false;
-					this.validations.address.is_valid = false;
-					this.validations.address.text = 'Inserisci un indirizzo per il luogo!';
-				} else {
-					this.validations.address.is_valid = true;
-					this.validations.address.text = '';
-				}
-
 				if (this.hashtag != null && (this.hashtag.includes(' ') || this.hashtag.includes('#'))) {
 					validForm = false;
 					this.validations.hashtag.is_valid = false;
@@ -345,10 +335,6 @@
 						text: ''
 					},
 					description: {
-						is_valid: true,
-						text: ''
-					},
-					address: {
 						is_valid: true,
 						text: ''
 					},
