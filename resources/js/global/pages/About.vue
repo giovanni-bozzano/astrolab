@@ -63,7 +63,6 @@
 				</div>
 				<div class="cell large-3 medium-4 small-6">
 					<div class="team-member">
-						<img class="team-image" src="/img/about/giovanni_bozzano.jpg" alt="Giovanni Bozzano"/>
 						<h2>Giovanni Bozzano</h2>
 						<h3>Web Developer</h3>
 						<p>Studente di Computer Science and Engineering al Politecnico di Milano. Per AstroLab si è occupato dello sviluppo e della realizzazione del sito.</p>

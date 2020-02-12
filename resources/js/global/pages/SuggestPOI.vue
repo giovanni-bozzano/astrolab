@@ -6,7 +6,7 @@
 					<h1>In cerca di nuove stelle</h1>
 				</div>
 				<div class="cell large-10 medium-10 small-12">
-					<p class="spectral">La rete di AstroLab è in continua crescita. Guidaci nei tuoi luoghi della città e ... ... ...</p>
+					<p class="spectral">La rete di Astrolab è in continua crescita. Ci sono luoghi della città che vorresti far conoscere? Perle nascoste di cui non si conosce abbastanza? Questo è lo spazio in cui puoi raccontare di loro.</p>
 					<p class="spectral">La sezione è privata e i tuoi suggerimenti saranno controllati dal team di AstroLab. Una volta approvata la scelta, il luogo verrà pubblicato e diventerà ufficialmente parte dei percorsi AstroLab.</p>
 				</div>
 				<br />

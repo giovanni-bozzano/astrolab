@@ -5,10 +5,10 @@ var url = '';
 
 switch (process.env.NODE_ENV) {
 	case 'development':
-		url = 'https://test.astrolabparma.com/';
+		url = 'https://www.astrolabparma.com/';
 		break;
 	case 'production':
-		url = 'https://test.astrolabparma.com/';
+		url = 'https://www.astrolabparma.com/';
 		break;
 }
 
