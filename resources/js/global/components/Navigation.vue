@@ -34,10 +34,15 @@
 						<div class="menu-inner">Consigli</div>
 					</router-link>
 				</div>
-				<div class="menu-section last-section" data-close="navigation" v-bind:class="{ 'active': $route.name.includes(['about']) }">
+				<div class="menu-section" data-close="navigation" v-bind:class="{ 'active': $route.name.includes(['about']) }">
 					<router-link :to="{ name: 'about' }">
 						<div class="menu-inner">Chi Siamo</div>
 					</router-link>
+				</div>
+				<div class="menu-section last-section" data-close="navigation">
+					<a href="https://progettoastrolab.design.blog">
+						<div class="menu-inner">Blog</div>
+					</a>
 				</div>
 				<div class="menu-section">
 					<a v-if="isUserLoggedIn" v-on:click="logout()">
